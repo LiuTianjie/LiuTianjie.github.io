@@ -176,7 +176,7 @@
 
 <h2 id="基于Vue和MQTT的简单IOT系统"><a href="#基于Vue和MQTT的简单IOT系统" class="headerlink" title="基于Vue和MQTT的简单IOT系统"></a>基于Vue和MQTT的简单IOT系统</h2><img src="http://images.nickname4th.vip/zc_bb.png" srcset="/img/loading.gif" alt="zc_bb" style="zoom: 25%;" />
 
-<p>整个系统可以分为前端、后端和硬件三个部分，前端通过模拟购票和开锁与后端数据库交互，并通过MQTT协议与树莓派通信，树莓派控制GPIO信号控制IOT设备。</p>
+<p>整个系统可以分为前端、后端和硬件三个部分，前端通过模拟购票和开锁与后端数据库交互，并通过MQTT协议与树莓派通信，树莓派控制GPIO引脚信号控制IOT设备。</p>
 <h3 id="1-前端部分"><a href="#1-前端部分" class="headerlink" title="1 前端部分"></a>1 前端部分</h3><h4 id="1-1-全局http处理"><a href="#1-1-全局http处理" class="headerlink" title="1.1 全局http处理"></a>1.1 全局http处理</h4><pre><code class="javascript">import axios from &#39;axios&#39;
 import Vue from &#39;vue&#39;
 const http = axios.create({
