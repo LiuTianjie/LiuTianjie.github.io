@@ -8,10 +8,12 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://images.nickname4th.vip/logo.jpg">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="Bupt/Computer Since">
@@ -19,25 +21,22 @@
   <meta name="keywords" content="">
   <title>树莓派搭建NCS2环境并测试 - Nickname4th</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
 
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
 
 <link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
 
 <!-- 自定义样式保持在最底部 -->
 
@@ -50,7 +49,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>Nickname4th</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -65,46 +64,41 @@
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="iconfont icon-home-fill"></i>
-              首页</a>
+            <a class="nav-link" href="/">首页</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/archives/">
-              <i class="iconfont icon-archive-fill"></i>
-              归档</a>
+            <a class="nav-link" href="/archives/">归档</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/categories/">
-              <i class="iconfont icon-category-fill"></i>
-              分类</a>
+            <a class="nav-link" href="/categories/">分类</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/tags/">
-              <i class="iconfont icon-tags-fill"></i>
-              标签</a>
+            <a class="nav-link" href="/tags/">标签</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/about/">
-              <i class="iconfont icon-user-fill"></i>
-              关于</a>
+            <a class="nav-link" href="/about/">关于</a>
           </li>
         
         
@@ -122,7 +116,7 @@
          style="background: url('http://images.nickname4th.vip/NCS2+树莓派.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+        <div class="mask rgba-black-light flex-center">
           <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
@@ -130,36 +124,31 @@
 
             
               
-                <div class="mt-3 post-meta">
-                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-03-05 16:14">
-                    2020年3月5日 下午
-                  </time>
-                </div>
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期四, 三月 5日 2020, 4:14 下午
+                </p>
               
 
-              <div class="mt-1">
+              <p class="mt-1">
                 
                   
-                  <span class="post-meta mr-2">
-                    <i class="iconfont icon-chart"></i>
-                    1.4k 字
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.6k 字
                   </span>
                 
 
                 
                   
-                  <span class="post-meta mr-2">
-                      <i class="iconfont icon-clock-fill"></i>
-                    
-                    
-                    23
-                     分钟
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      8 分钟
                   </span>
                 
 
                 
-              </div>
+              </p>
             
           </div>
 
@@ -178,10 +167,10 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div class="py-5 z-depth-3" id="board">
           <div class="post-content mx-auto" id="post">
             
-            <article class="markdown-body">
+            <div class="markdown-body">
               <p>做毕设和一些实验的基础，在树莓派环境搭建NCS2的依赖环境并进行相关测试</p>
 <a id="more"></a>
 <h3 id="OpenVINO-toolkit-for-RaspberryPi-树莓派NCS2环境搭建"><a href="#OpenVINO-toolkit-for-RaspberryPi-树莓派NCS2环境搭建" class="headerlink" title="OpenVINO toolkit for RaspberryPi(树莓派NCS2环境搭建)"></a>OpenVINO toolkit for RaspberryPi(树莓派NCS2环境搭建)</h3><p>@Nickname4th 2019/10/01</p>
@@ -189,19 +178,15 @@
 <h3 id="烧写官方镜像"><a href="#烧写官方镜像" class="headerlink" title="烧写官方镜像"></a>烧写官方镜像</h3><ul>
 <li>使用BleanEtchar，略</li>
 </ul>
-<h3 id="TensorFlow配置"><a href="#TensorFlow配置" class="headerlink" title="TensorFlow配置"></a>TensorFlow配置</h3><h4 id="更换apt和pip源"><a href="#更换apt和pip源" class="headerlink" title="更换apt和pip源"></a>更换apt和pip源</h4><pre><code class="hljs shell">sudo vim /etc/apt/sources.list</code></pre>
-
+<h3 id="TensorFlow配置"><a href="#TensorFlow配置" class="headerlink" title="TensorFlow配置"></a>TensorFlow配置</h3><h4 id="更换apt和pip源"><a href="#更换apt和pip源" class="headerlink" title="更换apt和pip源"></a>更换apt和pip源</h4><pre><code class="shell">sudo vim /etc/apt/sources.list</code></pre>
 <blockquote>
 <p>注释原来的源，添加 </p>
 <p>deb <a href="http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/" target="_blank" rel="noopener">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</a> stretch main contrib non-free rpi<br>deb-src <a href="http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/" target="_blank" rel="noopener">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</a> stretch main contrib non-free rpi</p>
 </blockquote>
-<pre><code class="hljs shell">pip install pip
+<pre><code class="shell">pip install pip
 pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/</code></pre>
-
-<h4 id="安装matplot-使用VNC调试更直观，后续可注释相关代码并以CLI启动"><a href="#安装matplot-使用VNC调试更直观，后续可注释相关代码并以CLI启动" class="headerlink" title="安装matplot(使用VNC调试更直观，后续可注释相关代码并以CLI启动)"></a>安装matplot(使用VNC调试更直观，后续可注释相关代码并以CLI启动)</h4><pre><code class="hljs shell">sudo pip3 install matplotlib</code></pre>
-
-<h4 id="安装TensorFlow"><a href="#安装TensorFlow" class="headerlink" title="安装TensorFlow"></a>安装TensorFlow</h4><pre><code class="hljs shell">sudo pip3 install tensorflow</code></pre>
-
+<h4 id="安装matplot-使用VNC调试更直观，后续可注释相关代码并以CLI启动"><a href="#安装matplot-使用VNC调试更直观，后续可注释相关代码并以CLI启动" class="headerlink" title="安装matplot(使用VNC调试更直观，后续可注释相关代码并以CLI启动)"></a>安装matplot(使用VNC调试更直观，后续可注释相关代码并以CLI启动)</h4><pre><code class="shell">sudo pip3 install matplotlib</code></pre>
+<h4 id="安装TensorFlow"><a href="#安装TensorFlow" class="headerlink" title="安装TensorFlow"></a>安装TensorFlow</h4><pre><code class="shell">sudo pip3 install tensorflow</code></pre>
 <blockquote>
 <p>安装依赖包时出现报错时将报错的依赖包单独使用sudo pip3 install [包名]即可</p>
 </blockquote>
@@ -210,8 +195,7 @@ pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/</code></
 </ul>
 <blockquote>
 <p>集成了TensorFlow的api，可以快速测试一个模型</p>
-<pre><code class="hljs shell">sudo pip3 install obapi-1.0.0-py3-none-any.whl</code></pre>
-
+<pre><code class="shell">sudo pip3 install obapi-1.0.0-py3-none-any.whl</code></pre>
 <p>感谢作者@obapi</p>
 </blockquote>
 <ul>
@@ -221,7 +205,7 @@ pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/</code></
 </blockquote>
 </li>
 </ul>
-<h4 id="安装opencv及其依赖"><a href="#安装opencv及其依赖" class="headerlink" title="安装opencv及其依赖"></a>安装opencv及其依赖</h4><pre><code class="hljs shell">sudo pip3 install opencv-python
+<h4 id="安装opencv及其依赖"><a href="#安装opencv及其依赖" class="headerlink" title="安装opencv及其依赖"></a>安装opencv及其依赖</h4><pre><code class="shell">sudo pip3 install opencv-python
 sudo apt-get install libcblas-dev
 sudo apt-get install libhdf5-dev
 sudo apt-get install libhdf5-serial-dev
@@ -229,7 +213,6 @@ sudo apt-get install libatlas-base-dev
 sudo apt-get install libjasper-dev 
 sudo apt-get install libqtgui4 
 sudo apt-get install libqt4-test</code></pre>
-
 <blockquote>
 <p>由于树莓派官方系统更新，可能会因为依赖冲突发生多次错误，耐心按照apt的报错决定是否覆盖安装相关依赖包</p>
 </blockquote>
@@ -252,87 +235,84 @@ sudo apt-get install libqt4-test</code></pre>
 <h4 id="TestWithOutNCS2-py"><a href="#TestWithOutNCS2-py" class="headerlink" title="TestWithOutNCS2.py"></a>TestWithOutNCS2.py</h4><blockquote>
 <p>这里就是之前在导盲杖和MacBook Pro上跑的目标检测算法</p>
 </blockquote>
-<pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">import</span> sys
-<span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
-<span class="hljs-keyword">from</span> obapi <span class="hljs-keyword">import</span> label_map_util
-<span class="hljs-keyword">from</span> obapi <span class="hljs-keyword">import</span> visualization_utils <span class="hljs-keyword">as</span> vis_util
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
-<span class="hljs-comment"># import matplotlib.pyplot as plt</span>
-<span class="hljs-keyword">import</span> time
-sys.path.append(<span class="hljs-string">'/home/pi/NCS2/object_detection'</span>) <span class="hljs-comment"># point to your tensorflow dir</span>
-sys.path.append(<span class="hljs-string">'/home/pi/NCS2/slim'</span>) <span class="hljs-comment"># point ot your slim dir</span>
-<span class="hljs-comment"># What model to download.</span>
-MODEL_NAME = <span class="hljs-string">'/home/pi/NCS2/object_detection/'</span>
-PATH_TO_CKPT = MODEL_NAME + <span class="hljs-string">'/frozen_inference_graph.pb'</span>
-PATH_TO_LABELS = <span class="hljs-string">'/home/pi/NCS2/obj/data/mscoco_label_map.pbtxt'</span>
-NUM_CLASSES = <span class="hljs-number">90</span>
+<pre><code class="python">import numpy as np
+import sys
+import tensorflow as tf
+from obapi import label_map_util
+from obapi import visualization_utils as vis_util
+from PIL import Image
+# import matplotlib.pyplot as plt
+import time
+sys.path.append(&#39;/home/pi/NCS2/object_detection&#39;) # point to your tensorflow dir
+sys.path.append(&#39;/home/pi/NCS2/slim&#39;) # point ot your slim dir
+# What model to download.
+MODEL_NAME = &#39;/home/pi/NCS2/object_detection/&#39;
+PATH_TO_CKPT = MODEL_NAME + &#39;/frozen_inference_graph.pb&#39;
+PATH_TO_LABELS = &#39;/home/pi/NCS2/obj/data/mscoco_label_map.pbtxt&#39;
+NUM_CLASSES = 90
 detection_graph = tf.Graph()
-<span class="hljs-keyword">with</span> detection_graph.as_default():
+with detection_graph.as_default():
   od_graph_def = tf.GraphDef()
-  <span class="hljs-keyword">with</span> tf.gfile.GFile(PATH_TO_CKPT, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> fid:
+  with tf.gfile.GFile(PATH_TO_CKPT, &#39;rb&#39;) as fid:
     serialized_graph = fid.read()
     od_graph_def.ParseFromString(serialized_graph)
-    tf.import_graph_def(od_graph_def, name=<span class="hljs-string">''</span>)
-<span class="hljs-comment">#Loading label map</span>
+    tf.import_graph_def(od_graph_def, name=&#39;&#39;)
+#Loading label map
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
-categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=<span class="hljs-literal">True</span>)
+categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
-<span class="hljs-comment">#Helper code</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_image_into_numpy_array</span><span class="hljs-params">(image)</span>:</span>
+#Helper code
+def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
-  <span class="hljs-keyword">return</span> np.array(image.getdata()).reshape(
-      (im_height, im_width, <span class="hljs-number">3</span>)).astype(np.uint8)
-TEST_IMAGE_PATHS = [<span class="hljs-string">'/home/pi/NCS2/obj/test_images/1.jpg'</span>]
-<span class="hljs-comment"># Size, in inches, of the output images.</span>
-IMAGE_SIZE = (<span class="hljs-number">16</span>, <span class="hljs-number">9</span>)
-<span class="hljs-keyword">with</span> detection_graph.as_default():
-  <span class="hljs-keyword">with</span> tf.Session(graph=detection_graph) <span class="hljs-keyword">as</span> sess:
-    image_tensor = detection_graph.get_tensor_by_name(<span class="hljs-string">'image_tensor:0'</span>)
-    detection_boxes = detection_graph.get_tensor_by_name(<span class="hljs-string">'detection_boxes:0'</span>)
-    detection_scores = detection_graph.get_tensor_by_name(<span class="hljs-string">'detection_scores:0'</span>)
-    detection_classes = detection_graph.get_tensor_by_name(<span class="hljs-string">'detection_classes:0'</span>)
-    num_detections = detection_graph.get_tensor_by_name(<span class="hljs-string">'num_detections:0'</span>)
-    <span class="hljs-keyword">import</span> cv2
-    <span class="hljs-keyword">while</span> <span class="hljs-number">1</span>:
-        <span class="hljs-keyword">for</span> image_path <span class="hljs-keyword">in</span> TEST_IMAGE_PATHS:
+  return np.array(image.getdata()).reshape(
+      (im_height, im_width, 3)).astype(np.uint8)
+TEST_IMAGE_PATHS = [&#39;/home/pi/NCS2/obj/test_images/1.jpg&#39;]
+# Size, in inches, of the output images.
+IMAGE_SIZE = (16, 9)
+with detection_graph.as_default():
+  with tf.Session(graph=detection_graph) as sess:
+    image_tensor = detection_graph.get_tensor_by_name(&#39;image_tensor:0&#39;)
+    detection_boxes = detection_graph.get_tensor_by_name(&#39;detection_boxes:0&#39;)
+    detection_scores = detection_graph.get_tensor_by_name(&#39;detection_scores:0&#39;)
+    detection_classes = detection_graph.get_tensor_by_name(&#39;detection_classes:0&#39;)
+    num_detections = detection_graph.get_tensor_by_name(&#39;num_detections:0&#39;)
+    import cv2
+    while 1:
+        for image_path in TEST_IMAGE_PATHS:
             start = time.clock()
-            cap = cv2.VideoCapture(<span class="hljs-number">0</span>)
+            cap = cv2.VideoCapture(0)
             ret, frame = cap.read()
-            cv2.imwrite(<span class="hljs-string">"/home/pi/NCS2/obj/test_images/1.jpg"</span>, frame)
+            cv2.imwrite(&quot;/home/pi/NCS2/obj/test_images/1.jpg&quot;, frame)
             cap.release()
             image = Image.open(image_path)
             image_np = load_image_into_numpy_array(image)
-            image_np_expanded = np.expand_dims(image_np, axis=<span class="hljs-number">0</span>)
-            image_tensor = detection_graph.get_tensor_by_name(<span class="hljs-string">'image_tensor:0'</span>)
-            boxes = detection_graph.get_tensor_by_name(<span class="hljs-string">'detection_boxes:0'</span>)
-            scores = detection_graph.get_tensor_by_name(<span class="hljs-string">'detection_scores:0'</span>)
-            classes = detection_graph.get_tensor_by_name(<span class="hljs-string">'detection_classes:0'</span>)
-            num_detections = detection_graph.get_tensor_by_name(<span class="hljs-string">'num_detections:0'</span>)
-            <span class="hljs-comment"># Actual detection.</span>
+            image_np_expanded = np.expand_dims(image_np, axis=0)
+            image_tensor = detection_graph.get_tensor_by_name(&#39;image_tensor:0&#39;)
+            boxes = detection_graph.get_tensor_by_name(&#39;detection_boxes:0&#39;)
+            scores = detection_graph.get_tensor_by_name(&#39;detection_scores:0&#39;)
+            classes = detection_graph.get_tensor_by_name(&#39;detection_classes:0&#39;)
+            num_detections = detection_graph.get_tensor_by_name(&#39;num_detections:0&#39;)
+            # Actual detection.
             (boxes, scores, classes, num_detections) = sess.run(
                 [boxes, scores, classes, num_detections],
-                feed_dict=&#123;image_tensor: image_np_expanded&#125;)
-            <span class="hljs-comment"># Visualization of the results of a detection.</span>
+                feed_dict={image_tensor: image_np_expanded})
+            # Visualization of the results of a detection.
             vis_util.visualize_boxes_and_labels_on_image_array(
                 image_np,
                 np.squeeze(boxes),
                 np.squeeze(classes).astype(np.int32),
                 np.squeeze(scores),
                 category_index,
-                use_normalized_coordinates=<span class="hljs-literal">True</span>,
-                line_thickness=<span class="hljs-number">8</span>)
-            a = np.squeeze(classes).astype(np.int32)[<span class="hljs-number">0</span>]
+                use_normalized_coordinates=True,
+                line_thickness=8)
+            a = np.squeeze(classes).astype(np.int32)[0]
             elapsed = (time.clock() - start)
-            name = category_index[a][<span class="hljs-string">'name'</span>]
-            print(<span class="hljs-string">"This is a "</span>,name)
-            print(<span class="hljs-string">"Time used:"</span>,elapsed)
-            <span class="hljs-comment"># plt.figure(figsize=IMAGE_SIZE)</span>
-            <span class="hljs-comment"># plt.imshow(image_np)</span>
-            <span class="hljs-comment"># plt.show()</span></code></pre>
-
-
-
+            name = category_index[a][&#39;name&#39;]
+            print(&quot;This is a &quot;,name)
+            print(&quot;Time used:&quot;,elapsed)
+            # plt.figure(figsize=IMAGE_SIZE)
+            # plt.imshow(image_np)
+            # plt.show()</code></pre>
 <ul>
 <li>冷启动时间：20.6s</li>
 <li>单独进行一次图像识别时间：6.03s</li>
@@ -340,93 +320,89 @@ IMAGE_SIZE = (<span class="hljs-number">16</span>, <span class="hljs-number">9</
 <h4 id="TestWithNCS2-py"><a href="#TestWithNCS2-py" class="headerlink" title="TestWithNCS2.py"></a>TestWithNCS2.py</h4><blockquote>
 <p>这里是将原来的目标检测算法转换后，通过计算棒执行的目标检测</p>
 </blockquote>
-<pre><code class="hljs shell">cd object_detection-master
-python3 main.py -d MYRIAD -i "cam" -m "ssd_v2.xml" # 使用摄像头进行实时目标检测 
-python3 main.py  -d MYRIAD -i "Cars - 1900.mp4" -m "./mobilenet-ssd/FP32/mobilenet-ssd.xml" # 在测试视频中运行目标检测</code></pre>
-
+<pre><code class="shell">cd object_detection-master
+python3 main.py -d MYRIAD -i &quot;cam&quot; -m &quot;ssd_v2.xml&quot; # 使用摄像头进行实时目标检测 
+python3 main.py  -d MYRIAD -i &quot;Cars - 1900.mp4&quot; -m &quot;./mobilenet-ssd/FP32/mobilenet-ssd.xml&quot; # 在测试视频中运行目标检测</code></pre>
 <blockquote>
 <p>注意：通过ssh进行目标检测时，会由于无法调用display而报错，这里将cv2.imshow()注释即可，如果要观测，可以通过VNC连接至树莓派，通过内置终端执行语句</p>
 <p>object_detection-master文件夹资源链接：<a href="https://yaleedupl-my.sharepoint.com/:f:/g/personal/acs_shier_love/Eu6GMrDyxi9DkFD4rAKy6-ABjpyvwmHuBWWkQRijtCo4rQ?e=zr7eIA" target="_blank" rel="noopener">https://yaleedupl-my.sharepoint.com/:f:/g/personal/acs_shier_love/Eu6GMrDyxi9DkFD4rAKy6-ABjpyvwmHuBWWkQRijtCo4rQ?e=zr7eIA</a></p>
 </blockquote>
-<pre><code class="hljs python"><span class="hljs-comment">#main.py代码</span>
-<span class="hljs-keyword">from</span> __future__ <span class="hljs-keyword">import</span> print_function
-<span class="hljs-keyword">import</span> sys
-<span class="hljs-keyword">import</span> os
-<span class="hljs-keyword">from</span> argparse <span class="hljs-keyword">import</span> ArgumentParser
-<span class="hljs-keyword">import</span> cv2
-<span class="hljs-keyword">import</span> time
-<span class="hljs-keyword">import</span> logging <span class="hljs-keyword">as</span> log
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">import</span> io
-<span class="hljs-keyword">import</span> detect <span class="hljs-keyword">as</span> dt
-<span class="hljs-keyword">from</span> openvino.inference_engine <span class="hljs-keyword">import</span> IENetwork, IEPlugin
-<span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
-sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.parent))
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_argparser</span><span class="hljs-params">()</span>:</span>
+<pre><code class="python">#main.py代码
+from __future__ import print_function
+import sys
+import os
+from argparse import ArgumentParser
+import cv2
+import time
+import logging as log
+import numpy as np
+import io
+import detect as dt
+from openvino.inference_engine import IENetwork, IEPlugin
+from pathlib import Path
+sys.path.insert(0, str(Path().resolve().parent.parent))
+def build_argparser():
     parser = ArgumentParser()
-    parser.add_argument(<span class="hljs-string">"-m"</span>, <span class="hljs-string">"--model"</span>, help=<span class="hljs-string">"Path to an .xml file with a trained model."</span>, required=<span class="hljs-literal">True</span>, type=str)
-    parser.add_argument(<span class="hljs-string">"-i"</span>, <span class="hljs-string">"--input"</span>,
-                        help=<span class="hljs-string">"Path to video file or image. 'cam' for capturing video stream from camera"</span>,
+    parser.add_argument(&quot;-m&quot;, &quot;--model&quot;, help=&quot;Path to an .xml file with a trained model.&quot;, required=True, type=str)
+    parser.add_argument(&quot;-i&quot;, &quot;--input&quot;,
+                        help=&quot;Path to video file or image. &#39;cam&#39; for capturing video stream from camera&quot;,
                         type=str)
-    parser.add_argument(<span class="hljs-string">"-l"</span>, <span class="hljs-string">"--cpu_extension"</span>,
-                        help=<span class="hljs-string">"MKLDNN (CPU)-targeted custom layers.Absolute path to a shared library with the kernels "</span>
-                             <span class="hljs-string">"impl."</span>, type=str, default=<span class="hljs-literal">None</span>)
-    parser.add_argument(<span class="hljs-string">"-pp"</span>, <span class="hljs-string">"--plugin_dir"</span>, help=<span class="hljs-string">"Path to a plugin folder"</span>, type=str, default=<span class="hljs-literal">None</span>)
-    parser.add_argument(<span class="hljs-string">"-d"</span>, <span class="hljs-string">"--device"</span>,
-                        help=<span class="hljs-string">"Specify the target device to infer on; CPU, GPU, FPGA, MYRIAD or HDDL is acceptable. Sample "</span>
-                             <span class="hljs-string">"will look for a suitable plugin for device specified (CPU by default)"</span>, default=<span class="hljs-string">"CPU"</span>,
+    parser.add_argument(&quot;-l&quot;, &quot;--cpu_extension&quot;,
+                        help=&quot;MKLDNN (CPU)-targeted custom layers.Absolute path to a shared library with the kernels &quot;
+                             &quot;impl.&quot;, type=str, default=None)
+    parser.add_argument(&quot;-pp&quot;, &quot;--plugin_dir&quot;, help=&quot;Path to a plugin folder&quot;, type=str, default=None)
+    parser.add_argument(&quot;-d&quot;, &quot;--device&quot;,
+                        help=&quot;Specify the target device to infer on; CPU, GPU, FPGA, MYRIAD or HDDL is acceptable. Sample &quot;
+                             &quot;will look for a suitable plugin for device specified (CPU by default)&quot;, default=&quot;CPU&quot;,
                         type=str)
-    parser.add_argument(<span class="hljs-string">"--labels"</span>, help=<span class="hljs-string">"Labels mapping file"</span>, default=<span class="hljs-literal">None</span>, type=str)
-    parser.add_argument(<span class="hljs-string">"-pt"</span>, <span class="hljs-string">"--prob_threshold"</span>, help=<span class="hljs-string">"Probability threshold for detections filtering"</span>,
-                        default=<span class="hljs-number">0.5</span>, type=float)
-    parser.add_argument(<span class="hljs-string">"-o"</span>, <span class="hljs-string">"--output_dir"</span>, help=<span class="hljs-string">"If set, it will write a video here instead of displaying it"</span>,
-                        default=<span class="hljs-literal">None</span>, type=str)
-    <span class="hljs-keyword">return</span> parser
+    parser.add_argument(&quot;--labels&quot;, help=&quot;Labels mapping file&quot;, default=None, type=str)
+    parser.add_argument(&quot;-pt&quot;, &quot;--prob_threshold&quot;, help=&quot;Probability threshold for detections filtering&quot;,
+                        default=0.5, type=float)
+    parser.add_argument(&quot;-o&quot;, &quot;--output_dir&quot;, help=&quot;If set, it will write a video here instead of displaying it&quot;,
+                        default=None, type=str)
+    return parser
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_sure_path_exists</span><span class="hljs-params">(path)</span>:</span>
-    <span class="hljs-keyword">try</span>:
+def make_sure_path_exists(path):
+    try:
         os.makedirs(path)
-    <span class="hljs-keyword">except</span> OSError <span class="hljs-keyword">as</span> exception:
-        <span class="hljs-keyword">pass</span>
- 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    is_async_mode = <span class="hljs-literal">True</span>
+    except OSError as exception:
+        pass
+
+def main():
+    is_async_mode = True
     args = build_argparser().parse_args()
     object_detection=dt.Detectors(args.device,args.model,args.cpu_extension,args.plugin_dir,is_async_mode)
     resultant_initialisation_object=object_detection.initialise_inference()
     input_stream = args.input
-    cap = cv2.VideoCapture(<span class="hljs-number">0</span>)
+    cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
-    cv2.imwrite(<span class="hljs-string">"/home/pi/NCS2/obj/test_images/1.jpg"</span>, frame)
+    cv2.imwrite(&quot;/home/pi/NCS2/obj/test_images/1.jpg&quot;, frame)
     video_len = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    frame_width = int(cap.get(<span class="hljs-number">3</span>))
-    frame_height = int(cap.get(<span class="hljs-number">4</span>))
-    cur_request_id = <span class="hljs-number">0</span>
-    next_request_id = <span class="hljs-number">1</span>
+    frame_width = int(cap.get(3))
+    frame_height = int(cap.get(4))
+    cur_request_id = 0
+    next_request_id = 1
 
-    <span class="hljs-keyword">try</span>:
-        <span class="hljs-keyword">while</span> cap.isOpened():
+    try:
+        while cap.isOpened():
             start = time.clock()
             ret, frame = cap.read()
-            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret:
-                <span class="hljs-keyword">break</span>
-            initial_w = cap.get(<span class="hljs-number">3</span>)
-            initial_h = cap.get(<span class="hljs-number">4</span>)
-            res_inference=resultant_initialisation_object.process_frame(cur_request_id,next_request_id,frame,initial_h,initial_w,<span class="hljs-literal">False</span>)
-            resultant_frame=resultant_initialisation_object.placeBoxes(res_inference,<span class="hljs-literal">None</span>,<span class="hljs-number">0.5</span>,frame,initial_w,initial_h,<span class="hljs-literal">False</span>,cur_request_id)
-            key = cv2.waitKey(<span class="hljs-number">1</span>)
-            <span class="hljs-keyword">if</span> key == <span class="hljs-number">27</span>:
-                <span class="hljs-keyword">break</span>
+            if not ret:
+                break
+            initial_w = cap.get(3)
+            initial_h = cap.get(4)
+            res_inference=resultant_initialisation_object.process_frame(cur_request_id,next_request_id,frame,initial_h,initial_w,False)
+            resultant_frame=resultant_initialisation_object.placeBoxes(res_inference,None,0.5,frame,initial_w,initial_h,False,cur_request_id)
+            key = cv2.waitKey(1)
+            if key == 27:
+                break
             elapsed = (time.clock() - start)
-            print(<span class="hljs-string">"Time used:"</span>,elapsed)
+            print(&quot;Time used:&quot;,elapsed)
         cap.release()
-    <span class="hljs-keyword">finally</span>:
-        <span class="hljs-keyword">del</span> resultant_initialisation_object.exec_net
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
-    sys.exit(main() <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>)</code></pre>
-
-
-
+    finally:
+        del resultant_initialisation_object.exec_net
+if __name__ == &#39;__main__&#39;:
+    sys.exit(main() or 0)</code></pre>
 <ul>
 <li>冷启动时间：2.0s</li>
 <li>单独进行一次图像识别时间：0.06s</li>
@@ -436,29 +412,30 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
 </blockquote>
 <p>待续。。。</p>
 
-            </article>
+            </div>
             <hr>
             <div>
-              <div class="post-metas mb-3">
+              <p>
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
+                  <span>
+                <i class="iconfont icon-inbox"></i>
                     
                       <a class="hover-with-bg" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                      &nbsp;
                     
-                  </div>
+                  </span>&nbsp;&nbsp;
                 
                 
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
+                  <span>
+                <i class="iconfont icon-tag"></i>
                     
                       <a class="hover-with-bg" href="/tags/NCS2/">NCS2</a>
                     
                       <a class="hover-with-bg" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
                     
-                  </div>
+                  </span>
                 
-              </div>
+              </p>
               
                 <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
@@ -468,7 +445,7 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
                     
                     
                       <a href="/2020/04/29/docker_learn/">
-                        <i class="iconfont icon-arrowleft"></i>
+                        <i class="fa fa-chevron-left"></i>
                         <span class="hidden-mobile">docker学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
@@ -480,7 +457,7 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
                       <a href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/">
                         <span class="hidden-mobile">跨年旅行计划</span>
                         <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
+                        <i class="fa fa-chevron-right"></i>
                       </a>
                     
                   </div>
@@ -488,15 +465,32 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
               
             </div>
 
-            
+              
+                <!-- Comments -->
+                <div class="comments" id="comments">
+                  
+                  
+  <script defer src="https://utteranc.es/client.js"
+          repo="LiuTianjie/BlogComments"
+          issue-term="pathname"
+  
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+                </div>
+              
           </div>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -512,8 +506,8 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
   </main>
 
   
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
     </a>
   
 
@@ -548,12 +542,28 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
     </div>
     
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
 
     
 
@@ -563,7 +573,9 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
 <script  src="/js/main.js" ></script>
 
 
@@ -572,12 +584,34 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
       var boardCtn = $('#board-ctn');
       var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
 
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
       tocbot.init({
         tocSelector: '#tocbot',
         contentSelector: '.post-content',
@@ -587,13 +621,16 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
+        $('#toc > p').css('visibility', 'visible');
       }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
     });
   </script>
 
@@ -608,8 +645,22 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
 
 <!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
 
 
 
@@ -655,22 +706,20 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
+      getSearchFile(path);
       this.onclick = null
     }
   </script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
         $(this).wrap(element);
       }
     );
@@ -680,11 +729,55 @@ sys.path.insert(<span class="hljs-number">0</span>, str(Path().resolve().parent.
 
 
 
-
-
-
-
-
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
 
 
 

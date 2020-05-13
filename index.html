@@ -8,10 +8,12 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://images.nickname4th.vip/logo.jpg">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="Bupt/Computer Since">
@@ -19,25 +21,22 @@
   <meta name="keywords" content="">
   <title>Nickname4th</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
 
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
 
 <link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
 
 <!-- 自定义样式保持在最底部 -->
 
@@ -50,7 +49,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>Nickname4th</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -65,46 +64,41 @@
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="iconfont icon-home-fill"></i>
-              首页</a>
+            <a class="nav-link" href="/">首页</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/archives/">
-              <i class="iconfont icon-archive-fill"></i>
-              归档</a>
+            <a class="nav-link" href="/archives/">归档</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/categories/">
-              <i class="iconfont icon-category-fill"></i>
-              分类</a>
+            <a class="nav-link" href="/categories/">分类</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/tags/">
-              <i class="iconfont icon-tags-fill"></i>
-              标签</a>
+            <a class="nav-link" href="/tags/">标签</a>
           </li>
         
           
           
           
+          
           <li class="nav-item">
-            <a class="nav-link" href="/about/">
-              <i class="iconfont icon-user-fill"></i>
-              关于</a>
+            <a class="nav-link" href="/about/">关于</a>
           </li>
         
         
@@ -119,10 +113,10 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('http://c4-q.mafengwo.net/s8/M00/2C/45/wKgBpVYiHp-AFn2HAAopXu6cjaQ34.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+        <div class="mask rgba-black-light flex-center">
           <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
@@ -133,7 +127,7 @@
 
           
             <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
             </div>
           
         </div>
@@ -144,7 +138,7 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5" id="board"
+        <div class="py-5 z-depth-3" id="board"
           style=margin-top:0>
           
           <div class="container">
@@ -156,46 +150,46 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/" target="_self">
-          <img src="http://images.nickname4th.vip/zc_bb.png" srcset="/img/loading.gif" alt="基于Vue和MQTT的简单IOT系统">
+          <img src="http://images.nickname4th.vip/zc_bb.png" srcset="/img/loading.gif" alt="基于Vue和MQTT的简单IOT系统"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/">基于Vue和MQTT的简单IOT系统</a>
+      <a href="/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/">
+        <p class="h4 index-header">基于Vue和MQTT的简单IOT系统</p>
+      </a>
 
-      <a href="/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/" class="index-excerpt">
+      <a href="/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/">
         
         
           
+          
         
-        <div>最近有个同学有点需求，简单帮忙实现了一下，前端部分使用了Vue+ElementUI，后端部分使用了MongoDB，中间使用MQTT协议的“发布——订阅”模式实现消息的传递。之前使用Docker在腾讯云搭建了一个环境，传送门A lot project build with Vue and Docker，如果你没有docker的相关知识，可以直接查看代码的web和server文件夹即可。</div>
+        <div class="index-excerpt" style="max-height: none;">
+          <div class="index-text mb-1">最近有个同学有点需求，简单帮忙实现了一下，前端部分使用了Vue+ElementUI，后端部分使用了MongoDB，中间使用MQTT协议的“发布——订阅”模式实现消息的传递。之前使用Docker在腾讯云搭建了一个环境，传送门A lot project build with Vue and Docker，如果你没有docker的相关知识，可以直接查看代码的web和server文件夹即可。...</div>
+        </div>
       </a>
 
-      <div class="index-btm post-metas">
+      <div class="index-btm">
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-05-13
-          </div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-13&nbsp;&nbsp;
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/IOT/">IOT</a>
-            
-          </div>
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/IOT/">IOT</a>&nbsp;
+          &nbsp;
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Vue/">Vue</a>
-            
-              <a href="/tags/MQTT/">MQTT</a>
-            
-          </div>
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Vue/">Vue</a>&nbsp;
+          
+            <a href="/tags/MQTT/">MQTT</a>&nbsp;
+          
         
       </div>
     </div>
@@ -204,46 +198,46 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/05/07/%E5%9F%BA%E4%BA%8EVue%E5%92%8CExpress%E7%9A%84%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E7%B3%BB%E7%BB%9F/" target="_self">
-          <img src="http://images.nickname4th.vip/基于Vue和Node.js的登录注册系统.png" srcset="/img/loading.gif" alt="基于Vue和Express的登录注册系统">
+          <img src="http://images.nickname4th.vip/基于Vue和Node.js的登录注册系统.png" srcset="/img/loading.gif" alt="基于Vue和Express的登录注册系统"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/05/07/%E5%9F%BA%E4%BA%8EVue%E5%92%8CExpress%E7%9A%84%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E7%B3%BB%E7%BB%9F/">基于Vue和Express的登录注册系统</a>
+      <a href="/2020/05/07/%E5%9F%BA%E4%BA%8EVue%E5%92%8CExpress%E7%9A%84%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E7%B3%BB%E7%BB%9F/">
+        <p class="h4 index-header">基于Vue和Express的登录注册系统</p>
+      </a>
 
-      <a href="/2020/05/07/%E5%9F%BA%E4%BA%8EVue%E5%92%8CExpress%E7%9A%84%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E7%B3%BB%E7%BB%9F/" class="index-excerpt">
+      <a href="/2020/05/07/%E5%9F%BA%E4%BA%8EVue%E5%92%8CExpress%E7%9A%84%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E7%B3%BB%E7%BB%9F/">
         
         
           
+          
         
-        <div>这是一个简单的登录注册示例，包含了登录、注册和用户页面三个部分。本示例的代码保存在我的github仓库，如有不清楚的地方可以下载查阅。传送门</div>
+        <div class="index-excerpt" style="max-height: none;">
+          <div class="index-text mb-1">这是一个简单的登录注册示例，包含了登录、注册和用户页面三个部分。本示例的代码保存在我的github仓库，如有不清楚的地方可以下载查阅。传送门...</div>
+        </div>
       </a>
 
-      <div class="index-btm post-metas">
+      <div class="index-btm">
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-05-07
-          </div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-07&nbsp;&nbsp;
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-            
-          </div>
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>&nbsp;
+          &nbsp;
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Vue/">Vue</a>
-            
-              <a href="/tags/express/">express</a>
-            
-          </div>
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Vue/">Vue</a>&nbsp;
+          
+            <a href="/tags/express/">express</a>&nbsp;
+          
         
       </div>
     </div>
@@ -252,46 +246,46 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/05/05/CommonJs%E5%92%8CES6%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/" target="_self">
-          <img src="https://webdevwithsam.files.wordpress.com/2016/04/javascript.png?w=785" srcset="/img/loading.gif" alt="CommonJs和ES6模块导入导出">
+          <img src="https://webdevwithsam.files.wordpress.com/2016/04/javascript.png?w=785" srcset="/img/loading.gif" alt="CommonJs和ES6模块导入导出"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/05/05/CommonJs%E5%92%8CES6%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">CommonJs和ES6模块导入导出</a>
+      <a href="/2020/05/05/CommonJs%E5%92%8CES6%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">
+        <p class="h4 index-header">CommonJs和ES6模块导入导出</p>
+      </a>
 
-      <a href="/2020/05/05/CommonJs%E5%92%8CES6%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/" class="index-excerpt">
+      <a href="/2020/05/05/CommonJs%E5%92%8CES6%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">
         
         
           
+          
         
-        <div>学习WebPack工具的一些前端基础，这是web前端系列的第一篇文章。</div>
+        <div class="index-excerpt" style="max-height: none;">
+          <div class="index-text mb-1">学习WebPack工具的一些前端基础，这是web前端系列的第一篇文章。...</div>
+        </div>
       </a>
 
-      <div class="index-btm post-metas">
+      <div class="index-btm">
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-05-05
-          </div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-05&nbsp;&nbsp;
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-            
-          </div>
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>&nbsp;
+          &nbsp;
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ES6/">ES6</a>
-            
-              <a href="/tags/CommonJS/">CommonJS</a>
-            
-          </div>
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/ES6/">ES6</a>&nbsp;
+          
+            <a href="/tags/CommonJS/">CommonJS</a>&nbsp;
+          
         
       </div>
     </div>
@@ -300,44 +294,44 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/04/29/docker_learn/" target="_self">
-          <img src="http://images.nickname4th.vip/docker.jpg" srcset="/img/loading.gif" alt="docker学习">
+          <img src="http://images.nickname4th.vip/docker.jpg" srcset="/img/loading.gif" alt="docker学习"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/04/29/docker_learn/">docker学习</a>
+      <a href="/2020/04/29/docker_learn/">
+        <p class="h4 index-header">docker学习</p>
+      </a>
 
-      <a href="/2020/04/29/docker_learn/" class="index-excerpt">
+      <a href="/2020/04/29/docker_learn/">
         
         
           
+          
         
-        <div>Docker入门的一些基本语法，dockerfile相关的东西待补充。</div>
+        <div class="index-excerpt" style="max-height: none;">
+          <div class="index-text mb-1">Docker入门的一些基本语法，dockerfile相关的东西待补充。...</div>
+        </div>
       </a>
 
-      <div class="index-btm post-metas">
+      <div class="index-btm">
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-04-29
-          </div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-29&nbsp;&nbsp;
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/">容器技术</a>
-            
-          </div>
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/">容器技术</a>&nbsp;
+          &nbsp;
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/docker/">docker</a>
-            
-          </div>
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/docker/">docker</a>&nbsp;
+          
         
       </div>
     </div>
@@ -346,46 +340,46 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/03/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BANCS2%E7%8E%AF%E5%A2%83%E5%B9%B6%E6%B5%8B%E8%AF%95/" target="_self">
-          <img src="http://images.nickname4th.vip/NCS2+树莓派.png" srcset="/img/loading.gif" alt="树莓派搭建NCS2环境并测试">
+          <img src="http://images.nickname4th.vip/NCS2+树莓派.png" srcset="/img/loading.gif" alt="树莓派搭建NCS2环境并测试"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2020/03/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BANCS2%E7%8E%AF%E5%A2%83%E5%B9%B6%E6%B5%8B%E8%AF%95/">树莓派搭建NCS2环境并测试</a>
+      <a href="/2020/03/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BANCS2%E7%8E%AF%E5%A2%83%E5%B9%B6%E6%B5%8B%E8%AF%95/">
+        <p class="h4 index-header">树莓派搭建NCS2环境并测试</p>
+      </a>
 
-      <a href="/2020/03/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BANCS2%E7%8E%AF%E5%A2%83%E5%B9%B6%E6%B5%8B%E8%AF%95/" class="index-excerpt">
+      <a href="/2020/03/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BANCS2%E7%8E%AF%E5%A2%83%E5%B9%B6%E6%B5%8B%E8%AF%95/">
         
         
           
+          
         
-        <div>做毕设和一些实验的基础，在树莓派环境搭建NCS2的依赖环境并进行相关测试</div>
+        <div class="index-excerpt" style="max-height: none;">
+          <div class="index-text mb-1">做毕设和一些实验的基础，在树莓派环境搭建NCS2的依赖环境并进行相关测试...</div>
+        </div>
       </a>
 
-      <div class="index-btm post-metas">
+      <div class="index-btm">
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-05
-          </div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-05&nbsp;&nbsp;
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-            
-          </div>
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+          &nbsp;
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/NCS2/">NCS2</a>
-            
-              <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
-            
-          </div>
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/NCS2/">NCS2</a>&nbsp;
+          
+            <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>&nbsp;
+          
         
       </div>
     </div>
@@ -394,46 +388,46 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/" target="_self">
-          <img src="http://images.nickname4th.vip/旅行封面.JPG" srcset="/img/loading.gif" alt="跨年旅行计划">
+          <img src="http://images.nickname4th.vip/旅行封面.JPG" srcset="/img/loading.gif" alt="跨年旅行计划"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/">跨年旅行计划</a>
+      <a href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/">
+        <p class="h4 index-header">跨年旅行计划</p>
+      </a>
 
-      <a href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/" class="index-excerpt">
+      <a href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/">
         
         
           
+          
         
-        <div>2019-2020跨年旅行计划，实际过程略有差别。</div>
+        <div class="index-excerpt" style="max-height: none;">
+          <div class="index-text mb-1">2019-2020跨年旅行计划，实际过程略有差别。...</div>
+        </div>
       </a>
 
-      <div class="index-btm post-metas">
+      <div class="index-btm">
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-12-06
-          </div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-06&nbsp;&nbsp;
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E4%B8%AA%E4%BA%BA/">个人</a>
-            
-          </div>
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E4%B8%AA%E4%BA%BA/">个人</a>&nbsp;
+          &nbsp;
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
-            
-              <a href="/tags/%E7%BA%AA%E5%BF%B5/">纪念</a>
-            
-          </div>
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>&nbsp;
+          
+            <a href="/tags/%E7%BA%AA%E5%BF%B5/">纪念</a>&nbsp;
+          
         
       </div>
     </div>
@@ -452,8 +446,8 @@
   </main>
 
   
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
     </a>
   
 
@@ -488,12 +482,28 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
     </div>
     
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
 
     
 
@@ -503,7 +513,9 @@
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
 <script  src="/js/main.js" ></script>
 
 
@@ -520,8 +532,22 @@
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
 
 <!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
 
 
 
@@ -530,7 +556,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "An elegant Material-Design theme for Hexo&nbsp;",
+        "工者，始于技，而见于器。&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -567,22 +593,78 @@
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
+      getSearchFile(path);
       this.onclick = null
     }
   </script>
 
 
 
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
 
 
-
-
-
-
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
 
 
 
