@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    596 字
+                    606 字
                   </span>
                 
 
@@ -174,7 +174,10 @@
               <p>简单梳理一下JavaScript原型链。</p>
 <a id="more"></a>
 
-<h2 id="JavaScript原型链"><a href="#JavaScript原型链" class="headerlink" title="JavaScript原型链"></a>JavaScript原型链</h2><h3 id="1-JavaScript创建对象的方式"><a href="#1-JavaScript创建对象的方式" class="headerlink" title="1 JavaScript创建对象的方式"></a>1 JavaScript创建对象的方式</h3><ul>
+<h2 id="JavaScript原型链"><a href="#JavaScript原型链" class="headerlink" title="JavaScript原型链"></a>JavaScript原型链</h2><p>首先用一张图来描述原型链。</p>
+<img src="http://images.nickname4th.vip/proto.png" srcset="/img/loading.gif" alt="proto" style="zoom:50%;" />
+
+<h3 id="1-JavaScript创建对象的方式"><a href="#1-JavaScript创建对象的方式" class="headerlink" title="1 JavaScript创建对象的方式"></a>1 JavaScript创建对象的方式</h3><ul>
 <li><p>字面量</p>
 <pre><code class="javascript">let obj1 = {name:&#39;liutao&#39;};
 let obj2 = new Object({name:&#39;liutao&#39;});</code></pre>
@@ -205,7 +208,7 @@ let obj4 = Object.create(obj)</code></pre>
 <li>每一个原型都有一个constructor，指向其关联的构造函数</li>
 </ul>
 <h4 id="3-2-基本原则"><a href="#3-2-基本原则" class="headerlink" title="3.2 基本原则"></a>3.2 基本原则</h4><ul>
-<li><p><code>实例对象</code>的<code>\_\_proto\_\_</code>属性指向<code>其原型对象</code>，实例对象的<code>构造函数</code>的<code>prototype</code>也指向<code>该</code>实例对象的<code>原型对象</code></p>
+<li><p><code>实例对象</code>的<code>__proto__</code>属性指向<code>其原型对象</code>，实例对象的<code>构造函数</code>的<code>prototype</code>也指向<code>该</code>实例对象的<code>原型对象</code></p>
 </li>
 <li><p>原型对象也有原型，原型链的<code>起点</code>为具体的<code>实例对象</code>，终点为<code>Object</code>，Object的原型为null，即没有原型对象</p>
 </li>
