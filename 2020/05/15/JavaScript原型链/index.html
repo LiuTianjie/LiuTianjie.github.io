@@ -19,7 +19,7 @@
   <meta name="description" content="Bupt/Computer Since">
   <meta name="author" content="Nickname4th">
   <meta name="keywords" content="">
-  <title>归档 - Nickname4th</title>
+  <title>JavaScript原型链 - Nickname4th</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -45,7 +45,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -113,7 +113,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('https://images.nickname4th.vip/MopPpHzgGss.jpg') no-repeat center center;
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -123,12 +123,35 @@
             </span>
 
             
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期五, 五月 15日 2020, 5:19 下午
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    593 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      2 分钟
+                  </span>
+                
+
+                
+              </p>
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
-            </div>
           
         </div>
       </div>
@@ -137,37 +160,158 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 7 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">跨年旅行计划</span>
-      <span style="float: right;">12-06</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>简单梳理一下JavaScript原型链。</p>
+<a id="more"></a>
 
+<h2 id="JavaScript原型链"><a href="#JavaScript原型链" class="headerlink" title="JavaScript原型链"></a>JavaScript原型链</h2><h3 id="1-JavaScript创建对象的方式"><a href="#1-JavaScript创建对象的方式" class="headerlink" title="1 JavaScript创建对象的方式"></a>1 JavaScript创建对象的方式</h3><ul>
+<li><p>字面量</p>
+<pre><code class="javascript">let obj1 = {name:&#39;liutao&#39;};
+let obj2 = new Object({name:&#39;liutao&#39;});</code></pre>
+</li>
+<li><p>构造函数</p>
+<pre><code class="javascript">let M = function(name){
+  this.name = name;
+}
+let obj3 = new M(&#39;liutao&#39;)</code></pre>
+</li>
+<li><p>create方法</p>
+<pre><code class="javascript">let obj = {name:&#39;liutao&#39;}
+let obj4 = Object.create(obj)</code></pre>
+</li>
+</ul>
+<h3 id="2-相关的关键字"><a href="#2-相关的关键字" class="headerlink" title="2 相关的关键字"></a>2 相关的关键字</h3><ul>
+<li>实例对象</li>
+<li>原型对象</li>
+<li>构造函数</li>
+<li>Function构造函数</li>
+<li>Object构造函数</li>
+<li>Function原型</li>
+<li>Object原型</li>
+</ul>
+<h3 id="3-联系"><a href="#3-联系" class="headerlink" title="3 联系"></a>3 联系</h3><h4 id="3-1-设定（约定俗成）"><a href="#3-1-设定（约定俗成）" class="headerlink" title="3.1 设定（约定俗成）"></a>3.1 设定（约定俗成）</h4><ul>
+<li>每一个实例对象（除了null）都存在__proto__属性</li>
+<li>每一个函数都有一个prototype属性，指向其构造的对象的原型</li>
+<li>每一个原型都有一个constructor，指向其关联的构造函数</li>
+</ul>
+<h4 id="3-2-基本原则"><a href="#3-2-基本原则" class="headerlink" title="3.2 基本原则"></a>3.2 基本原则</h4><ul>
+<li><p>==实例对象==的==__proto__==属性指向==其原型对象==，实例对象的==构造函数==的==prototype==也指向==该==实例对象的==原型对象==</p>
+</li>
+<li><p>原型对象也有原型，原型链的==起点==为具体的==实例对象==，终点为==Object==，Object的原型为null，即没有原型对象</p>
+</li>
+<li><p>一个对象的==原型对象==的==constructor==属性指向==该==对象的==构造函数==</p>
+</li>
+<li><p>利用原型链可以进行多重继承</p>
+</li>
+</ul>
+<h4 id="3-2-实例的-proto-属性和prototype属性"><a href="#3-2-实例的-proto-属性和prototype属性" class="headerlink" title="3.2 实例的__proto__属性和prototype属性"></a>3.2 实例的__proto__属性和prototype属性</h4><pre><code class="javascript">let obj1 = {name:&#39;liutao&#39;};    //字面量创建一个实例对象
+let M = function(name){     //M是构造函数
+  this.name = name;
+}
+let obj2 = new M(&#39;liutao&#39;);    //构造函数创建一个实例对象
+console.log(obj1.__proto__);//{}，即obj1的原型对象
+console.log(obj2.__proto__);//M{}，即obj2的原型对象
+console.log(obj2.__proto__===M.prototype)//通过3.1可知M.prototype指向其构造的对象即obj2的原型
+//这里可以得出，字面量实例对象的__proto__属性和构造函数实例对象的__proto__属性指向各自的原型对象</code></pre>
+<h4 id="3-3-原型对象的-proto-属性和prototype属性"><a href="#3-3-原型对象的-proto-属性和prototype属性" class="headerlink" title="3.3 原型对象的__proto__属性和prototype属性"></a>3.3 原型对象的__proto__属性和prototype属性</h4><pre><code class="javascript">console.log(obj1.__proto__.__proto__);//null，由于obj1是由Object构造函数创建的，所以obj1.__proto__指向Object的prototype，而obj1.__proto__.__proto__指向Object的原型，即null
+console.log(obj2.__proto__.__proto__);//{}，由于obj2是由M构造函数创建的，所以obj2.__proto__指向M.prototype，而M是由Object构造函数创建的，所以obj2.__proto__.__proto__指向M.prototype.__proto__，即Object.__proto__，即obj1.__proto__
+//验证
+console.log(obj2.__proto__.__proto__ === obj1.__proto__);//true
+console.log(obj2.__proto__.__proto__.__proto__);//false</code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>原型链的图其实画的不太好，但是只要理解了3.1和3.2的内容，就很容易理解原型链了。</p>
 
-              </div>
             </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/">
+                        <span class="hidden-mobile">基于Vue和MQTT的简单IOT系统</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+                <!-- Comments -->
+                <div class="comments" id="comments">
+                  
+                  
+  <script defer src="https://utteranc.es/client.js"
+          repo="LiuTianjie/BlogComments"
+          issue-term="pathname"
+  
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+                </div>
+              
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -249,6 +393,59 @@
 
 
 
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
 
 
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
@@ -282,7 +479,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "珍丸之珍，雀不祈弹。&nbsp;",
+        "JavaScript原型链&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

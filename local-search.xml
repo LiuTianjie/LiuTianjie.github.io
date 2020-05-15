@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>JavaScript原型链</title>
+    <link href="/2020/05/15/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+    <url>/2020/05/15/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
+    
+    <content type="html"><![CDATA[<p>简单梳理一下JavaScript原型链。</p><a id="more"></a><h2 id="JavaScript原型链"><a href="#JavaScript原型链" class="headerlink" title="JavaScript原型链"></a>JavaScript原型链</h2><h3 id="1-JavaScript创建对象的方式"><a href="#1-JavaScript创建对象的方式" class="headerlink" title="1 JavaScript创建对象的方式"></a>1 JavaScript创建对象的方式</h3><ul><li><p>字面量</p><pre><code class="javascript">let obj1 = {name:&#39;liutao&#39;};let obj2 = new Object({name:&#39;liutao&#39;});</code></pre></li><li><p>构造函数</p><pre><code class="javascript">let M = function(name){  this.name = name;}let obj3 = new M(&#39;liutao&#39;)</code></pre></li><li><p>create方法</p><pre><code class="javascript">let obj = {name:&#39;liutao&#39;}let obj4 = Object.create(obj)</code></pre></li></ul><h3 id="2-相关的关键字"><a href="#2-相关的关键字" class="headerlink" title="2 相关的关键字"></a>2 相关的关键字</h3><ul><li>实例对象</li><li>原型对象</li><li>构造函数</li><li>Function构造函数</li><li>Object构造函数</li><li>Function原型</li><li>Object原型</li></ul><h3 id="3-联系"><a href="#3-联系" class="headerlink" title="3 联系"></a>3 联系</h3><h4 id="3-1-设定（约定俗成）"><a href="#3-1-设定（约定俗成）" class="headerlink" title="3.1 设定（约定俗成）"></a>3.1 设定（约定俗成）</h4><ul><li>每一个实例对象（除了null）都存在__proto__属性</li><li>每一个函数都有一个prototype属性，指向其构造的对象的原型</li><li>每一个原型都有一个constructor，指向其关联的构造函数</li></ul><h4 id="3-2-基本原则"><a href="#3-2-基本原则" class="headerlink" title="3.2 基本原则"></a>3.2 基本原则</h4><ul><li><p>==实例对象==的==__proto__==属性指向==其原型对象==，实例对象的==构造函数==的==prototype==也指向==该==实例对象的==原型对象==</p></li><li><p>原型对象也有原型，原型链的==起点==为具体的==实例对象==，终点为==Object==，Object的原型为null，即没有原型对象</p></li><li><p>一个对象的==原型对象==的==constructor==属性指向==该==对象的==构造函数==</p></li><li><p>利用原型链可以进行多重继承</p></li></ul><h4 id="3-2-实例的-proto-属性和prototype属性"><a href="#3-2-实例的-proto-属性和prototype属性" class="headerlink" title="3.2 实例的__proto__属性和prototype属性"></a>3.2 实例的__proto__属性和prototype属性</h4><pre><code class="javascript">let obj1 = {name:&#39;liutao&#39;};    //字面量创建一个实例对象let M = function(name){     //M是构造函数  this.name = name;}let obj2 = new M(&#39;liutao&#39;);    //构造函数创建一个实例对象console.log(obj1.__proto__);//{}，即obj1的原型对象console.log(obj2.__proto__);//M{}，即obj2的原型对象console.log(obj2.__proto__===M.prototype)//通过3.1可知M.prototype指向其构造的对象即obj2的原型//这里可以得出，字面量实例对象的__proto__属性和构造函数实例对象的__proto__属性指向各自的原型对象</code></pre><h4 id="3-3-原型对象的-proto-属性和prototype属性"><a href="#3-3-原型对象的-proto-属性和prototype属性" class="headerlink" title="3.3 原型对象的__proto__属性和prototype属性"></a>3.3 原型对象的__proto__属性和prototype属性</h4><pre><code class="javascript">console.log(obj1.__proto__.__proto__);//null，由于obj1是由Object构造函数创建的，所以obj1.__proto__指向Object的prototype，而obj1.__proto__.__proto__指向Object的原型，即nullconsole.log(obj2.__proto__.__proto__);//{}，由于obj2是由M构造函数创建的，所以obj2.__proto__指向M.prototype，而M是由Object构造函数创建的，所以obj2.__proto__.__proto__指向M.prototype.__proto__，即Object.__proto__，即obj1.__proto__//验证console.log(obj2.__proto__.__proto__ === obj1.__proto__);//trueconsole.log(obj2.__proto__.__proto__.__proto__);//false</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>原型链的图其实画的不太好，但是只要理解了3.1和3.2的内容，就很容易理解原型链了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>JavaScript</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于Vue和MQTT的简单IOT系统</title>
     <link href="/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/"/>
     <url>/2020/05/13/%E5%9F%BA%E4%BA%8EVue%E5%92%8CMQTT%E7%9A%84%E7%AE%80%E5%8D%95IOT%E7%B3%BB%E7%BB%9F/</url>
