@@ -266,7 +266,7 @@ console.log(c2.list);
 */</code></pre>
 <p>可以看出，在new一个Child实例时，实际上是执行了Father中的初始化代码，这样每个实例都拥有自己的副本。</p>
 <h4 id="3-2-构造函数继承的弊端"><a href="#3-2-构造函数继承的弊端" class="headerlink" title="3.2 构造函数继承的弊端"></a>3.2 构造函数继承的弊端</h4><p>仅利用构造函数，方法都在构造函数中进行定义，将会降低函数的复用性，而且对于子类的构造函数来讲，定义在父类型原型上的方法对于子类的构造函数是不可见的。导致所有的类型都只能使用构造函数模式。因此借用构造函数的这个办法也很少单独使用。</p>
-<h3 id="4-组合继承"><a href="#4-组合继承" class="headerlink" title="4 组合继承"></a>4 组合继承</h3><h4 id="3-2-利用原型链和apply-实现组合继承"><a href="#3-2-利用原型链和apply-实现组合继承" class="headerlink" title="3.2 利用原型链和apply()实现组合继承"></a>3.2 利用原型链和apply()实现组合继承</h4><p>结合2和3，很容易可以得出组合继承的方法，这也是JavaScript的经典继承方法。</p>
+<h3 id="4-组合继承"><a href="#4-组合继承" class="headerlink" title="4 组合继承"></a>4 组合继承</h3><h4 id="4-1-利用原型链和apply-实现组合继承"><a href="#4-1-利用原型链和apply-实现组合继承" class="headerlink" title="4.1 利用原型链和apply()实现组合继承"></a>4.1 利用原型链和apply()实现组合继承</h4><p>结合2和3，很容易可以得出组合继承的方法，这也是JavaScript的经典继承方法。</p>
 <pre><code class="javascript">function Father() {
     this.name = &quot;name from Father&quot;
     this.list = [1, 2, 3, 4, 5]
