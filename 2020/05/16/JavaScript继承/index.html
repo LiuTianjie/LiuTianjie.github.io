@@ -19,7 +19,7 @@
   <meta name="description" content="Bupt/Computer Since">
   <meta name="author" content="Nickname4th">
   <meta name="keywords" content="">
-  <title>docker学习 - Nickname4th</title>
+  <title>JavaScript继承 - Nickname4th</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -113,7 +113,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('http://images.nickname4th.vip/docker.jpg') no-repeat center center;
+         style="background: url('http://images.nickname4th.vip/南奥索峰.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -126,7 +126,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期三, 四月 29日 2020, 9:11 晚上
+                  星期六, 五月 16日 2020, 11:41 中午
                 </p>
               
 
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    521 字
+                    1.1k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      2 分钟
+                      4 分钟
                   </span>
                 
 
@@ -171,122 +171,140 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>Docker入门的一些基本语法，dockerfile相关的东西待补充。</p>
+              <p>关于JavaScript继承的一些实现方法。</p>
 <a id="more"></a>
-<h2 id="Docker-CE-on-Ubuntu-18-04"><a href="#Docker-CE-on-Ubuntu-18-04" class="headerlink" title="Docker CE on Ubuntu 18.04"></a>Docker CE on Ubuntu 18.04</h2><h3 id="安装步骤（来自官网）"><a href="#安装步骤（来自官网）" class="headerlink" title="安装步骤（来自官网）"></a>安装步骤（来自官网）</h3><ul>
-<li>完全删除旧的Docker<pre><code class="shell">$ sudo apt-get remove docker docker-engine docker.io containerd runc</code></pre>
-</li>
-<li>升级apt包管理工具<pre><code class="shell">$ sudo apt-get update</code></pre>
-</li>
-<li>安装依赖使apt可以通过https获取包<pre><code class="shell">$ sudo apt-get install \
-  apt-transport-https \
-  ca-certificates \
-  curl \
-  gnupg-agent \
-  software-properties-common</code></pre>
-</li>
-<li>获取Docker的GPG密钥并验证<pre><code class="shell">$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-$ sudo apt-key fingerprint 0EBFCD88</code></pre>
-</li>
-<li>安装Docker CE<pre><code class="shell">$ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
-<h3 id="惯用配置"><a href="#惯用配置" class="headerlink" title="惯用配置"></a>惯用配置</h3></li>
-<li>将Docker加入用户组<pre><code class="shell">$ sudo adduser $USER docker
-# 避免每次使用docker命令时必须输入sudo，修改后重新登录shell即可</code></pre>
-</li>
-<li>更换国内镜像源<pre><code class="shell">$ vim /etc/docker/daemon.json
-{
-&quot;registry-mirrors&quot;: [&quot;https://vchck76f.mirror.aliyuncs.com&quot;]
-}
-# 地址可以去阿里云免费申请</code></pre>
-<h3 id="Docker容器数据卷"><a href="#Docker容器数据卷" class="headerlink" title="Docker容器数据卷"></a>Docker容器数据卷</h3></li>
+
+
+<h2 id="JavaScript继承"><a href="#JavaScript继承" class="headerlink" title="JavaScript继承"></a>JavaScript继承</h2><h3 id="1-前置知识"><a href="#1-前置知识" class="headerlink" title="1 前置知识"></a>1 前置知识</h3><h4 id="1-1-JavaScript原型链"><a href="#1-1-JavaScript原型链" class="headerlink" title="1.1 JavaScript原型链"></a>1.1 JavaScript原型链</h4><p>关于原型链的内容，可以查看我的另一篇博客<a href="https://liutianjie.github.io/2020/05/15/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">JavaScript原型链</a>，但是核心原理可以总结为：</p>
+<ul>
+<li>每一个实例对象（除了null）都存在__proto__属性</li>
+<li>每一个函数都有一个prototype属性，指向其构造的对象的原型</li>
+<li>每一个原型都有一个constructor，指向其关联的构造函数</li>
+<li>==实例对象==的==__proto__==属性指向==其原型对象==，实例对象的==构造函数==的==prototype==也指向==该==实例对象的==原型对象==</li>
+<li>原型对象也有原型，原型链的==起点==为具体的==实例对象==，终点为==Object==，Object的原型为null，即没有原型对象</li>
+<li>一个对象的==原型对象==的==constructor==属性指向==该==对象的==构造函数==</li>
+<li>利用原型链可以进行多重继承</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>docker run -it -v [imageID] [hostDir]:[dockerDir]</code></td>
-<td>将宿主机的hostDir文件夹挂载到docker的dockerDir文件夹，如果不存在，将创建</td>
-</tr>
-<tr>
-<td><code>docker run -it -v [imageID] [hostDir]:[dockerDir]:ro</code></td>
-<td>ro即readOnly，使容器只能读取不能写入</td>
-</tr>
-</tbody></table>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>docker ps [-a] [-l]</code></td>
-<td>查看运行中的容器，-a为查看历史所有的容器，-l为上一次运行的容器</td>
-</tr>
-<tr>
-<td><code>docker images</code></td>
-<td>查看docker镜像</td>
-</tr>
-<tr>
-<td><code>docker run [-it] [--name] [imageID] [-d]</code></td>
-<td>使用image创建容器，-i交互模式，-t为容器重新分配伪终端,–name为容器的昵称，-d为守护进程，即后台运行</td>
-</tr>
-<tr>
-<td><code>docker start [name/containerID]</code></td>
-<td>启动名为name或ID为containerID的容器</td>
-</tr>
-<tr>
-<td><code>docker stop [name]</code></td>
-<td>停止名为name或ID为containerID的容器</td>
-</tr>
-<tr>
-<td><code>docker exec [-it] [name/containerID] [/bin/bash]</code></td>
-<td>进入容器，可以指定伪终端的shell路径</td>
-</tr>
-<tr>
-<td><code>docker search [name]</code></td>
-<td>搜索名为name的镜像</td>
-</tr>
-<tr>
-<td><code>docker pull [name]</code></td>
-<td>拉取名为name的镜像到本地</td>
-</tr>
-<tr>
-<td><code>docker rmi [imageID]</code></td>
-<td>删除imageID镜像，删除前必须删除关联的容器</td>
-</tr>
-<tr>
-<td><code>docker rm [name/containerID</code></td>
-<td>删除名为name或ID为containerID的容器，删除前必须停止容器</td>
-</tr>
-<tr>
-<td><code>docker commit [-a=&quot;&quot;] [-m=&quot;&quot;] [containerID] [NewImageName] [tag]</code></td>
-<td>创建名为NewImageName的镜像，-a为作者信息，-m为说明</td>
-</tr>
-</tbody></table>
-<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><h3 id="容器持续化"><a href="#容器持续化" class="headerlink" title="容器持续化"></a>容器持续化</h3><h3 id="容器间通信"><a href="#容器间通信" class="headerlink" title="容器间通信"></a>容器间通信</h3><h3 id="Dockercompose"><a href="#Dockercompose" class="headerlink" title="Dockercompose"></a>Dockercompose</h3>
+<h4 id="1-2-Object-create"><a href="#1-2-Object-create" class="headerlink" title="1.2 Object.create()"></a>1.2 Object.create()</h4><p>Object.create()函数的用法如下：</p>
+<pre><code class="javascript">let a = {
+  name:&#39;liutao&#39;;
+};
+let obj = Object.create(a,  name: {
+        configurable: true,
+        enumerable: true,
+        value: &#39;kitty&#39;,
+        writable: true,
+    })</code></pre>
+<p>Object.create()的第一个参数是用于obj继承的原型，后面是对a中参数的配置如可读写性、属性值等的定义。利用这个函数，我们可以方便的创建对象的继承关系，但是他的缺点是继承只能在创建对象时进行，非常不灵活。</p>
+<h3 id="2-Object-create-prototype实现原型链继承"><a href="#2-Object-create-prototype实现原型链继承" class="headerlink" title="2 Object.create() + prototype实现原型链继承"></a>2 Object.create() + prototype实现原型链继承</h3><h4 id="2-1-利用原型链实现多重继承"><a href="#2-1-利用原型链实现多重继承" class="headerlink" title="2.1 利用原型链实现多重继承"></a>2.1 利用原型链实现多重继承</h4><pre><code class="javascript">function Father() {
+    this.name = &quot;name from Father&quot;
+}
+function Child() {
+    this.age = 12
+}
+Father.prototype.name = &quot;name form Father&#39;s prototype&quot;
+//start
+Child.prototype = Object.create(Father.prototype)
+Child.prototype.constructor = Child
+//end
+const my = new Child()
+console.log(my.name) //&quot;name form Father&#39;s prototype&quot;
+</code></pre>
+<p>start-end之间的代码，相当于将Child的原型指向Father的原型，同时将Child的原型的构造器指定为Child本身，通过他们之间的关系，构建出一条链条。</p>
+<p>这样，执行<code>console.log(my.name)</code>时，先从本身查找name属性，再从my的原型即Child的<code>prototype</code>查找，再从Father的<code>prototype</code>查找，最后从Object的<code>prototype</code>查找，通过这条原型链实现了多重继承。</p>
+<blockquote>
+<p>start-end之间的代码也可以写成：</p>
+<pre><code class="javascript">Child.prototype = new Father()
+Child.prototype.constructor = Child</code></pre>
+</blockquote>
+<h4 id="2-2-原型链继承的弊端"><a href="#2-2-原型链继承的弊端" class="headerlink" title="2.2 原型链继承的弊端"></a>2.2 原型链继承的弊端</h4><p>使用原型链继承有一些弊端，因为继承的属性来自于共享的原型的属性，所以实例化多个对象时，如果对其中一个实例的继承属性进行修改，则会影响所有的实例：</p>
+<pre><code class="javascript">function Father() {
+    this.list = [1, 2, 3, 4, 5]
+}
+function Child() {
+}
+Father.prototype.list = [1, 2, 3, 4, 5]
+Child.prototype = new Father()
+let c1 = new Child()
+let c2 = new Child()
+
+console.log(c1.list)
+console.log(c2.list)
+c1.list.push(6)
+console.log(&quot;================&quot;)
+console.log(c1.list)
+console.log(c2.list)
+/*
+[ 1, 2, 3, 4, 5 ]
+[ 1, 2, 3, 4, 5 ]
+================
+[ 1, 2, 3, 4, 5, 6 ]
+[ 1, 2, 3, 4, 5, 6 ]
+*/</code></pre>
+<p>上面的代码修改了c1.list，但是c2.list也发生了变化</p>
+<h3 id="3-利用构造函数继承"><a href="#3-利用构造函数继承" class="headerlink" title="3 利用构造函数继承"></a>3 利用构造函数继承</h3><h4 id="3-1-构造函数继承"><a href="#3-1-构造函数继承" class="headerlink" title="3.1 构造函数继承"></a>3.1 构造函数继承</h4><pre><code class="javascript">function Father() {
+  this.list = [1, 2, 3, 4, 5]
+}
+
+function Child() {
+  Father.call(this);
+}
+let c1 = new Child();
+let c2 = new Child();
+console.log(c1.list); 
+console.log(c2.list); 
+c1.list.push(6)
+console.log(&quot;================&quot;)
+console.log(c1.list); 
+console.log(c2.list); 
+/*
+[ 1, 2, 3, 4, 5 ]
+[ 1, 2, 3, 4, 5 ]
+================
+[ 1, 2, 3, 4, 5, 6 ]
+[ 1, 2, 3, 4, 5 ]
+*/</code></pre>
+<p>可以看出，在new一个Child实例时，实际上是执行了Father中的初始化代码，这样每个实例都拥有自己的副本。</p>
+<h4 id="3-2-构造函数继承的弊端"><a href="#3-2-构造函数继承的弊端" class="headerlink" title="3.2 构造函数继承的弊端"></a>3.2 构造函数继承的弊端</h4><p>仅利用构造函数，方法都在构造函数中进行定义，将会降低函数的复用性，而且对于子类的构造函数来讲，定义在父类型原型上的方法对于子类的构造函数是不可见的。导致所有的类型都只能使用构造函数模式。因此借用构造函数的这个办法也很少单独使用。</p>
+<h3 id="4-组合继承"><a href="#4-组合继承" class="headerlink" title="4 组合继承"></a>4 组合继承</h3><h4 id="3-2-利用原型链和apply-实现组合继承"><a href="#3-2-利用原型链和apply-实现组合继承" class="headerlink" title="3.2 利用原型链和apply()实现组合继承"></a>3.2 利用原型链和apply()实现组合继承</h4><p>结合2和3，很容易可以得出组合继承的方法，这也是JavaScript的经典继承方法。</p>
+<pre><code class="javascript">function Father() {
+    this.name = &quot;name from Father&quot;
+    this.list = [1, 2, 3, 4, 5]
+}
+function Child() {
+    this.age = 12;
+    Father.call(this)
+}
+Father.prototype.getList = function () {
+    return this.list
+}
+//start
+Child.prototype = Object.create(Father.prototype)
+Child.prototype.constructor = Child
+//end
+const c1 = new Child()
+const c2 = new Child()
+console.log(c1.list)
+console.log(c2.list)
+c1.list.push(6)
+console.log(&quot;================&quot;)
+console.log(c1.list);
+console.log(c2.list);
+console.log(&quot;================&quot;)
+console.log(c1.getList())
+console.log(c2.getList())  </code></pre>
+<p>其中属性继承自Father类，方法则继承自原型链。</p>
+
             </div>
             <hr>
             <div>
               <p>
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/">容器技术</a>
-                      &nbsp;
-                    
-                  </span>&nbsp;&nbsp;
-                
                 
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
                   </span>
                 
@@ -299,18 +317,12 @@ $ sudo apt-key fingerprint 0EBFCD88</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/05/CommonJs%E5%92%8CES6%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">
-                        <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">CommonJs和ES6模块导入导出</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/03/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BANCS2%E7%8E%AF%E5%A2%83%E5%B9%B6%E6%B5%8B%E8%AF%95/">
-                        <span class="hidden-mobile">树莓派搭建NCS2环境并测试</span>
+                      <a href="/2020/05/15/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+                        <span class="hidden-mobile">JavaScript原型链</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
@@ -524,7 +536,7 @@ $ sudo apt-key fingerprint 0EBFCD88</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "docker学习&nbsp;",
+        "JavaScript继承&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
