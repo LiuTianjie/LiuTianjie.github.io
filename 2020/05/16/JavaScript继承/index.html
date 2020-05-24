@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.1k 字
+                    1.3k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      4 分钟
+                      5 分钟
                   </span>
                 
 
@@ -180,9 +180,9 @@
 <li>每一个实例对象（除了null）都存在<code>__proto__</code>属性</li>
 <li>每一个函数都有一个prototype属性，指向其构造的对象的原型</li>
 <li>每一个原型都有一个constructor，指向其关联的构造函数</li>
-<li><code>实例对象</code>的<code>__proto__</code>属性指向<code>其原型对象</code>，实例对象的<code>构造函数</code>的<code>prototype</code>也指向<code>该</code>实例对象的<code>原型对象</code></li>
-<li>原型对象也有原型，原型链的<code>起点</code>为具体的<code>实例对象</code>，终点为<code>Object</code>，Object的原型为null，即没有原型对象</li>
-<li>一个对象的<code>原型对象</code>的<code>constructor</code>属性指向<code>该</code>对象的<code>构造函数</code></li>
+<li>==实例对象==的==<code>__proto__</code>==属性指向==其原型对象==，实例对象的==构造函数==的==prototype==也指向==该==实例对象的==原型对象==</li>
+<li>原型对象也有原型，原型链的==起点==为具体的==实例对象==，终点为==Object==，Object的原型为null，即没有原型对象</li>
+<li>一个对象的==原型对象==的==constructor==属性指向==该==对象的==构造函数==</li>
 <li>利用原型链可以进行多重继承</li>
 </ul>
 <h4 id="1-2-Object-create"><a href="#1-2-Object-create" class="headerlink" title="1.2 Object.create()"></a>1.2 Object.create()</h4><p>Object.create()函数的用法如下：</p>
@@ -241,7 +241,7 @@ console.log(c2.list)
 [ 1, 2, 3, 4, 5, 6 ]
 [ 1, 2, 3, 4, 5, 6 ]
 */</code></pre>
-<p>上面的代码修改了c1.list，但是c2.list也发生了变化</p>
+<p>上面的代码修改了c1.list，但是c2.list也发生了变换</p>
 <h3 id="3-利用构造函数继承"><a href="#3-利用构造函数继承" class="headerlink" title="3 利用构造函数继承"></a>3 利用构造函数继承</h3><h4 id="3-1-构造函数继承"><a href="#3-1-构造函数继承" class="headerlink" title="3.1 构造函数继承"></a>3.1 构造函数继承</h4><pre><code class="javascript">function Father() {
   this.list = [1, 2, 3, 4, 5]
 }
@@ -266,7 +266,7 @@ console.log(c2.list);
 */</code></pre>
 <p>可以看出，在new一个Child实例时，实际上是执行了Father中的初始化代码，这样每个实例都拥有自己的副本。</p>
 <h4 id="3-2-构造函数继承的弊端"><a href="#3-2-构造函数继承的弊端" class="headerlink" title="3.2 构造函数继承的弊端"></a>3.2 构造函数继承的弊端</h4><p>仅利用构造函数，方法都在构造函数中进行定义，将会降低函数的复用性，而且对于子类的构造函数来讲，定义在父类型原型上的方法对于子类的构造函数是不可见的。导致所有的类型都只能使用构造函数模式。因此借用构造函数的这个办法也很少单独使用。</p>
-<h3 id="4-组合继承"><a href="#4-组合继承" class="headerlink" title="4 组合继承"></a>4 组合继承</h3><h4 id="4-1-利用原型链和apply-实现组合继承"><a href="#4-1-利用原型链和apply-实现组合继承" class="headerlink" title="4.1 利用原型链和apply()实现组合继承"></a>4.1 利用原型链和apply()实现组合继承</h4><p>结合2和3，很容易可以得出组合继承的方法，这也是JavaScript的经典继承方法。</p>
+<h3 id="4-组合继承"><a href="#4-组合继承" class="headerlink" title="4 组合继承"></a>4 组合继承</h3><h4 id="3-2-利用原型链和apply-实现组合继承"><a href="#3-2-利用原型链和apply-实现组合继承" class="headerlink" title="3.2 利用原型链和apply()实现组合继承"></a>3.2 利用原型链和apply()实现组合继承</h4><p>结合2和3，很容易可以得出组合继承的方法，这也是JavaScript的经典继承方法。</p>
 <pre><code class="javascript">function Father() {
     this.name = &quot;name from Father&quot;
     this.list = [1, 2, 3, 4, 5]
@@ -280,6 +280,7 @@ Father.prototype.getList = function () {
 }
 //start
 Child.prototype = Object.create(Father.prototype)
+//Child.prototype = new Father()
 Child.prototype.constructor = Child
 //end
 const c1 = new Child()
@@ -294,6 +295,43 @@ console.log(&quot;================&quot;)
 console.log(c1.getList())
 console.log(c2.getList())  </code></pre>
 <p>其中属性继承自Father类，方法则继承自原型链。</p>
+<hr>
+<h3 id="5-24更新"><a href="#5-24更新" class="headerlink" title="==5.24更新=="></a>==5.24更新==</h3><h4 id="ES6中的继承方法"><a href="#ES6中的继承方法" class="headerlink" title="ES6中的继承方法"></a>ES6中的继承方法</h4><p>使用<code>class</code>关键字定义类，使用<code>extends</code>关键字继承</p>
+<pre><code class="javascript">class Person{
+    cosntructor(name){
+        this.name = name
+        this.life = 100
+        this.status = &quot;alive&quot;
+    }
+    attack(obj){
+        if(this.life&gt;0){
+            if(obj.life&gt;0 &amp;&amp; obj.status==&quot;alive&quot;)
+            obj.life -=this.weapon.attackNum
+            else
+            obj.status = &#39;dead&#39;
+        }
+        else{
+            throw new Error(&quot;You&#39;re already dead!&quot;)
+        }
+    }
+}
+
+class Police extends Person{
+    constructor(name,weapon){
+        super(name)
+        this.weapon = weapon
+    }
+}
+
+let po1 = new Police(&quot;xiaoming&quot;,{name:&quot;handgun&quot;,attackNum = 10})
+let po2 = new Police(&quot;xiaoming&quot;,{name:&quot;AWM&quot;,attackNum = 100})
+po2.attack(po1)
+console.log(po1.status)
+//dead</code></pre>
+<ul>
+<li>在子类的构造方法中，必须先调用<code>super</code>方法，拿到父类的<code>this</code>对象。如果没有显式的调用，也会默认调用。</li>
+<li>在调用子类的方法时，使用的均为子类的<code>this</code>，即使使用<code>super</code>关键字来调用也是如此。</li>
+</ul>
 
             </div>
             <hr>
