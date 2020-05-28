@@ -19,7 +19,7 @@
   <meta name="description" content="Bupt/Computer Since">
   <meta name="author" content="Nickname4th">
   <meta name="keywords" content="">
-  <title>JavaScript异步编程 - Nickname4th</title>
+  <title>Leetcode中等题目分析（持续更新） - Nickname4th</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -113,7 +113,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('http://images.nickname4th.vip/th.jpg') no-repeat center center;
+         style="background: url('http://images.nickname4th.vip/leetcode.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -126,7 +126,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期一, 五月 25日 2020, 5:25 下午
+                  星期四, 五月 28日 2020, 10:22 晚上
                 </p>
               
 
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.1k 字
+                    1.3k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      4 分钟
+                      5 分钟
                   </span>
                 
 
@@ -171,133 +171,108 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>总结了JavaScript异步编程的一些方式。</p>
+              <p>作为刷算法题目路上的一点心得。</p>
 <a id="more"></a>
+<h2 id="Leetcode中等题目分析（持续更新）"><a href="#Leetcode中等题目分析（持续更新）" class="headerlink" title="Leetcode中等题目分析（持续更新）"></a>Leetcode中等题目分析（持续更新）</h2><h3 id="1-No-8-字符串转整数"><a href="#1-No-8-字符串转整数" class="headerlink" title="1 No.8 字符串转整数"></a>1 No.8 字符串转整数</h3><p>请你来实现一个atio函数，使其能将字符串转换成整数。要求：</p>
+<ul>
+<li>首先丢弃字符串开头的空格</li>
+<li>非空格的第一个字符串是正负号时，则将该符号与<code>后面</code>尽可能多<code>连续</code>的数字字符组合起来，形成一个有符号整数</li>
+<li>非空格的第一个字符是数字时，直接将其与之后<code>连续</code>的数字字符组合起来，形成一个有符号整数</li>
+<li>该字符串有效整数部分之后也可能存在多余的字符，应该被忽略</li>
+<li>当不满足以上规则而无法进行转换时，返回0</li>
+<li>返回整数的大小范围为32位有符号整数的范围</li>
+</ul>
+<h4 id="1-1-直接上手"><a href="#1-1-直接上手" class="headerlink" title="1.1 直接上手"></a>1.1 直接上手</h4><p>最简单的方法是直接开始编码，但是显然，会遇到很多麻烦，并且写出的代码具有非常多的<code>if-else</code>结构，十分臃肿，我在VS Code上测试了十余次，前后经过了一两个小时，才写出完整AC的代码，可以说是十分low了。</p>
+<pre><code class="python">class Solution:
+    def myAtoi(self, str: str) -&gt; int:
+        res = &quot; &quot;
+        flag = True
+        strList = list(str.strip())
+        for i in range(len(strList)):
+            if strList[i] != &quot; &quot;:
+                for j in strList[i:]:
+                    if j == &quot; &quot;:
+                        break
+                    if (j == &quot;+&quot; or j == &quot;-&quot;) and flag:
+                        res += j
+                        flag = False
+                        continue
+                    elif j.isdigit():
+                        res += j
+                        flag = False
+                    else:
+                        break
+                break
+        try:
+            res = int(res)
+        except:
+            return 0
+        return max(-2**31, min(res, 2**31-1))</code></pre>
+<p>其中<code>flag</code>用于标志<code>是否已经添加了正负号</code>，因为如果对符号进行统一的直接拼接处理，则会如果有多个正负号出现时程序出错的问题。（这其实是测试了多次，从测试用例观察出来的）</p>
+<p>整个思路为：</p>
+<ul>
+<li>首先将字符串转换成列表，包括空格在内</li>
+<li>进入第一个<code>for</code>循环，字符非空格时，进入第二个循环，循环从第一个非空字符开始，即<code>strList[i:]</code></li>
+<li>非空字符后面再遇到空格时，结束循环</li>
+<li>如果遇到正负号，则判断<code>flag</code>，仅在第一次出现时添加符号</li>
+<li>如果遇到数字字符，则直接和<code>res</code>进行拼接</li>
+<li>遇到其他字符，则结束循环</li>
+<li>将<code>res</code>转换成整数，为了避免可能出现的问题如<code>res</code>为空等情况，使用<code>try-catch</code>语法将其包裹，如果出错直接返回0</li>
+<li>最后判断<code>res</code>是否在32位有符号整数的范围内，根据条件返回整数</li>
+</ul>
+<p>算法的时间复杂度为<code>O(n)</code>，空间复杂度为<code>O(1)</code></p>
+<p>可以看到整个流程十分复杂，并且绝不是一次想好就能编写出这样的代码，因此在面对这样的题目时，我们需要用另一种思路去更清晰的分析问题。</p>
+<h4 id="1-2-有限状态机"><a href="#1-2-有限状态机" class="headerlink" title="1.2 有限状态机"></a>1.2 有限状态机</h4><p>通过简单分析，可以知道整个转换的流程主要有4种状态：</p>
+<ul>
+<li>初始状态，直到首个不为空格的字符之前，都处于这个状态</li>
+<li>符号转换状态，在遇到符号时，处于这个状态</li>
+<li>数字转换状态，在遇到数字字符时，出于这个状态</li>
+<li>结束状态，即程序退出</li>
+</ul>
+<img src="http://images.nickname4th.vip/charTonum.png" srcset="/img/loading.gif" alt="charTonum" style="zoom:50%;" />
 
-<h2 id="JavaScript异步操作"><a href="#JavaScript异步操作" class="headerlink" title="JavaScript异步操作"></a>JavaScript异步操作</h2><p>在实际项目开发中，经常遇到网络请求、数据库操作等异步操作，由于这些操作需要耗费一定的时间，而JavaScript是一个单线程的语言，因此在执行异步操作时，其不进入主线程，而是加入一个任务队列，主线程继续执行同步任务，当异步任务执行完毕时，只需通知主线程即可。当异步操作指定了回调函数时，主线程将在其执行完毕时调用执行回调函数。</p>
-<h3 id="1-模拟一个异步操作"><a href="#1-模拟一个异步操作" class="headerlink" title="1 模拟一个异步操作"></a>1 模拟一个异步操作</h3><pre><code class="javascript">let a = 0
-function set_a(val,time){
-  setTimeout(()=&gt;{
-    a = val
-  },time)
-}
-set_a(1,1000)
-console.log(a)
-//0</code></pre>
-<p>在这里，setTimeout函数延时1000ms执行，是一个异步操作，简单分析一下代码执行过程：</p>
-<ul>
-<li>声明变量<code>a</code>，初始化其值为<code>0</code></li>
-<li>定义函数<code>set_a( )</code></li>
-<li>执行函数<code>set_a(1,1000)</code>，在<code>1000ms</code>后将<code>a</code>赋值为<code>1</code></li>
-<li>将<code>set_a(1,1000)</code>加入异步任务队列并执行</li>
-<li>执行<code>console.log(a)</code>，打印<code>a</code>的值为<code>0</code></li>
-<li>约1s后，<code>set_a(1,1000)</code>执行完毕，此时<code>a</code>的值为<code>1</code></li>
-</ul>
-<h4 id="1-1-使用回调函数进行异步编程"><a href="#1-1-使用回调函数进行异步编程" class="headerlink" title="1.1 使用回调函数进行异步编程"></a>1.1 使用回调函数进行异步编程</h4><p>使用回调函数是最简单直接的方法，如这里我们想在a的值改变后再将其打印输出：</p>
-<pre><code class="javascript">let a = 0
-function set_a(val, time, callback) {
-    setTimeout(() =&gt; {
-        a = val
-        callback(a)
-    }, time)
-}
-set_a(100, 1000, (a) =&gt; {
-    console.log(a)
-})
-//100</code></pre>
-<p>回调函数的一大缺点是当有多个异步操作需要进行，并且其相互之间有依赖关系时，容易遇到<code>回调地狱</code>的问题。</p>
-<h4 id="1-2-使用Promise"><a href="#1-2-使用Promise" class="headerlink" title="1.2 使用Promise"></a>1.2 使用Promise</h4><p>Promise让异步编程非常容易理解，也可以避免回调地狱的产生，同时也是ES6支持的一种方式。</p>
-<pre><code class="javascript">function set_a(val, time) {
-    return new Promise(function (reslove, reject) {
-        setTimeout(() =&gt; {
-            a = val
-            reslove(a)
-        }, time)
-    })
-}
-set_a(100, 1000).then(() =&gt; console.log(a))
-//100</code></pre>
-<p>当有多个异步操作需要进行时，可以通过在<code>.then</code>中return一个Promise对象来进行：</p>
-<pre><code class="javascript">set_a(100, 1000).then(() =&gt; {
-    console.log(a)
-    return set_a(200, 500)
-}).then(() =&gt; console.log(a))
-//100
-//200</code></pre>
-<p>虽然Promise避免了回调地狱，但是带来了<code>执行地狱</code>，即有多个异步操作需要进行时，仍然需要不断通过<code>.then</code>来调用。</p>
-<h4 id="1-3-使用Generator"><a href="#1-3-使用Generator" class="headerlink" title="1.3 使用Generator"></a>1.3 使用Generator</h4><p>ES6中的Generator和Python的十分相似，其本质是一个函数，最大的特点是可以被<code>中断</code>，然后恢复执行。</p>
-<p>定义一个简单的Generator函数：</p>
-<pre><code class="javascript">function * gen(){
-  yield &quot;hello&quot;
-  return &quot;world&quot;
-}</code></pre>
-<ul>
-<li>在函数中定义了<code>x</code>个<code>yield</code>关键字，则函数具有<code>x+1</code>种状态（包含<code>return</code>）</li>
-<li><code>yield</code>关键字不产生任何返回，只对其后面的表达式进行求值</li>
-<li>通过<code>next()</code>方法继续执行程序</li>
-<li><code>next()</code>方法可以接受一个参数，传递到Generator内部，利用这个特性来组织异步代码</li>
-<li>更常见的情况是<code>yield</code>关键字后面接一个<code>Promise</code>对象</li>
-</ul>
-<pre><code class="javascript">list = [1, 2, 3, 4, 6, 3, 1]
-function* gen() {
-    for (let i of list) {
-        //延时设置为随机数，模拟实际的异步情况
-        yield set_a(val, Math.round(Math.random()) * 1000)
-    }
-}
-var g = gen()
-var r1 = g.next()
-r1.value.then(() =&gt; {
-    console.log(a1)
-    var r2 = g.next()
-    r2.value.then(() =&gt; console.log(a1))
-})
-//1
-//2</code></pre>
-<ul>
-<li>调用<code>next()</code>方法时，返回对象的<code>value</code>值就是<code>yield</code>语句的值，<code>done</code>属性用来标志Generator方法是否执行结束</li>
-</ul>
-<p>在执行for循环中的异步操作时，由于<code>next()</code>方法需要手动执行，因此可以通过递归调用来自动执行：</p>
-<pre><code class="javascript">function promise_list(p) {
-    if (!p.done) {
-        p.value.then(() =&gt; {
-            console.log(a1)
-            promise_list(g.next())
-        })
-    }
-}
-promise_list(g.next())
-//1
-//2
-//3
-//4
-//6
-//3
-//1</code></pre>
-<h4 id="1-4-async-await"><a href="#1-4-async-await" class="headerlink" title="1.4 async/await"></a>1.4 async/await</h4><p>async函数可以简单的看做带有自执行器的Generator函数。</p>
-<pre><code class="javascript">async function async_set_a() {
-    await set_a(1, 1000).then(() =&gt; console.log(a))
-    await set_a(2, 200).then(() =&gt; console.log(a))
-}
-async_set_a()
-//在for循环中使用async/await
-list = [1, 2, 3]
-async function set_list(list) {
-    for (let i of list) {
-        await set_a(i, 100)
-        console.log(a)
-    }
-}
+<p>各状态之间的转换流程和其对应的表格如上图所示。根据状态转移图和表格，可以很方便的写出程序：</p>
+<pre><code class="python">INT_MAX = 2 ** 31 - 1
+INT_MIN = -2 ** 31
+class Auto:
+    def __init__(self):
+        self.status = &#39;start&#39;
+        self.sign = 1
+        self.ans = 0
+        self.status_matrix = {
+            &#39;start&#39;: [&#39;start&#39;, &#39;change_number&#39;, &#39;signed&#39;, &#39;end&#39;],
+            &#39;signed&#39;: [&#39;end&#39;, &#39;change_number&#39;, &#39;end&#39;, &#39;end&#39;],
+            &#39;change_number&#39;: [&#39;end&#39;, &#39;change_number&#39;, &#39;end&#39;, &#39;end&#39;],
+            &#39;end&#39;: [&#39;end&#39;, &#39;end&#39;, &#39;end&#39;, &#39;end&#39;]
+        }
+    # 获取当前的状态
+    def get_status(self, c: str) -&gt; int:
+        if c.isspace():
+            return 0
+        elif c.isdigit():
+            return 1
+        elif c == &#39;+&#39; or c == &quot;-&quot;:
+            return 2
+        else:
+            return 3
+    # 处理当前字符
+    def get(self, c: str):
+        self.status = self.status_matrix[self.status][self.get_status(c)]
+        if self.status == &#39;change_number&#39;:
+            self.ans = self.ans*10 + int(c)
+            self.ans = min(self.ans, INT_MAX) if self.sign == 1 else min(
+                self.ans, -INT_MIN)
+        elif self.status == &quot;signed&quot;:
+            self.sign = 1 if c == &#39;+&#39; else -1
 
-set_list(list)</code></pre>
-<p>这里和1.2明显的区别就是不用再通过<code>.then</code>来嵌套调用，避免了<code>执行地狱</code></p>
-<ul>
-<li>async函数返回一个Promise对象，当在方法体中遇到异步操作时，会立即返回，随后不断<code>轮询</code>直到异步操作完成，随后再执行方法体内剩下的代码</li>
-<li>await关键字必须位于async函数内部</li>
-<li>await关键字后面必须跟一个Promise对象，如果不是，则使用resolve将其转换</li>
-<li>await的结果即为Promis执行的结果，为<code>resolve</code>或<code>reject</code>的值</li>
-<li>可以通过<code>Promise.all()</code>进行并行操作</li>
-</ul>
+class Solution:
+    def myAtoi(self, str: str) -&gt; int:
+        auto = Auto()
+        for c in str:
+            auto.get(c)
+        return auto.sign * auto.ans</code></pre>
+<p>根据状态转移表创建<code>status_martix</code>字典，以每种状态为键，值依次为下一个字符出现时的转移状态，通过<code>get_status</code>方法处理并返回下一个状态，<code>get</code>处理符号和数字两种情况。</p>
+<p>这样一来，整个程序的状态十分清晰，也无需再依靠苦苦的调试测试用例来写一堆臃肿的<code>if-else</code>代码，算法的时间复杂度为<code>O(n)</code>，空间复杂度为<code>O(1)</code>虽然最后通过击败的人数不如前一中方法，但是这样的方式思考问题是值得借鉴的。</p>
 
             </div>
             <hr>
@@ -308,7 +283,7 @@ set_list(list)</code></pre>
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
                     
                   </span>
                 
@@ -321,18 +296,12 @@ set_list(list)</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/28/Leetcode%E4%B8%AD%E7%AD%89%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">
-                        <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">Leetcode中等题目分析（持续更新）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/05/23/%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/">
-                        <span class="hidden-mobile">前端实习面经</span>
+                      <a href="/2020/05/25/JavaScript%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
+                        <span class="hidden-mobile">JavaScript异步编程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
@@ -546,7 +515,7 @@ set_list(list)</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "JavaScript异步编程&nbsp;",
+        "Leetcode中等题目分析（持续更新）&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
