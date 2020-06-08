@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.7k 字
+                    2k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      6 分钟
+                      8 分钟
                   </span>
                 
 
@@ -306,6 +306,37 @@ for s in addLetter(items[:-1]):
       ans.append(s+c)
 return ans</code></pre>
 其中，函数递归调用的过程体现在第一层<code>for</code>循环中，其中的<code>s</code>并不能直接获得，而是随着递归调用逐渐改变。</li>
+</ul>
+<h2 id="2020-6-7更新"><a href="#2020-6-7更新" class="headerlink" title="==2020.6.7更新=="></a>==2020.6.7更新==</h2><h3 id="3-删除链表的倒数第n个结点"><a href="#3-删除链表的倒数第n个结点" class="headerlink" title="3 删除链表的倒数第n个结点"></a>3 删除链表的倒数第n个结点</h3><p>给定一个链表，删除链表的倒数第n个结点，并返回链表结点的头结点。</p>
+<p>链表的缺点就是查找元素不方便，要找到任何一个结点都必须遍历其之前的全部结点，所以一般的思路是：</p>
+<ul>
+<li>遍历链表，记录链表的大小<pre><code class="python">  count=0
+  while head:
+      count+=1
+      head = head.next</code></pre>
+</li>
+<li>利用循环，当遍历到倒数第n个节点的前一个结点时，删除节点<pre><code class="python">  start = head
+  for i in range(0,count):
+      if count-i == n-1:
+          start.next = start.next.next
+      start = start.next</code></pre>
+但是其实可以利用多个指针来进行，这样就无需事先遍历统计节点的个数了。</li>
+<li>设定一个快指针<code>fast</code>，一个慢指针<code>slow</code>，指向头结点<code>head</code>，假设总共有<code>N</code>个结点，则倒数第<code>n</code>个结点的索引为<code>N-n-1</code></li>
+<li>先将快指针<code>fast</code>向后移动<code>n</code>次， 指向结点索引为<code>n-1</code></li>
+<li>然后将快指针<code>fast</code>移动到末尾，同时移动慢指针<code>slow</code>，当fast指向末尾结点时，慢指针指向结点索引为<code>N-n</code>，即倒数第<code>n</code>个结点的前一个结点</li>
+<li>此时直接删除慢指针<code>slow</code>指向的结点的后一个结点即可<br>图示如下：<br><img src="http://images.nickname4th.vip/10.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E7%BB%93%E7%82%B9.png" srcset="/img/loading.gif" alt="10.删除链表倒数第n个结点"><pre><code class="python">class Solution:
+  def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
+      fast = slow = head
+      for _ in range(n):
+          fast = fast.next
+      if not fast:
+          return head.next
+      while fast.next:
+          fast = fast.next
+          slow = slow.next
+      slow.next = slow.next.next
+      return head</code></pre>
+</li>
 </ul>
 
             </div>
