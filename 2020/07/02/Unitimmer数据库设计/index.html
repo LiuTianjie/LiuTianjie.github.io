@@ -19,7 +19,7 @@
   <meta name="description" content="Bupt/Computer Since">
   <meta name="author" content="Nickname4th">
   <meta name="keywords" content="">
-  <title>归档 - Nickname4th</title>
+  <title>Unitimmer数据库设计 - Nickname4th</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -45,7 +45,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -113,7 +113,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('https://images.nickname4th.vip/MopPpHzgGss.jpg') no-repeat center center;
+         style="background: url('https://static.djangoproject.com/img/logos/django-logo-negative.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -123,12 +123,35 @@
             </span>
 
             
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期四, 七月 2日 2020, 12:11 凌晨
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    240 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      1 分钟
+                  </span>
+                
+
+                
+              </p>
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
-            </div>
           
         </div>
       </div>
@@ -137,37 +160,120 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/12/06/%E8%B7%A8%E5%B9%B4%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">跨年旅行计划</span>
-      <span style="float: right;">12-06</span>
-    </a>
-  
-</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>​    本文讲述我的开源项目<a href="https://github.com/LiuTianjie/unitimmer" target="_blank" rel="noopener">unitimmer</a>的数据库设计，我将从需求分析出发，设计各数据表的结构，并使用<code>Django</code>的<code>ORM</code>来定义数据模型，最终该项目的后端将从<code>Node.js</code>重构为<code>Django</code></p>
+<a id="more"></a>
 
 
+<h2 id="Unitimmers数据库设计"><a href="#Unitimmers数据库设计" class="headerlink" title="Unitimmers数据库设计"></a>Unitimmers数据库设计</h2><h3 id="1-数据表"><a href="#1-数据表" class="headerlink" title="1 数据表"></a>1 数据表</h3><ul>
+<li><p>动态表</p>
+<p>动态表存储所有用户发布的全部动态，包括动态的唯一id、用户名、头像、发布日期、文字内容、图片链接等信息，其中动态唯一id<code>msgID</code>作为主键，并且作为外键在点赞表中使用</p>
+</li>
+<li><p>用户表</p>
+</li>
+<li><p>点赞表</p>
+</li>
+<li><p>评论表</p>
+<p>整个数据表设计完成时的E-R图为：</p>
+</li>
+</ul>
+<img src="https://images.nickname4th.vip/unidb.png" srcset="/img/loading.gif" alt="unidb" style="zoom:50%;" />
 
-              </div>
+<h3 id="和前端的联系"><a href="#和前端的联系" class="headerlink" title="和前端的联系"></a>和前端的联系</h3><ul>
+<li><p>UI设计页面</p>
+<img src="https://images.nickname4th.vip/dailyPage.png" srcset="/img/loading.gif" alt="dailyPage" style="zoom:50%;" />
+</li>
+<li><p>数据字段的作用（以红色文字和箭头标出）</p>
+<img src="https://images.nickname4th.vip/dailyUsage.png" srcset="/img/loading.gif" alt="dailyUsage" style="zoom:50%;" />
+
+<p>其中点赞信息由点赞用户和点赞总数组成，这两个字段没有在数据库中直接存储，而是需要经过查询动态获取。</p>
+</li>
+</ul>
+
             </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Django/">Django</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/28/Leetcode%E4%B8%AD%E7%AD%89%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">
+                        <span class="hidden-mobile">Leetcode中等题目分析（持续更新）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+                <!-- Comments -->
+                <div class="comments" id="comments">
+                  
+                  
+  <script defer src="https://utteranc.es/client.js"
+          repo="LiuTianjie/BlogComments"
+          issue-term="pathname"
+  
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+                </div>
+              
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -249,6 +355,59 @@
 
 
 
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
 
 
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
@@ -282,7 +441,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "珍丸之珍，雀不祈弹。&nbsp;",
+        "Unitimmer数据库设计&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
