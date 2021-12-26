@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    2.8k 字
+                    2.7k 字
                   </span>
                 
 
@@ -171,8 +171,11 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>作为刷算法题目路上的一点心得。<br><span id="more"></span></p>
-<h2 id="Leetcode中等题目分析（持续更新）"><a href="#Leetcode中等题目分析（持续更新）" class="headerlink" title="Leetcode中等题目分析（持续更新）"></a>Leetcode中等题目分析（持续更新）</h2><h3 id="1-No-8-字符串转整数"><a href="#1-No-8-字符串转整数" class="headerlink" title="1 No.8 字符串转整数"></a>1 No.8 字符串转整数</h3><p>请你来实现一个atio函数，使其能将字符串转换成整数。要求：</p>
+              <p>作为刷算法题目路上的一点心得。</p>
+<a id="more"></a>
+<h2 id="Leetcode中等题目分析（持续更新）">Leetcode中等题目分析（持续更新）</h2>
+<h3 id="1-No-8-字符串转整数">1 No.8 字符串转整数</h3>
+<p>请你来实现一个atio函数，使其能将字符串转换成整数。要求：</p>
 <ul>
 <li>首先丢弃字符串开头的空格</li>
 <li>非空格的第一个字符串是正负号时，则将该符号与<code>后面</code>尽可能多<code>连续</code>的数字字符组合起来，形成一个有符号整数</li>
@@ -181,8 +184,9 @@
 <li>当不满足以上规则而无法进行转换时，返回0</li>
 <li>返回整数的大小范围为32位有符号整数的范围</li>
 </ul>
-<h4 id="1-1-直接上手"><a href="#1-1-直接上手" class="headerlink" title="1.1 直接上手"></a>1.1 直接上手</h4><p>最简单的方法是直接开始编码，但是显然，会遇到很多麻烦，并且写出的代码具有非常多的<code>if-else</code>结构，十分臃肿，我在VS Code上测试了十余次，前后经过了一两个小时，才写出完整AC的代码，可以说是十分low了。</p>
-<pre><code class="lang-python">class Solution:
+<h4 id="1-1-直接上手">1.1 直接上手</h4>
+<p>最简单的方法是直接开始编码，但是显然，会遇到很多麻烦，并且写出的代码具有非常多的<code>if-else</code>结构，十分臃肿，我在VS Code上测试了十余次，前后经过了一两个小时，才写出完整AC的代码，可以说是十分low了。</p>
+<pre><code class="language-python">class Solution:
     def myAtoi(self, str: str) -&gt; int:
         res = &quot; &quot;
         flag = True
@@ -222,47 +226,48 @@
 </ul>
 <p>算法的时间复杂度为<code>O(n)</code>，空间复杂度为<code>O(1)</code></p>
 <p>可以看到整个流程十分复杂，并且绝不是一次想好就能编写出这样的代码，因此在面对这样的题目时，我们需要用另一种思路去更清晰的分析问题。</p>
-<h4 id="1-2-有限状态机"><a href="#1-2-有限状态机" class="headerlink" title="1.2 有限状态机"></a>1.2 有限状态机</h4><p>通过简单分析，可以知道整个转换的流程主要有4种状态：</p>
+<h4 id="1-2-有限状态机">1.2 有限状态机</h4>
+<p>通过简单分析，可以知道整个转换的流程主要有4种状态：</p>
 <ul>
 <li>初始状态，直到首个不为空格的字符之前，都处于这个状态</li>
 <li>符号转换状态，在遇到符号时，处于这个状态</li>
 <li>数字转换状态，在遇到数字字符时，出于这个状态</li>
 <li>结束状态，即程序退出</li>
 </ul>
-<p><img src="http://images.nickname4th.vip/charTonum.png" srcset="/img/loading.gif" alt="charTonum" style="zoom:50%;" /></p>
+<img src="http://images.nickname4th.vip/charTonum.png" srcset="/img/loading.gif" alt="charTonum" style="zoom:50%;" />
 <p>各状态之间的转换流程和其对应的表格如上图所示。根据状态转移图和表格，可以很方便的写出程序：</p>
-<pre><code class="lang-python">INT_MAX = 2 ** 31 - 1
+<pre><code class="language-python">INT_MAX = 2 ** 31 - 1
 INT_MIN = -2 ** 31
 class Auto:
     def __init__(self):
-        self.status = &#39;start&#39;
+        self.status = 'start'
         self.sign = 1
         self.ans = 0
-        self.status_matrix = &#123;
-            &#39;start&#39;: [&#39;start&#39;, &#39;change_number&#39;, &#39;signed&#39;, &#39;end&#39;],
-            &#39;signed&#39;: [&#39;end&#39;, &#39;change_number&#39;, &#39;end&#39;, &#39;end&#39;],
-            &#39;change_number&#39;: [&#39;end&#39;, &#39;change_number&#39;, &#39;end&#39;, &#39;end&#39;],
-            &#39;end&#39;: [&#39;end&#39;, &#39;end&#39;, &#39;end&#39;, &#39;end&#39;]
-        &#125;
-    # 获取当前的状态
+        self.status_matrix = {
+            'start': ['start', 'change_number', 'signed', 'end'],
+            'signed': ['end', 'change_number', 'end', 'end'],
+            'change_number': ['end', 'change_number', 'end', 'end'],
+            'end': ['end', 'end', 'end', 'end']
+        }
+	# 获取当前的状态
     def get_status(self, c: str) -&gt; int:
         if c.isspace():
             return 0
         elif c.isdigit():
             return 1
-        elif c == &#39;+&#39; or c == &quot;-&quot;:
+        elif c == '+' or c == &quot;-&quot;:
             return 2
         else:
             return 3
-    # 处理当前字符
+	# 处理当前字符
     def get(self, c: str):
         self.status = self.status_matrix[self.status][self.get_status(c)]
-        if self.status == &#39;change_number&#39;:
+        if self.status == 'change_number':
             self.ans = self.ans*10 + int(c)
             self.ans = min(self.ans, INT_MAX) if self.sign == 1 else min(
                 self.ans, -INT_MIN)
         elif self.status == &quot;signed&quot;:
-            self.sign = 1 if c == &#39;+&#39; else -1
+            self.sign = 1 if c == '+' else -1
 
 class Solution:
     def myAtoi(self, str: str) -&gt; int:
@@ -273,160 +278,186 @@ class Solution:
 </code></pre>
 <p>根据状态转移表创建<code>status_martix</code>字典，以每种状态为键，值依次为下一个字符出现时的转移状态，通过<code>get_status</code>方法处理并返回下一个状态，<code>get</code>处理符号和数字两种情况。</p>
 <p>这样一来，整个程序的状态十分清晰，也无需再依靠苦苦的调试测试用例来写一堆臃肿的<code>if-else</code>代码，算法的时间复杂度为<code>O(n)</code>，空间复杂度为<code>O(1)</code>虽然最后通过击败的人数不如前一种方法，但是这样的方式思考问题是值得借鉴的。</p>
-<h2 id="2020-6-5更新"><a href="#2020-6-5更新" class="headerlink" title="==2020.6.5更新=="></a>==2020.6.5更新==</h2><h3 id="2-电话号码的字符组合"><a href="#2-电话号码的字符组合" class="headerlink" title="2 电话号码的字符组合"></a>2 电话号码的字符组合</h3><p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。<br>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。<br><img src="http://images.nickname4th.vip/算法2.png" srcset="/img/loading.gif" alt="算法2"></p>
-<h4 id="2-1-使用循环"><a href="#2-1-使用循环" class="headerlink" title="2.1 使用循环"></a>2.1 使用循环</h4><p>很显然的可想到使用循环遍历来进行字母的组合：</p>
+<h2 id="2020-6-5更新">==2020.6.5更新==</h2>
+<h3 id="2-电话号码的字符组合">2 电话号码的字符组合</h3>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。<br>
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。<br>
+<img src="http://images.nickname4th.vip/%E7%AE%97%E6%B3%952.png" srcset="/img/loading.gif" alt="算法2"></p>
+<h4 id="2-1-使用循环">2.1 使用循环</h4>
+<p>很显然的可想到使用循环遍历来进行字母的组合：</p>
 <ul>
-<li>首先将数字-字母形成键值对，保存到字典中<pre><code class="lang-python">      mapping = &#123;&#39;2&#39;: &#39;abc&#39;, &#39;3&#39;: &#39;def&#39;, &#39;4&#39;: &#39;ghi&#39;, &#39;5&#39;: &#39;jkl&#39;,&#39;6&#39;: &#39;mno&#39;, &#39;7&#39;: &#39;pqrs&#39;, &#39;8&#39;: &#39;tuv&#39;, &#39;9&#39;: &#39;wxyz&#39;&#125;
+<li>首先将数字-字母形成键值对，保存到字典中<pre><code class="language-python">    mapping = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl','6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
 </code></pre>
 </li>
-<li>遍历输入字符串，根据当前数字查找字典，再进行其间的排列组合<pre><code class="lang-python"># 当仅有两个数字时
+<li>遍历输入字符串，根据当前数字查找字典，再进行其间的排列组合</li>
+</ul>
+<pre><code class="language-python"># 当仅有两个数字时
 ans=[]
-res=&#39;&#39;
+res=''
 for i in mapping(digits[0]):
-  for j in mapping(digits[1]):
-      res =i+j
-      ans.append(res)
+    for j in mapping(digits[1]):
+        res =i+j
+        ans.append(res)
 return ans
 </code></pre>
-经过实际上手代码发现，循环的方式需要确定循环的次数，并且要手动编写循环体，所以转而使用递归。<h4 id="2-2-使用递归"><a href="#2-2-使用递归" class="headerlink" title="2.2 使用递归"></a>2.2 使用递归</h4><pre><code class="lang-python">ans=[]
+<p>经过实际上手代码发现，循环的方式需要确定循环的次数，并且要手动编写循环体，所以转而使用递归。</p>
+<h4 id="2-2-使用递归">2.2 使用递归</h4>
+<pre><code class="language-python">ans=[]
 Lists = [mapping[i] for i in str]
 def addLetter(items):
-  if len(items)==0:
-      return []
-  if len(items)==1:
-      return items[0]
-  now = items[-1]
-  p = addLetter(items[:-1])
-  return [s + c for s in p for c in now]
+    if len(items)==0:
+        return []
+    if len(items)==1:
+        return items[0]
+    now = items[-1]
+    p = addLetter(items[:-1])
+    return [s + c for s in p for c in now]
 </code></pre>
-这个<code>return</code>后的列表解析表达式等价于：<pre><code class="lang-python">for s in p:
-  for c in now:
-      ans.append(s+c)
+<p>这个<code>return</code>后的列表解析表达式等价于：</p>
+<pre><code class="language-python">for s in p:
+    for c in now:
+        ans.append(s+c)
 return ans
 # 即
 for s in addLetter(items[:-1]):
-  for j in items[-1]:
-      ans.append(s+c)
+    for j in items[-1]:
+        ans.append(s+c)
 return ans
 </code></pre>
-其中，函数递归调用的过程体现在第一层<code>for</code>循环中，其中的<code>s</code>并不能直接获得，而是随着递归调用逐渐改变。</li>
-</ul>
-<h2 id="2020-6-7更新"><a href="#2020-6-7更新" class="headerlink" title="==2020.6.7更新=="></a>==2020.6.7更新==</h2><h3 id="3-删除链表的倒数第n个结点"><a href="#3-删除链表的倒数第n个结点" class="headerlink" title="3 删除链表的倒数第n个结点"></a>3 删除链表的倒数第n个结点</h3><p>给定一个链表，删除链表的倒数第n个结点，并返回链表结点的头结点。</p>
+<p>其中，函数递归调用的过程体现在第一层<code>for</code>循环中，其中的<code>s</code>并不能直接获得，而是随着递归调用逐渐改变。</p>
+<h2 id="2020-6-7更新">==2020.6.7更新==</h2>
+<h3 id="3-删除链表的倒数第n个结点">3 删除链表的倒数第n个结点</h3>
+<p>给定一个链表，删除链表的倒数第n个结点，并返回链表结点的头结点。</p>
 <p>链表的缺点就是查找元素不方便，要找到任何一个结点都必须遍历其之前的全部结点，所以一般的思路是：</p>
 <ul>
-<li>遍历链表，记录链表的大小<pre><code class="lang-python">  count=0
-  while head:
-      count+=1
-      head = head.next
+<li>遍历链表，记录链表的大小<pre><code class="language-python">count=0
+while head:
+    count+=1
+    head = head.next
 </code></pre>
 </li>
-<li>利用循环，当遍历到倒数第n个节点的前一个结点时，删除节点<pre><code class="lang-python">  start = head
-  for i in range(0,count):
-      if count-i == n-1:
-          start.next = start.next.next
-      start = start.next
+<li>利用循环，当遍历到倒数第n个节点的前一个结点时，删除节点<pre><code class="language-python">start = head
+for i in range(0,count):
+    if count-i == n-1:
+        start.next = start.next.next
+    start = start.next
 </code></pre>
-但是其实可以利用多个指针来进行，这样就无需事先遍历统计节点的个数了。</li>
+</li>
+</ul>
+<p>但是其实可以利用多个指针来进行，这样就无需事先遍历统计节点的个数了。</p>
+<ul>
 <li>设定一个快指针<code>fast</code>，一个慢指针<code>slow</code>，指向头结点<code>head</code>，假设总共有<code>N</code>个结点，则倒数第<code>n</code>个结点的索引为<code>N-n-1</code></li>
 <li>先将快指针<code>fast</code>向后移动<code>n</code>次， 指向结点索引为<code>n-1</code></li>
 <li>然后将快指针<code>fast</code>移动到末尾，同时移动慢指针<code>slow</code>，当fast指向末尾结点时，慢指针指向结点索引为<code>N-n</code>，即倒数第<code>n</code>个结点的前一个结点</li>
-<li>此时直接删除慢指针<code>slow</code>指向的结点的后一个结点即可<br>图示如下：<br><img src="http://images.nickname4th.vip/10.删除链表倒数第n个结点.png" srcset="/img/loading.gif" alt="10.删除链表倒数第n个结点"><pre><code class="lang-python">class Solution:
-  def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
-      fast = slow = head
-      for _ in range(n):
-          fast = fast.next
-      if not fast:
-          return head.next
-      while fast.next:
-          fast = fast.next
-          slow = slow.next
-      slow.next = slow.next.next
-      return head
-</code></pre>
-<h2 id="2020-6-10更新"><a href="#2020-6-10更新" class="headerlink" title="==2020.6.10更新=="></a>==2020.6.10更新==</h2><h3 id="4-括号生成"><a href="#4-括号生成" class="headerlink" title="4 括号生成"></a>4 括号生成</h3>数字<code>n</code>代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的括号组合。</li>
+<li>此时直接删除慢指针<code>slow</code>指向的结点的后一个结点即可<br>
+图示如下：<br>
+<img src="http://images.nickname4th.vip/10.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E7%BB%93%E7%82%B9.png" srcset="/img/loading.gif" alt="10.删除链表倒数第n个结点"></li>
 </ul>
-<h4 id="4-1-回溯法（深度优先遍历）"><a href="#4-1-回溯法（深度优先遍历）" class="headerlink" title="4.1 回溯法（深度优先遍历）"></a>4.1 回溯法（深度优先遍历）</h4><p>首先想到的就是回溯法（深度优先遍历），由于其可以利用函数递归的方式，直接利用系统栈，而广度优先遍历往往需要我们自定义数据结构。<br>分析如下：</p>
+<pre><code class="language-python">class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
+        fast = slow = head
+        for _ in range(n):
+            fast = fast.next
+        if not fast:
+            return head.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return head
+</code></pre>
+<h2 id="2020-6-10更新">==2020.6.10更新==</h2>
+<h3 id="4-括号生成">4 括号生成</h3>
+<p>数字<code>n</code>代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的括号组合。</p>
+<h4 id="4-1-回溯法（深度优先遍历）">4.1 回溯法（深度优先遍历）</h4>
+<p>首先想到的就是回溯法（深度优先遍历），由于其可以利用函数递归的方式，直接利用系统栈，而广度优先遍历往往需要我们自定义数据结构。<br>
+分析如下：</p>
 <ul>
 <li>当左括号的数量小于n时，可以生成子树</li>
 <li>产生左子树时，仅判断左括号数量是否小于n</li>
 <li>当产生右子树时，判断右括号数量是否小于左括号数量</li>
 <li>整个树的节点数量等于2n时结束</li>
 </ul>
-<p>以<code>n=2</code>的情况为例，其树的生成情况如图所示：<br><img src="http://images.nickname4th.vip/qute.png" srcset="/img/loading.gif" alt="qute"></p>
-<pre><code class="lang-python">ans=[]
+<p>以<code>n=2</code>的情况为例，其树的生成情况如图所示：<br>
+<img src="http://images.nickname4th.vip/qute.png" srcset="/img/loading.gif" alt="qute"></p>
+<pre><code class="language-python">ans=[]
 def generateParenthesis(self, n: int) -&gt; List[str]:
     def generate(Tree,L,R):
         if len(Tree)==2*n:
-            ans.append(&#39;&#39;.join(Tree))
+            ans.append(''.join(Tree))
             # 满足条件的组合进入后，返回到上一层函数
             return
         if L &lt; n:
-            Tree.append(&#39;(&#39;)
+            Tree.append('(')
             generate(Tree,L+1,R)
             # 得到调用函数的返回时，出栈，回到父函数
             Tree.pop()
         if L &gt; R:
-            Tree.appned(&#39;)&#39;)
+            Tree.appned(')')
             generate(Tree,L,R+1)
             # 得到调用函数的返回时，出栈，回到父函数
             Tree.pop()
     generate([],0,0)
     return ans
 </code></pre>
-<h4 id="4-2-动态规划"><a href="#4-2-动态规划" class="headerlink" title="4.2 动态规划"></a>4.2 动态规划</h4><p>首先分析状态及其转移方程：</p>
+<h4 id="4-2-动态规划">4.2 动态规划</h4>
+<p>首先分析状态及其转移方程：</p>
 <ul>
 <li>状态<code>dp[i]</code>代表括号对数为<code>i</code>时的所有正确的组合数</li>
-<li>状态<code>dp[i]</code>依赖于<code>dp[j]</code>和<code>dp[k]</code>，其中<code>j</code>和<code>k</code>满足<code>j+k=i-1</code>，事实上，<code>dp[i]</code>仅仅比<code>dp[j]</code>和<code>dp[k]</code>的组合多了一对括号<code>( )</code>,其位置关系为：<ul>
+<li>状态<code>dp[i]</code>依赖于<code>dp[j]</code>和<code>dp[k]</code>，其中<code>j</code>和<code>k</code>满足<code>j+k=i-1</code>，事实上，<code>dp[i]</code>仅仅比<code>dp[j]</code>和<code>dp[k]</code>的组合多了一对括号<code>( )</code>,其位置关系为：
+<ul>
 <li>从<code>dp[0]</code>开始，<code>dp[0]=[&quot;&quot;]</code></li>
 <li><code>dp[j]</code>在<code>( )</code>内部，<code>dp[k]</code>在<code>( )</code>外部</li>
-<li>即<code>dp[i] = &quot;(&quot; + dp[j] + &quot;)&quot; + dp[k]</code><pre><code class="lang-python">class Solution:
-def generateParenthesis(self, n: int) -&gt; List[str]:
-  if n == 0:
-      return []
-  dp = [None for _ in range(n + 1)]
-  dp[0] = [&quot;&quot;]
-  for i in range(1, n + 1):
-      cur = []
-      for j in range(i):
-          left = dp[j]
-          right = dp[i - j - 1]
-          for s1 in left:
-              for s2 in right:
-                  cur.append(&quot;(&quot; + s1 + &quot;)&quot; + s2)
-      dp[i] = cur
-  return dp[n]
+<li>即<code>dp[i] = &quot;(&quot; + dp[j] + &quot;)&quot; + dp[k]</code></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">class Solution:
+    def generateParenthesis(self, n: int) -&gt; List[str]:
+        if n == 0:
+            return []
+        dp = [None for _ in range(n + 1)]
+        dp[0] = [&quot;&quot;]
+        for i in range(1, n + 1):
+            cur = []
+            for j in range(i):
+                left = dp[j]
+                right = dp[i - j - 1]
+                for s1 in left:
+                    for s2 in right:
+                        cur.append(&quot;(&quot; + s1 + &quot;)&quot; + s2)
+            dp[i] = cur
+        return dp[n]
 </code></pre>
-<h2 id="2020-8-13更新"><a href="#2020-8-13更新" class="headerlink" title="==2020.8.13更新=="></a>==2020.8.13更新==</h2>N数和，给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在N个元素 a,b,c,d,… ，使得 a + b + c + d +…的值与 target 相等？找出所有满足条件且不重复的四元组。<blockquote>
+<h2 id="2020-8-13更新">==2020.8.13更新==</h2>
+<p>N数和，给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在N个元素 a,b,c,d,… ，使得 a + b + c + d +…的值与 target 相等？找出所有满足条件且不重复的四元组。</p>
+<blockquote>
 <p>对于2数、3数的情况，我们可以使用双指针，但是拓展到N个数的时候，我们采用回溯法会比较方便。</p>
-<pre><code class="lang-javascript">function nSums(nums,target,N)&#123;
-let res = []
-nums.sort((a,b)=&gt;a-b)
-function dfs(nums,target,index,tmp,res)&#123;
-  if(tmp.length&lt;=N &amp;&amp; index &lt; nums.length)&#123;
-      if(target==0 &amp;&amp; tmp.length==n)&#123;
-          res.push(tmp)
-          return 
-      &#125;
-      else&#123;
-          for(let i =index; i&lt;nums.length;i++)&#123;
-              tmp.push(nums[i])
-              dfs(nums,target - nums[i],i+1,tmp,res)
-              return
-          &#125;
-      &#125;
-  &#125;
-  return
-&#125;
-dfs(nums,target,0,[],res)
-return res
-&#125;
+</blockquote>
+<pre><code class="language-javascript">function nSums(nums,target,N){
+	let res = []
+	nums.sort((a,b)=&gt;a-b)
+	function dfs(nums,target,index,tmp,res){
+		if(tmp.length&lt;=N &amp;&amp; index &lt; nums.length){
+			if(target==0 &amp;&amp; tmp.length==n){
+				res.push(tmp)
+				return 
+			}
+			else{
+				for(let i =index; i&lt;nums.length;i++){
+					tmp.push(nums[i])
+					dfs(nums,target - nums[i],i+1,tmp,res)
+					return
+				}
+			}
+		}
+		return
+	}
+	dfs(nums,target,0,[],res)
+	return res
+}
 </code></pre>
 <p>这里默认数组中不包含重复元素， 如果包含重复元素，需要进行剪枝处理，注意使用JavaScript语言，在进行深度优先遍历时不要忘记 <strong><code>return</code></strong></p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
 
             </div>
             <hr>
@@ -443,7 +474,7 @@ return res
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">

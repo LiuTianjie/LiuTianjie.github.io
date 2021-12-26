@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.7k 字
+                    1.5k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      8 分钟
+                      7 分钟
                   </span>
                 
 
@@ -171,32 +171,37 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>最近有个同学有点需求，简单帮忙实现了一下，前端部分使用了Vue+ElementUI，后端部分使用了MongoDB，中间使用MQTT协议的“发布——订阅”模式实现消息的传递。之前使用Docker在腾讯云搭建了一个环境，传送门<a target="_blank" rel="noopener" href="https://github.com/LiuTianjie/zc_web">A lot project build with Vue and Docker</a>，如果你没有docker的相关知识，可以直接查看代码的web和server文件夹即可。<br><span id="more"></span></p>
-<h2 id="基于Vue和MQTT的简单IOT系统"><a href="#基于Vue和MQTT的简单IOT系统" class="headerlink" title="基于Vue和MQTT的简单IOT系统"></a>基于Vue和MQTT的简单IOT系统</h2><p><img src="http://images.nickname4th.vip/zc_bb.png" srcset="/img/loading.gif" alt="zc_bb" style="zoom: 25%;" /></p>
+              <p>最近有个同学有点需求，简单帮忙实现了一下，前端部分使用了Vue+ElementUI，后端部分使用了MongoDB，中间使用MQTT协议的“发布——订阅”模式实现消息的传递。之前使用Docker在腾讯云搭建了一个环境，传送门<a href="https://github.com/LiuTianjie/zc_web" target="_blank" rel="noopener">A lot project build with Vue and Docker</a>，如果你没有docker的相关知识，可以直接查看代码的web和server文件夹即可。</p>
+<a id="more"></a>
+<h2 id="基于Vue和MQTT的简单IOT系统">基于Vue和MQTT的简单IOT系统</h2>
+<img src="http://images.nickname4th.vip/zc_bb.png" srcset="/img/loading.gif" alt="zc_bb" style="zoom: 25%;" />
 <p>整个系统可以分为前端、后端和硬件三个部分，前端通过模拟购票和开锁与后端数据库交互，并通过MQTT协议与树莓派通信，树莓派控制GPIO引脚信号控制IOT设备。</p>
-<h3 id="1-前端部分"><a href="#1-前端部分" class="headerlink" title="1 前端部分"></a>1 前端部分</h3><h4 id="1-1-全局http处理"><a href="#1-1-全局http处理" class="headerlink" title="1.1 全局http处理"></a>1.1 全局http处理</h4><pre><code class="lang-javascript">import axios from &#39;axios&#39;
-import Vue from &#39;vue&#39;
-const http = axios.create(&#123;
-    baseURL: &#39;url&#39;
-&#125;)
-http.interceptors.response.use(res =&gt; &#123;
+<h3 id="1-前端部分">1 前端部分</h3>
+<h4 id="1-1-全局http处理">1.1 全局http处理</h4>
+<pre><code class="language-javascript">import axios from 'axios'
+import Vue from 'vue'
+const http = axios.create({
+    baseURL: 'url'
+})
+http.interceptors.response.use(res =&gt; {
     return res
-&#125;, err =&gt; &#123;
+}, err =&gt; {
     //服务端返回错误通用处理方案，并使用element的message进行提示
-    if (err.response.data) &#123;
-        Vue.prototype.$message.error(&#123;
-            type: &#39;error&#39;,
+    if (err.response.data) {
+        Vue.prototype.$message.error({
+            type: 'error',
             message: err.response.data
-        &#125;);
+        });
         console.log(err.response.status)
-    &#125;
+    }
     return Promise.reject(err)
-&#125;)
+})
 export default http
 </code></pre>
 <p>使用axios进行网络请求，添加http拦截器，将服务端返回的错误码和信息返回。</p>
-<h4 id="1-2-模拟购票"><a href="#1-2-模拟购票" class="headerlink" title="1.2 模拟购票"></a>1.2 模拟购票</h4><p>简单的表单验证，利用vue的ref引用一个p标签来展示购票结果。</p>
-<pre><code class="lang-vue">&lt;div class=&quot;buy&quot; v-loading.fullscreen.lock=&quot;loading&quot;&gt;
+<h4 id="1-2-模拟购票">1.2 模拟购票</h4>
+<p>简单的表单验证，利用vue的ref引用一个p标签来展示购票结果。</p>
+<pre><code class="language-vue">&lt;div class=&quot;buy&quot; v-loading.fullscreen.lock=&quot;loading&quot;&gt;
   &lt;el-card header=&quot;购买车票（模拟）&quot; class=&quot;check-card&quot;&gt;
     &lt;div class=&quot;info&quot;&gt;
       &lt;p ref=&quot;answer&quot;&gt;&lt;/p&gt;
@@ -204,56 +209,57 @@ export default http
   &lt;/el-card&gt;
 &lt;/div&gt;
 &lt;script&gt;
-methods: &#123;
-    check() &#123;
+methods: {
+    check() {
       let that = this;
-      this.$refs[&quot;formData&quot;].validate(async valid =&gt; &#123;
-        if (valid) &#123;
+      this.$refs[&quot;formData&quot;].validate(async valid =&gt; {
+        if (valid) {
           this.$refs.answer.innerHTML = &quot;购票中，请稍后&quot;;
           this.loading = true;
-          try &#123;
+          try {
             const res = await this.$http.post(&quot;/orders&quot;, this.formData);
-            setTimeout(() =&gt; &#123;
+            setTimeout(() =&gt; {
               this.loading = false;
-              this.$message(&#123;
+              this.$message({
                 message: &quot;购票成功！&quot;,
                 type: &quot;success&quot;
-              &#125;);
-            &#125;, 500);
+              });
+            }, 500);
             this.resetForm(&quot;formData&quot;);
             this.$refs.answer.innerHTML = `购票成功！&lt;/p&gt;&lt;p&gt;
-          日期：$&#123;res.data.date&#125;&lt;/p&gt;&lt;p&gt;
-          车次：$&#123;res.data.train&#125;&lt;/p&gt;&lt;p&gt;
-          座位：$&#123;res.data.set&#125;`;
-          &#125; catch (err) &#123;
-            setTimeout(() =&gt; &#123;
+          日期：${res.data.date}&lt;/p&gt;&lt;p&gt;
+          车次：${res.data.train}&lt;/p&gt;&lt;p&gt;
+          座位：${res.data.set}`;
+          } catch (err) {
+            setTimeout(() =&gt; {
               this.loading = false;
               this.$refs.answer.innerHTML = &quot;购票失败！&quot;;
-            &#125;, 500);
-          &#125;
-        &#125; else &#123;
+            }, 500);
+          }
+        } else {
           this.$message.error(&quot;输入有误，请重试！&quot;);
-        &#125;
-      &#125;);
-    &#125;,
-&#125;
+        }
+      });
+    },
+}
 &lt;/script&gt;
 </code></pre>
 <ul>
 <li>使用了v-loading做等待时的缓冲动画</li>
 <li>利用ref控制购票状态</li>
 </ul>
-<h4 id="1-2-模拟验证"><a href="#1-2-模拟验证" class="headerlink" title="1.2 模拟验证"></a>1.2 模拟验证</h4><pre><code class="lang-vue">&lt;el-form :model=&quot;formData&quot; ref=&quot;formData&quot; label-width=&quot;100px&quot; @submit.native.prevent=&quot;check&quot;&gt;
+<h4 id="1-2-模拟验证">1.2 模拟验证</h4>
+<pre><code class="language-vue">&lt;el-form :model=&quot;formData&quot; ref=&quot;formData&quot; label-width=&quot;100px&quot; @submit.native.prevent=&quot;check&quot;&gt;
   &lt;el-form-item
     label=&quot;身份证号&quot;
     prop=&quot;id&quot;
     :rules=&quot;[
-              &#123; required: true, message: &#39;身份证号码不能为空&#39;&#125;,
-              &#123; required: true, message: &#39;请填写证件号码&#39;, trigger: &#39;blur&#39; &#125;,
-              &#123; pattern: /(^[1-9]\d&#123;5&#125;(18|19|([23]\d))\d&#123;2&#125;((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d&#123;3&#125;[0-9Xx]$)|(^[1-9]\d&#123;5&#125;\d&#123;2&#125;((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d&#123;2&#125;$)/,
-                message: &#39;证件号码格式有误！&#39;,
-                trigger: &#39;blur&#39;
-              &#125;]&quot;&gt;
+              { required: true, message: '身份证号码不能为空'},
+              { required: true, message: '请填写证件号码', trigger: 'blur' },
+              { pattern: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
+                message: '证件号码格式有误！',
+                trigger: 'blur'
+              }]&quot;&gt;
     &lt;el-input
       class=&quot;check-box&quot;
       type=&quot;id&quot;
@@ -263,118 +269,168 @@ methods: &#123;
     &lt;/el-input&gt;
   &lt;/el-form-item&gt;
      &lt;el-button type=&quot;primary&quot; native-type=&quot;submit&quot;&gt;提交&lt;/el-button&gt;
-     &lt;el-button @click=&quot;resetForm(&#39;formData&#39;)&quot;&gt;重置&lt;/el-button&gt;
+     &lt;el-button @click=&quot;resetForm('formData')&quot;&gt;重置&lt;/el-button&gt;
    &lt;/el-form-item&gt;
 &lt;/el-form&gt;
 </code></pre>
 <ul>
 <li>使用element表单验证，rules中使用正则表达式限制身份证号码的格式</li>
-<li>@submit.native.prevent=”check”，阻止表单的自动提交</li>
-<li>提交按钮绑定native-type=”submit”，点击提交</li>
+<li>@submit.native.prevent=“check”，阻止表单的自动提交</li>
+<li>提交按钮绑定native-type=“submit”，点击提交</li>
 </ul>
-<h3 id="2-后端部分"><a href="#2-后端部分" class="headerlink" title="2 后端部分"></a>2 后端部分</h3><h4 id="2-1-MQTT-Server"><a href="#2-1-MQTT-Server" class="headerlink" title="2.1 MQTT Server"></a>2.1 MQTT Server</h4><pre><code class="lang-javascript">var mosca = require(&#39;mosca&#39;);
+<h3 id="2-后端部分">2 后端部分</h3>
+<h4 id="2-1-MQTT-Server">2.1 MQTT Server</h4>
+<pre><code class="language-javascript">var mosca = require('mosca');
 //构建自带服务器
-var MqttServer = new mosca.Server(&#123;
+var MqttServer = new mosca.Server({
     port: 1883
-&#125;);
+});
 //对服务器端口进行配置， 在此端口进行监听
-MqttServer.on(&#39;clientConnected&#39;, function (client) &#123;
+MqttServer.on('clientConnected', function (client) {
     //监听连接
-    console.log(&#39;client connected&#39;, client.id);
-&#125;);
+    console.log('client connected', client.id);
+});
 /**
  * 监听MQTT主题消息
  **/
-MqttServer.on(&#39;published&#39;, function (packet, client) &#123;
+MqttServer.on('published', function (packet, client) {
     //当客户端有连接发布主题消息
     var topic = packet.topic;
     console.log(packet);
-    switch (topic) &#123;
-        case &#39;train1&#39;:
-            console.log(&#39;message-publish&#39;, packet.payload.toString());
+    switch (topic) {
+        case 'train1':
+            console.log('message-publish', packet.payload.toString());
             //MQTT转发主题消息
-            //MqttServer.publish(&#123; topic: &#39;other&#39;, payload: &#39;sssss&#39; &#125;);
+            //MqttServer.publish({ topic: 'other', payload: 'sssss' });
             break;
-        case &#39;train2&#39;:
-            console.log(&#39;message-123&#39;, packet.payload.toString());
+        case 'train2':
+            console.log('message-123', packet.payload.toString());
             break;
-    &#125;
-&#125;);
+    }
+});
 
-MqttServer.on(&#39;ready&#39;, function () &#123;
+MqttServer.on('ready', function () {
     //当服务开启时
-    console.log(&#39;mqtt is running...&#39;);
-&#125;);
+    console.log('mqtt is running...');
+});
+
 </code></pre>
 <ul>
 <li>通过mosca新建mqtt服务器，监听1883端口</li>
 <li>利用switch函数，监听从客户的publish的消息</li>
 </ul>
-<h4 id="2-2-Express服务器接口"><a href="#2-2-Express服务器接口" class="headerlink" title="2.2 Express服务器接口"></a>2.2 Express服务器接口</h4><pre><code class="lang-javascript">const Model = require(&#39;../../models/Order&#39;)
-const mqtt = require(&#39;mqtt&#39;);
-const client = mqtt.connect(&#39;mqtt://host&#39;); //连接到服务端
+<h4 id="2-2-Express服务器接口">2.2 Express服务器接口</h4>
+<pre><code class="language-javascript">const Model = require('../../models/Order')
+const mqtt = require('mqtt');
+const client = mqtt.connect('mqtt://host'); //连接到服务端
 //验证并删除订单记录
-router.get(&#39;/orders/:id&#39;, async (req, res) =&gt; &#123;
-  const item = await Model.findOne(&#123; user: req.params.id &#125;)
+router.get('/orders/:id', async (req, res) =&gt; {
+  const item = await Model.findOne({ user: req.params.id })
 
-  if (item === null) &#123;
+  if (item === null) {
     res.status(401).send(&quot;未查到数据！&quot;)
-  &#125;
-  else &#123;
+  }
+  else {
     const id = item._id
     console.log(item)
-    const msg = await Model.findOneAndDelete(&#123; _id: id &#125;)
+    const msg = await Model.findOneAndDelete({ _id: id })
     console.log(&quot;使用成功！已删除！&quot;)
     res.send(item)
-    client.publish(&#39;train1&#39;, msg.set+&#39;&#39;, &#123; qos: 0, retain: true &#125;);
-  &#125;
-&#125;)
+    client.publish('train1', msg.set+'', { qos: 0, retain: true });
+  }
+})
 </code></pre>
 <ul>
 <li>使用express的router定义后端路由，通过url传递参数匹配特定用户的id，进行CURD操作</li>
 <li>创建mqtt客户端，删除时向“train1”频道发布信息</li>
 </ul>
-<h3 id="3-硬件部分"><a href="#3-硬件部分" class="headerlink" title="3 硬件部分"></a>3 硬件部分</h3><h4 id="3-1-示意图和电路图"><a href="#3-1-示意图和电路图" class="headerlink" title="3.1 示意图和电路图"></a>3.1 示意图和电路图</h4><ul>
+<h3 id="3-硬件部分">3 硬件部分</h3>
+<h4 id="3-1-示意图和电路图">3.1 示意图和电路图</h4>
+<ul>
 <li>示意图</li>
 </ul>
-<p><img src="http://images.nickname4th.vip/zc_bb.png" srcset="/img/loading.gif" alt="zc_bb" style="zoom: 25%;" /></p>
+<img src="http://images.nickname4th.vip/zc_bb.png" srcset="/img/loading.gif" alt="zc_bb" style="zoom: 25%;" />
 <ul>
 <li>电路图</li>
 </ul>
-<p><img src="http://images.nickname4th.vip/zc_图示.png" srcset="/img/loading.gif" alt="zc_图示" style="zoom:25%;" /></p>
+<img src="http://images.nickname4th.vip/zc_图示.png" srcset="/img/loading.gif" alt="zc_图示" style="zoom:25%;" />
 <ul>
-<li><p>GPIO 11 连接至L298N驱动板的ENA，用于发送高低电平信号，GPIO 35、36连接L298N的IN1、IN2，用于控制OUT1的输出，L298N真值表如下：</p>
-<p>| ENA  | IN1  | IN2  | 输出 |<br>| :—: | :—: | :—: | :—: |<br>|  0   |  x   |  x   |  0   |<br>|  1   |  0   |  0   |  0   |<br>|  1   |  0   |  1   | +12V |<br>|  1   |  1   |  0   | -12V |<br>|  1   |  1   |  1   |  0   |</p>
+<li>
+<p>GPIO 11 连接至L298N驱动板的ENA，用于发送高低电平信号，GPIO 35、36连接L298N的IN1、IN2，用于控制OUT1的输出，L298N真值表如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ENA</th>
+<th style="text-align:center">IN1</th>
+<th style="text-align:center">IN2</th>
+<th style="text-align:center">输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">+12V</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">-12V</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
 </li>
 </ul>
-<h4 id="3-2-MQTT-Client"><a href="#3-2-MQTT-Client" class="headerlink" title="3.2 MQTT Client"></a>3.2 MQTT Client</h4><pre><code class="lang-javascript">var mqtt = require(&#39;mqtt&#39;);
+<h4 id="3-2-MQTT-Client">3.2 MQTT Client</h4>
+<pre><code class="language-javascript">var mqtt = require('mqtt');
 //指定服务端地址和端口
 var client2 = mqtt.connect(&quot;host:1883&quot;);
 //引入Node.js操作GPIO的库
-var rpio = require(&#39;rpio&#39;);
-const player = require(&#39;play-sound&#39;)();
+var rpio = require('rpio');
+const player = require('play-sound')();
 rpio.open(12, rpio.OUTPUT);
 rpio.open(35, rpio.OUTPUT, rpio.HIGH);
 rpio.open(36, rpio.OUTPUT, rpio.LOW);
 //MQTT客户端订阅主题train1
-client2.subscribe(&#39;train1&#39;, &#123; qos: 1 &#125;);//订阅主题为train1的消息  
+client2.subscribe('train1', { qos: 1 });//订阅主题为train1的消息  
 //当客户端收到消息时，在控制台输出消息内容，
-client2.on(&#39;message&#39;, function (top, message) &#123;
+client2.on('message', function (top, message) {
   //收到验证信息后，验证
   rpio.write(11, rpio.HIGH);
   rpio.msleep(800)
   rpio.write(11, rpio.LOW);
-  console.log(message.toString() + &#39;号锁已开启！&#39;);
-  player.play(&#39;./open.mp3&#39;, (err) =&gt; &#123;
-    if (err) console.log(`Could not play sound: $&#123;err&#125;`);
-  &#125;);
-  setTimeout(player.play(&#39;./close.mp3&#39;, (err) =&gt; &#123;
-    if (err) console.log(`Could not play sound: $&#123;err&#125;`);
-  &#125;), 100000)
-&#125;);
+  console.log(message.toString() + '号锁已开启！');
+  player.play('./open.mp3', (err) =&gt; {
+    if (err) console.log(`Could not play sound: ${err}`);
+  });
+  setTimeout(player.play('./close.mp3', (err) =&gt; {
+    if (err) console.log(`Could not play sound: ${err}`);
+  }), 100000)
+});
+
 </code></pre>
 <ul>
-<li>在<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5cf4df8806c0">树莓派配置好Node环境</a>，安装MQTT协议的库，订阅相应的主题，在客户端发起对物联网设备的操作请求时，在通过校验后，即可进行相应的操作</li>
+<li>在<a href="https://www.jianshu.com/p/5cf4df8806c0" target="_blank" rel="noopener">树莓派配置好Node环境</a>，安装MQTT协议的库，订阅相应的主题，在客户端发起对物联网设备的操作请求时，在通过校验后，即可进行相应的操作</li>
 <li>可以根据订阅消息的具体内容再进一步判断操作，但是注意消息内容仅能以字符串形式传递。</li>
 </ul>
 
@@ -403,7 +459,7 @@ client2.on(&#39;message&#39;, function (top, message) &#123;
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">

@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      6 分钟
+                      5 分钟
                   </span>
                 
 
@@ -172,11 +172,14 @@
             
             <div class="markdown-body">
               <p>刚出炉的面试凉经，哎~~~。</p>
-<span id="more"></span>
-<h2 id="字节跳动-amp-百词斩前端实习一面"><a href="#字节跳动-amp-百词斩前端实习一面" class="headerlink" title="字节跳动&amp;百词斩前端实习一面"></a>字节跳动&amp;百词斩前端实习一面</h2><p>自我感觉没有准备充足，算法了解较少，前端基础较薄弱。</p>
+<a id="more"></a>
+<h2 id="字节跳动-百词斩前端实习一面">字节跳动&amp;百词斩前端实习一面</h2>
+<p>自我感觉没有准备充足，算法了解较少，前端基础较薄弱。</p>
 <p>面试官问的<code>问题</code>和你的<code>简历直接相关</code>，先看下简历：<img src="http://images.nickname4th.vip/简历.png" srcset="/img/loading.gif" alt="简历" style="zoom:50%;border:1px solid grey;" /></p>
 <p>然后直接进入正题吧，写写面试官问的问题。</p>
-<h2 id="1-字节跳动"><a href="#1-字节跳动" class="headerlink" title="1 字节跳动"></a>1 字节跳动</h2><h3 id="1-1-前端基础"><a href="#1-1-前端基础" class="headerlink" title="1.1 前端基础"></a>1.1 前端基础</h3><ul>
+<h2 id="1-字节跳动">1 字节跳动</h2>
+<h3 id="1-1-前端基础">1.1 前端基础</h3>
+<ul>
 <li>Vue使用的版本？</li>
 <li><code>v-for</code>,<code>v-if</code>实现的原理，模板编译的过程？</li>
 <li>简单实现一个模板编译？</li>
@@ -194,36 +197,42 @@
 <li>Webpack，bable了解多少？</li>
 <li>类似微博主页的行列结构用css怎么实现？</li>
 </ul>
-<h3 id="1-2-算法相关"><a href="#1-2-算法相关" class="headerlink" title="1.2 算法相关"></a>1.2 算法相关</h3><ul>
-<li>一道深度搜索递归的问题，参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-area-of-island/solution/">leetcode—岛屿的最大面积</a></li>
-<li>给定数组，三个数<code>a+b+c=k</code>的问题，参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum/solution/">leetcode——三数之和</a></li>
+<h3 id="1-2-算法相关">1.2 算法相关</h3>
+<ul>
+<li>一道深度搜索递归的问题，参考<a href="https://leetcode-cn.com/problems/max-area-of-island/solution/" target="_blank" rel="noopener">leetcode—岛屿的最大面积</a></li>
+<li>给定数组，三个数<code>a+b+c=k</code>的问题，参考<a href="https://leetcode-cn.com/problems/3sum/solution/" target="_blank" rel="noopener">leetcode——三数之和</a></li>
 </ul>
 <p>整个面试持续了50分钟，总的来说，我的前端基础显得还比较薄弱，偏向于应用而不是深入了解其原理，算法题难度在leetcode都算中等，但是由于我平时算法题刷的比较少，解决起来比较吃力。</p>
-<h2 id="2-百词斩"><a href="#2-百词斩" class="headerlink" title="2 百词斩"></a>2 百词斩</h2><h3 id="2-1-笔试部分"><a href="#2-1-笔试部分" class="headerlink" title="2.1 笔试部分"></a>2.1 笔试部分</h3><p>笔试部分是三道算法题，我只记得其中两道。</p>
-<h4 id="①-判断一个数是否是素数"><a href="#①-判断一个数是否是素数" class="headerlink" title="① 判断一个数是否是素数"></a>① 判断一个数是否是素数</h4><p>这道题说简单也十分简单，但是要往深处追究还是有很大的优化空间。</p>
-<pre><code class="lang-javascript">//判断素数
-function isPrime(n) &#123;
-    if (n &lt; 2) &#123;
+<h2 id="2-百词斩">2 百词斩</h2>
+<h3 id="2-1-笔试部分">2.1 笔试部分</h3>
+<p>笔试部分是三道算法题，我只记得其中两道。</p>
+<h4 id="①-判断一个数是否是素数">① 判断一个数是否是素数</h4>
+<p>这道题说简单也十分简单，但是要往深处追究还是有很大的优化空间。</p>
+<pre><code class="language-javascript">//判断素数
+function isPrime(n) {
+    if (n &lt; 2) {
         return false
-    &#125;
-    if (n == 2) &#123;
+    }
+    if (n == 2) {
         return true
-    &#125;
+    }
     //这一步非必须，但是可以筛出所有偶数，减少计算量，n特别大的时候有效
-    if (n % 2 == 0) &#123;
+    if (n % 2 == 0) {
         return false
-    &#125;
-    for (let i = 2; i &lt; parseInt(Math.sqrt(n)) + 1; i++) &#123;
-        if (n % i == 0) &#123;
+    }
+    for (let i = 2; i &lt; parseInt(Math.sqrt(n)) + 1; i++) {
+        if (n % i == 0) {
             return false
-        &#125;
-    &#125;
+        }
+    }
     return true
-&#125;
+}
 </code></pre>
-<h4 id="③-26进制加法"><a href="#③-26进制加法" class="headerlink" title="③ 26进制加法"></a>③ 26进制加法</h4><p>我这里使用了python编程，很自然的想到26进制对应a~z的26个字母，使用<code>ord(&#39;a&#39;)</code>可以获取字母a对应的ASSIC值为97，其余的就直接遍历字符串每一位然后做乘加就行了。</p>
+<h4 id="③-26进制加法">③ 26进制加法</h4>
+<p>我这里使用了python编程，很自然的想到26进制对应a~z的26个字母，使用<code>ord('a')</code>可以获取字母a对应的ASSIC值为97，其余的就直接遍历字符串每一位然后做乘加就行了。</p>
 <p>通过率方面，第一题为68%+，第二题没做出来，第三题95%+，第二天收到HR通知说笔试通过了，然后收到了面试邀请。</p>
-<h3 id="2-2-面试基本情况"><a href="#2-2-面试基本情况" class="headerlink" title="2.2 面试基本情况"></a>2.2 面试基本情况</h3><p>面试官比较随和，一开始简单了解一下一下毕业论文的相关情况，问了毕业论文的方向，所做的工作，由于我是我们组唯一一篇优秀论文，所以在这里回答的我自认为还是十分满意的，随后开始正式面试。</p>
+<h3 id="2-2-面试基本情况">2.2 面试基本情况</h3>
+<p>面试官比较随和，一开始简单了解一下一下毕业论文的相关情况，问了毕业论文的方向，所做的工作，由于我是我们组唯一一篇优秀论文，所以在这里回答的我自认为还是十分满意的，随后开始正式面试。</p>
 <ul>
 <li>简历中提到了做过网络监听方面的程序，简单解释一下ARP协议？</li>
 <li>说一下HTTP和HTTPs的区别？</li>
@@ -231,64 +240,66 @@ function isPrime(n) &#123;
 <li>CSS做对齐的时候，你能想到多少种不同的方式？</li>
 <li>简历上有使用过Node.js，如何处理跨域问题？</li>
 </ul>
-<h3 id="2-3-算法相关"><a href="#2-3-算法相关" class="headerlink" title="2.3 算法相关"></a>2.3 算法相关</h3><p>第一题是一个非常简单的问题，将数组中的对象按照其键，分类组成一个新的对象。</p>
-<pre><code class="lang-javascript">//将列表中的对象按键值对的形式转换为对象
-let list1 = [&#123;class: &quot;1&quot;,number: 1&#125;,
-              &#123;class: &quot;1&quot;,number: 2&#125;,
-              &#123; class: &quot;2&quot;,number: 1&#125;]
-function mergerObject(array) &#123;
-    output = &#123;&#125;
+<h3 id="2-3-算法相关">2.3 算法相关</h3>
+<p>第一题是一个非常简单的问题，将数组中的对象按照其键，分类组成一个新的对象。</p>
+<pre><code class="language-javascript">//将列表中的对象按键值对的形式转换为对象
+let list1 = [{class: &quot;1&quot;,number: 1},
+              {class: &quot;1&quot;,number: 2},
+              { class: &quot;2&quot;,number: 1}]
+function mergerObject(array) {
+    output = {}
     //遍历数组，为每个对象的class创建属性，并将其值初始化为数组
-    for (i of array) &#123;
+    for (i of array) {
         output[i.class] = new Array()
-    &#125;
+    }
     //遍历数组，将每个对象对应的number存储到对应的class中
-    for (i of array) &#123;
+    for (i of array) {
         output[i.class].push(i.number)
-    &#125;
+    }
     return output
-&#125;
+}
 console.log(mergerObject(list1))
 </code></pre>
 <p>这一题我在写的时候，思路完全正确，但是for循环中给对象设置属性时忘记了加<code>.class</code>，导致题目输出错误，面试官因而认为我对JavaScript语言并不熟悉，这是非常遗憾的一个地方。</p>
 <p>第二题是一个合并两个有序数组的问题，应该来说还是十分简单，最简单的做法是直接合并，再进行排序，但是我不想用这么简单的方法，一直在思考另一种方法，我也说出了正确的思路：设置两个指针，分别指向list1和list2的头部，然后比较两个元素，将较小的push进answerList数组，然后将其指针后移一位，直到遍历完毕。</p>
 <p>但是使用牛客网的oj时仍然出现了错误，之后就特别紧张， 一直没有调试出结果，但事实上面试一结束，我自己做的时候很快就做出来了，也十分可惜。</p>
-<pre><code class="lang-javascript">//合并两个有序数组
+<pre><code class="language-javascript">//合并两个有序数组
 let a = [1, 2, 3, 4, 5, 7, 8, 9, 10]
 let b = [4, 5, 6, 7]
-function mergerTwoOrderedList(list1, list2) &#123;
+function mergerTwoOrderedList(list1, list2) {
     let answer = []
     //使用两个指针，分别指向list1和list2的开头
     let i = 0
     let j = 0
     //循环次数为两个数组的长度
-    for (let count = 0; count &lt; list1.length + list2.length; count++) &#123;
+    for (let count = 0; count &lt; list1.length + list2.length; count++) {
         //将小的元素push进answerList，指针往后指向一位，当指针出于数组末尾时，表示这个数组已经遍历完毕
-        if (list1[i] &lt; list2[j]) &#123;
+        if (list1[i] &lt; list2[j]) {
             answer.push(list1[i])
-            if (i + 1 &lt; list1.length) &#123;
+            if (i + 1 &lt; list1.length) {
                 i += 1
-            &#125;
-            else &#123;
+            }
+            else {
                 list1[i] = list2[list2.length - 1]
-            &#125;
-        &#125;
-        else &#123;
+            }
+        }
+        else {
             answer.push(list2[j])
-            if (j + 1 &lt; list2.length) &#123;
+            if (j + 1 &lt; list2.length) {
                 j += 1
-            &#125;
-            else &#123;
+            }
+            else {
                 list2[j] = list1[list1.length - 1]
-            &#125;
-        &#125;
-    &#125;
+            }
+        }
+    }
     return answer
-&#125;
+}
 //时间复杂度为O(m+n)，空间复杂度为O(m+n)
 console.log(mergerTwoOrderedList(b, a))
 </code></pre>
-<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h2><p>目前来看，两个面试都凉凉了~~</p>
+<h2 id="3-总结">3 总结</h2>
+<p>目前来看，两个面试都凉凉了~~</p>
 <ul>
 <li>前端基础薄弱，并非框架，而是基本的基础，在平时使用工具开发经常被忽略的地方</li>
 <li>平时算法题做的较少</li>
@@ -321,7 +332,7 @@ console.log(mergerTwoOrderedList(b, a))
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
@@ -338,8 +349,8 @@ console.log(mergerTwoOrderedList(b, a))
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/05/23/%E8%AE%B0%E4%B8%80%E6%AC%A1linux%E4%BF%AE%E6%94%B9usr%E6%9D%83%E9%99%90%E7%9A%84%E8%AE%B0%E5%BD%95/">
-                        <span class="hidden-mobile">前端实习面经</span>
+                      <a href="/2020/05/16/JavaScript%E7%BB%A7%E6%89%BF/">
+                        <span class="hidden-mobile">JavaScript继承</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>

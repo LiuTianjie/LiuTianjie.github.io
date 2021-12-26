@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    657 字
+                    601 字
                   </span>
                 
 
@@ -171,32 +171,34 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>学习WebPack工具的一些前端基础，这是web前端系列的第一篇文章。<br><span id="more"></span></p>
-<h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h4><pre><code class="lang-javascript">//导出
+              <p>学习WebPack工具的一些前端基础，这是web前端系列的第一篇文章。</p>
+<a id="more"></a>
+<h4 id="CommonJS">CommonJS</h4>
+<pre><code class="language-javascript">//导出
 //test.js
 //方式1
-module.exports = &#123;
-  name:&#39;module1&#39;,
-  add: function(a,b)&#123;
+module.exports = {
+  name:'module1',
+  add: function(a,b){
     return a + b
-  &#125;
-&#125;
+  }
+}
 //方式2
-exports.name = &#39;module1&#39;;
-exports.add = function(a,b)&#123;
+exports.name = 'module1';
+exports.add = function(a,b){
   return a + b
-&#125;
+}
 
 //导入
 //index.js
 //方式1
-const test = require(&#39;./test.js&#39;)
+const test = require('./test.js')
 const add = test.add
 //方式2，支持表达式动态导入
-const modules = [&#39;test.js&#39;,&#39;test2.js&#39;]
-modules.forEach(name=&gt;&#123;
-  require(&#39;./&#39;+name)
-&#125;)
+const modules = ['test.js','test2.js']
+modules.forEach(name=&gt;{
+  require('./'+name)
+})
 </code></pre>
 <p>CommonJS注意的地方</p>
 <blockquote>
@@ -208,43 +210,44 @@ modules.forEach(name=&gt;&#123;
 <li>CommonJs导入模块是对其值的拷贝，可以进行修改，不影响原模块</li>
 </ul>
 </blockquote>
-<h4 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h4><pre><code class="lang-javascript">//导出
+<h4 id="ES6">ES6</h4>
+<pre><code class="language-javascript">//导出
 //test.js
 //方式1，默认导出，只有一个export
-export dufault &#123;
-  name:&#39;test&#39;,
-  add:function(a,b)&#123;
+export dufault {
+  name:'test',
+  add:function(a,b){
     return a + b
-  &#125;
-&#125;
+  }
+}
 //方式2
-export const name = &#39;test&#39;
-export add=function(a,b)&#123;
+export const name = 'test'
+export add=function(a,b){
   return a+b
-&#125;
+}
 //方式3，默认导出
-const name = &#39;test&#39;
-add = function(a,b)&#123;
+const name = 'test'
+add = function(a,b){
   return a+b
-&#125;
-export &#123;test,add&#125;
+}
+export {test,add}
 //方式3，命名导出
-const name = &#39;test&#39;
-add = function(a,b)&#123;
+const name = 'test'
+add = function(a,b){
   return a+b
-&#125;
-export &#123;test as test1,add as add1&#125;
+}
+export {test as test1,add as add1}
 
 //导入
 //index.js
 //方式1，按照原名导入
-import &#123;name,add&#125; from &#39;./test.js&#39;
+import {name,add} from './test.js'
 //方式2，命名导入
-import &#123;name as name1, add as add1&#125; from &#39;./test.js&#39;
+import {name as name1, add as add1} from './test.js'
 //方式3 整体导入
-import * from &#39;./test.js&#39;
+import * from './test.js'
 //方式4，对默认导出的导入
-import myModule from &#39;./test.js&#39; //相当于import default as myModule from &#39;./test.js&#39;
+import myModule from './test.js' //相当于import default as myModule from './test.js'
 </code></pre>
 <p>ES6注意的地方</p>
 <blockquote>
@@ -255,10 +258,12 @@ import myModule from &#39;./test.js&#39; //相当于import default as myModule f
 <li>导出、导出必须放在顶层作用域</li>
 </ul>
 </blockquote>
-<h4 id="CommonJS和ES6的区别"><a href="#CommonJS和ES6的区别" class="headerlink" title="CommonJS和ES6的区别"></a>CommonJS和ES6的区别</h4><ul>
+<h4 id="CommonJS和ES6的区别">CommonJS和ES6的区别</h4>
+<ul>
 <li>CommonJS对模块依赖的解决是动态的，模块依赖关系的建立发生在代码<strong>运行</strong>阶段。ES6对模块依赖解决的办法是静态的，模块依赖关系的建立发生在代码<strong>编译</strong>阶段</li>
 <li>CommonJS支持导入的路径是表达式，ES6的导入是声明式的，故不支持</li>
-<li>ES6的好处<ul>
+<li>ES6的好处
+<ul>
 <li>死代码检测和排除</li>
 <li>模块变量类型检查</li>
 <li>编译器优化</li>
@@ -292,7 +297,7 @@ import myModule from &#39;./test.js&#39; //相当于import default as myModule f
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
