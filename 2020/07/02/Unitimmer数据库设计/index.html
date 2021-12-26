@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    241 字
+                    240 字
                   </span>
                 
 
@@ -171,36 +171,26 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>​    本文讲述我的开源项目<a href="https://github.com/LiuTianjie/unitimmer" target="_blank" rel="noopener">unitimmer</a>的数据库设计，我将从需求分析出发，设计各数据表的结构，并使用<code>Django</code>的<code>ORM</code>来定义数据模型，最终该项目的后端将从<code>Node.js</code>重构为<code>Django</code></p>
-<a id="more"></a>
-<h2 id="Unitimmers数据库设计">Unitimmers数据库设计</h2>
-<h3 id="1-数据表">1 数据表</h3>
-<ul>
-<li>
-<p>动态表</p>
+              <p>​    本文讲述我的开源项目<a target="_blank" rel="noopener" href="https://github.com/LiuTianjie/unitimmer">unitimmer</a>的数据库设计，我将从需求分析出发，设计各数据表的结构，并使用<code>Django</code>的<code>ORM</code>来定义数据模型，最终该项目的后端将从<code>Node.js</code>重构为<code>Django</code><br><span id="more"></span></p>
+<h2 id="Unitimmers数据库设计"><a href="#Unitimmers数据库设计" class="headerlink" title="Unitimmers数据库设计"></a>Unitimmers数据库设计</h2><h3 id="1-数据表"><a href="#1-数据表" class="headerlink" title="1 数据表"></a>1 数据表</h3><ul>
+<li><p>动态表</p>
 <p>动态表存储所有用户发布的全部动态，包括动态的唯一id、用户名、头像、发布日期、文字内容、图片链接等信息，其中动态唯一id<code>msgID</code>作为主键，并且作为外键在点赞表中使用</p>
 </li>
-<li>
-<p>用户表</p>
+<li><p>用户表</p>
 </li>
-<li>
-<p>点赞表</p>
+<li><p>点赞表</p>
 </li>
-<li>
-<p>评论表</p>
+<li><p>评论表</p>
 <p>整个数据表设计完成时的E-R图为：</p>
 </li>
 </ul>
-<img src="https://images.nickname4th.vip/unidb1.png" srcset="/img/loading.gif" alt="unidb" style="zoom:50%;" />
-<h3 id="和前端的联系">和前端的联系</h3>
-<ul>
-<li>
-<p>UI设计页面</p>
-<img src="https://images.nickname4th.vip/dailyPage.png" srcset="/img/loading.gif" alt="dailyPage" style="zoom:50%;" />
+<p><img src="https://images.nickname4th.vip/unidb1.png" srcset="/img/loading.gif" alt="unidb" style="zoom:50%;" /></p>
+<h3 id="和前端的联系"><a href="#和前端的联系" class="headerlink" title="和前端的联系"></a>和前端的联系</h3><ul>
+<li><p>UI设计页面</p>
+<p><img src="https://images.nickname4th.vip/dailyPage.png" srcset="/img/loading.gif" alt="dailyPage" style="zoom:50%;" /></p>
 </li>
-<li>
-<p>数据字段的作用（以红色文字和箭头标出）</p>
-<img src="https://images.nickname4th.vip/dailyUsage.png" srcset="/img/loading.gif" alt="dailyUsage" style="zoom:50%;" />
+<li><p>数据字段的作用（以红色文字和箭头标出）</p>
+<p><img src="https://images.nickname4th.vip/dailyUsage.png" srcset="/img/loading.gif" alt="dailyUsage" style="zoom:50%;" /></p>
 <p>其中点赞信息由点赞用户和点赞总数组成，这两个字段没有在数据库中直接存储，而是需要经过查询动态获取。</p>
 </li>
 </ul>
@@ -220,7 +210,7 @@
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">

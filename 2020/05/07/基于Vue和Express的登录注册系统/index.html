@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    2.4k 字
+                    2.7k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      11 分钟
+                      13 分钟
                   </span>
                 
 
@@ -171,346 +171,314 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>这是一个简单的登录注册示例，包含了登录、注册和用户页面三个部分。本示例的代码保存在我的github仓库，如有不清楚的地方可以下载查阅。<a href="https://github.com/LiuTianjie/LoginSystem" target="_blank" rel="noopener">传送门</a></p>
-<a id="more"></a>
-<h2 id="基于Vue和express的登录注册系统">基于Vue和express的登录注册系统</h2>
-<h3 id="1-前端部分">1 前端部分</h3>
-<h4 id="1-1-UI">1.1 UI</h4>
-<p>UI方面使用了Element UI的按钮、表单和消息通知等组件。</p>
+              <p>这是一个简单的登录注册示例，包含了登录、注册和用户页面三个部分。本示例的代码保存在我的github仓库，如有不清楚的地方可以下载查阅。<a target="_blank" rel="noopener" href="https://github.com/LiuTianjie/LoginSystem">传送门</a><br><span id="more"></span></p>
+<h2 id="基于Vue和express的登录注册系统"><a href="#基于Vue和express的登录注册系统" class="headerlink" title="基于Vue和express的登录注册系统"></a>基于Vue和express的登录注册系统</h2><h3 id="1-前端部分"><a href="#1-前端部分" class="headerlink" title="1 前端部分"></a>1 前端部分</h3><h4 id="1-1-UI"><a href="#1-1-UI" class="headerlink" title="1.1 UI"></a>1.1 UI</h4><p>UI方面使用了Element UI的按钮、表单和消息通知等组件。</p>
 <ul>
-<li>
-<p>引入ElementUI</p>
-<pre><code class="language-shell">vue add element-ui
+<li><p>引入ElementUI</p>
+<pre><code class="lang-shell">vue add element-ui
 </code></pre>
 </li>
-<li>
-<p>使用ElementUI</p>
-<pre><code class="language-javascript">//element.js
-import Vue from 'vue'
-import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+<li><p>使用ElementUI</p>
+<pre><code class="lang-javascript">//element.js
+import Vue from &#39;vue&#39;
+import Element from &#39;element-ui&#39;
+import &#39;element-ui/lib/theme-chalk/index.css&#39;
 Vue.use(Element)
 /*这里是全局导入，将ElementUI可用的组件全部挂载到Vue上,
 这样我们就可以直接使用其组件了，如Vue.prototype.$message等
 </code></pre>
 </li>
 </ul>
-<h4 id="1-2-网络请求http-js">1.2 网络请求http.js</h4>
-<p>前端网络请求使用了axios，通过async—await语法实现异步请求。</p>
+<h4 id="1-2-网络请求http-js"><a href="#1-2-网络请求http-js" class="headerlink" title="1.2 网络请求http.js"></a>1.2 网络请求http.js</h4><p>前端网络请求使用了axios，通过async—await语法实现异步请求。</p>
 <ul>
-<li>
-<p>引入axios</p>
-<pre><code class="language-shell">npm install vue-axios
+<li><p>引入axios</p>
+<pre><code class="lang-shell">npm install vue-axios
 </code></pre>
 </li>
-<li>
-<p>配置http.js</p>
-<pre><code class="language-javascript">import axios from 'axios'
-import Vue from 'vue'
-import router from './router/index'
-const http = axios.create({
-    baseURL: 'http://localhost:3030'
-})
+<li><p>配置http.js</p>
+<pre><code class="lang-javascript">import axios from &#39;axios&#39;
+import Vue from &#39;vue&#39;
+import router from &#39;./router/index&#39;
+const http = axios.create(&#123;
+    baseURL: &#39;http://localhost:3030&#39;
+&#125;)
 //拦截器
-http.interceptors.request.use((config) =&gt; {
-    if (localStorage.token) {
-        config.headers.Authorization = 'Bearer ' + localStorage.token
-    }
+http.interceptors.request.use((config) =&gt; &#123;
+    if (localStorage.token) &#123;
+        config.headers.Authorization = &#39;Bearer &#39; + localStorage.token
+    &#125;
     return config
-})
-http.interceptors.response.use(res =&gt; {
+&#125;)
+http.interceptors.response.use(res =&gt; &#123;
     return res
-}, err =&gt; {
+&#125;, err =&gt; &#123;
   //服务器无响应
-    if (!err.response) {
-        Vue.prototype.$message.error({
-            type: 'error',
+    if (!err.response) &#123;
+        Vue.prototype.$message.error(&#123;
+            type: &#39;error&#39;,
             message: &quot;服务器连接失败&quot;
-        });
+        &#125;);
         return Promise.reject(err)
-    }
+    &#125;
     //服务端返回错误通用处理方案
-    if (err.response.data.message) {
-        Vue.prototype.$message.error({
-            type: 'error',
+    if (err.response.data.message) &#123;
+        Vue.prototype.$message.error(&#123;
+            type: &#39;error&#39;,
             message: err.response.data.message
-        });
+        &#125;);
         // console.log(err.response.status)
-        if (err.response.status === 401) {
-            router.push('/login')
-        }
-    }
+        if (err.response.status === 401) &#123;
+            router.push(&#39;/login&#39;)
+        &#125;
+    &#125;
     // console.log(err.response.data.message)
     return Promise.reject(err)
-})
+&#125;)
 export default http
 </code></pre>
 <p>上述代码进行了如下操作：</p>
 <ul>
-<li>
-<p>配置了请求接口的Baseurl，请求时通过拼接访问具体接口，有利于隐私性。</p>
+<li><p>配置了请求接口的Baseurl，请求时通过拼接访问具体接口，有利于隐私性。</p>
 </li>
-<li>
-<p>添加了请求拦截器，配合后端的权限机制，在访问需要用户登录后才能使用的页面时，在请求头中添加token，供后端验证。</p>
+<li><p>添加了请求拦截器，配合后端的权限机制，在访问需要用户登录后才能使用的页面时，在请求头中添加token，供后端验证。</p>
 </li>
-<li>
-<p>添加了全局错误处理的拦截，配合服务端返回的错误代码和信息，进行相应的展示和跳转，如这里收到服务端401代码则返回登录页面。</p>
+<li><p>添加了全局错误处理的拦截，配合服务端返回的错误代码和信息，进行相应的展示和跳转，如这里收到服务端401代码则返回登录页面。</p>
 </li>
-<li>
-<p>抛出http模块，在main.js中将其挂载到Vue的原型对象，便于直接通过<strong>this</strong>来使用。</p>
-<pre><code class="language-javascript">import Vue from 'vue'
-import App from './App.vue'
-import './plugins/element.js'
-import router from './router'
-import http from './http'
+<li><p>抛出http模块，在main.js中将其挂载到Vue的原型对象，便于直接通过<strong>this</strong>来使用。</p>
+<pre><code class="lang-javascript">import Vue from &#39;vue&#39;
+import App from &#39;./App.vue&#39;
+import &#39;./plugins/element.js&#39;
+import router from &#39;./router&#39;
+import http from &#39;./http&#39;
 Vue.prototype.$http = http
 Vue.config.productionTip = false
-new Vue({
+new Vue(&#123;
   router,
   render: h =&gt; h(App)
-}).$mount('#app')
+&#125;).$mount(&#39;#app&#39;)
 </code></pre>
 </li>
 </ul>
 </li>
 </ul>
-<h4 id="1-3-前端路由">1.3 前端路由</h4>
-<p>使用vue-router实现前端路由。</p>
+<h4 id="1-3-前端路由"><a href="#1-3-前端路由" class="headerlink" title="1.3 前端路由"></a>1.3 前端路由</h4><p>使用vue-router实现前端路由。</p>
 <ul>
-<li>
-<p>引入vue-router</p>
-<pre><code class="language-shell">vue add vue-router --save
+<li><p>引入vue-router</p>
+<pre><code class="lang-shell">vue add vue-router --save
 </code></pre>
 </li>
-<li>
-<p>定义router.js</p>
+<li><p>定义router.js</p>
 <p>本示例中包含3个页面，相应的配置为：</p>
-<pre><code class="language-javascript">import Vue from 'vue'
-import VueRouter from 'vue-router'
+<pre><code class="lang-javascript">import Vue from &#39;vue&#39;
+import VueRouter from &#39;vue-router&#39;
 Vue.use(VueRouter)
 const routes = [
-  {
-    path: '/',
-    name: 'Login',
-    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ '../views/Login.vue'),
-    meta: { isPublic: true }
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ '../views/Login.vue'),
-    meta: { isPublic: true }
-  },
-  {
-    path: '/signup',
-    name: 'SignUp',
-    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ '../views/SignUp.vue'),
-    meta: { isPublic: true }
-  },
-  {
-    path: '/index:id',
-    name: 'index',
-    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ '../views/index.vue'),
-    meta: { isPublic: false }
-  },
-  {
-    path: '*',
-    name: 'notfound',
-    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ '../views/notfound.vue')
-  }
+  &#123;
+    path: &#39;/&#39;,
+    name: &#39;Login&#39;,
+    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ &#39;../views/Login.vue&#39;),
+    meta: &#123; isPublic: true &#125;
+  &#125;,
+  &#123;
+    path: &#39;/login&#39;,
+    name: &#39;Login&#39;,
+    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ &#39;../views/Login.vue&#39;),
+    meta: &#123; isPublic: true &#125;
+  &#125;,
+  &#123;
+    path: &#39;/signup&#39;,
+    name: &#39;SignUp&#39;,
+    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ &#39;../views/SignUp.vue&#39;),
+    meta: &#123; isPublic: true &#125;
+  &#125;,
+  &#123;
+    path: &#39;/index:id&#39;,
+    name: &#39;index&#39;,
+    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ &#39;../views/index.vue&#39;),
+    meta: &#123; isPublic: false &#125;
+  &#125;,
+  &#123;
+    path: &#39;*&#39;,
+    name: &#39;notfound&#39;,
+    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ &#39;../views/notfound.vue&#39;)
+  &#125;
 ]
 </code></pre>
 <ul>
-<li>
-<p>通过meta属性限定页面是否公开，配合全局导航守卫进行路由判断。</p>
+<li><p>通过meta属性限定页面是否公开，配合全局导航守卫进行路由判断。</p>
 </li>
-<li>
-<p>通过’*'路由加入404页面。</p>
+<li><p>通过’*’路由加入404页面。</p>
 </li>
 </ul>
 </li>
 </ul>
-<h5 id="1-3-1-全局导航守卫">1.3.1 全局导航守卫</h5>
-<pre><code class="language-javascript">router.beforeEach((to, from, next) =&gt; {
-  if (!to.meta.isPublic &amp;&amp; !localStorage.token) {
-    Vue.prototype.$message({
+<h5 id="1-3-1-全局导航守卫"><a href="#1-3-1-全局导航守卫" class="headerlink" title="1.3.1 全局导航守卫"></a>1.3.1 全局导航守卫</h5><pre><code class="lang-javascript">router.beforeEach((to, from, next) =&gt; &#123;
+  if (!to.meta.isPublic &amp;&amp; !localStorage.token) &#123;
+    Vue.prototype.$message(&#123;
       type: &quot;warning&quot;,
       message: &quot;请先登录&quot;
-    });
-    next('/login')
-  }
+    &#125;);
+    next(&#39;/login&#39;)
+  &#125;
   next()
-})
+&#125;)
 </code></pre>
 <p>在页面跳转之前进行相应的判断，主要在非法访问页面时跳转到login页面。</p>
-<h4 id="1-4-登录">1.4 登录</h4>
-<h5 id="1-4-1-Login-vue">1.4.1 Login.vue</h5>
-<pre><code class="language-vue">&lt;script&gt;
-export default {
+<h4 id="1-4-登录"><a href="#1-4-登录" class="headerlink" title="1.4 登录"></a>1.4 登录</h4><h5 id="1-4-1-Login-vue"><a href="#1-4-1-Login-vue" class="headerlink" title="1.4.1 Login.vue"></a>1.4.1 Login.vue</h5><pre><code class="lang-vue">&lt;script&gt;
+export default &#123;
   name: &quot;app&quot;,
-  data() {
-    return {
-      form: {
+  data() &#123;
+    return &#123;
+      form: &#123;
         account: &quot;&quot;,
         psw: &quot;&quot;
-      }
-    };
-  },
-  components: {},
-  methods: {
-    async toLogin() {
-      if (this.form.psw === &quot;&quot; || this.form.account===&quot;&quot;) {
-        this.$notify({
+      &#125;
+    &#125;;
+  &#125;,
+  components: &#123;&#125;,
+  methods: &#123;
+    async toLogin() &#123;
+      if (this.form.psw === &quot;&quot; || this.form.account===&quot;&quot;) &#123;
+        this.$notify(&#123;
           title: &quot;输入错误&quot;,
           message: &quot;请检查账户和密码！&quot;,
           type: &quot;error&quot;
-        });
-      } else {
+        &#125;);
+      &#125; else &#123;
         const res = await this.$http.post(&quot;login&quot;, this.form);
         localStorage.token = res.data.token;
-        this.$message({
+        this.$message(&#123;
           type: &quot;success&quot;,
           message: &quot;登录成功&quot;
-        });
-        this.$router.push({ path: `./index${this.form.account}` });
-      }
-    },
-    toSignUp() {
-      this.$router.push({ path: &quot;./signup&quot; });
-    }
-  }
-};
+        &#125;);
+        this.$router.push(&#123; path: `./index$&#123;this.form.account&#125;` &#125;);
+      &#125;
+    &#125;,
+    toSignUp() &#123;
+      this.$router.push(&#123; path: &quot;./signup&quot; &#125;);
+    &#125;
+  &#125;
+&#125;;
 &lt;/script&gt;
 </code></pre>
 <p>通过定义的toLogin方法进行登录，在前端限制了账户和密码非空，并通过Element的message进行提示。通过POST方法将表单数据。</p>
-<h4 id="1-5-注册">1.5 注册</h4>
-<h5 id="1-5-1-SignUp-vue">1.5.1 SignUp.vue</h5>
-<pre><code class="language-vue">&lt;script&gt;
-export default {
-  methods: {
-    toLogin() {
-      this.$router.push({ path: &quot;./login&quot; });
-    },
-    async toSignUp() {
-      try {
+<h4 id="1-5-注册"><a href="#1-5-注册" class="headerlink" title="1.5 注册"></a>1.5 注册</h4><h5 id="1-5-1-SignUp-vue"><a href="#1-5-1-SignUp-vue" class="headerlink" title="1.5.1 SignUp.vue"></a>1.5.1 SignUp.vue</h5><pre><code class="lang-vue">&lt;script&gt;
+export default &#123;
+  methods: &#123;
+    toLogin() &#123;
+      this.$router.push(&#123; path: &quot;./login&quot; &#125;);
+    &#125;,
+    async toSignUp() &#123;
+      try &#123;
         this.loading = true;
         const res = await this.$http.post(&quot;/api/users&quot;, this.form);
-        this.$message({
+        this.$message(&#123;
           type: &quot;success&quot;,
           message: &quot;注册成功&quot;
-        });
+        &#125;);
         this.loading = false;
-      } catch (error) {
-        this.$message({
+      &#125; catch (error) &#123;
+        this.$message(&#123;
           type: &quot;error&quot;,
           message: &quot;注册失败&quot;
-        });
+        &#125;);
         this.loading = false;
-      }
+      &#125;
       this.clear();
-    },
+    &#125;,
 &lt;/script&gt;
 </code></pre>
-<h5 id="1-5-2-表单验证">1.5.2 表单验证</h5>
-<pre><code class="language-javascript">data() {
+<h5 id="1-5-2-表单验证"><a href="#1-5-2-表单验证" class="headerlink" title="1.5.2 表单验证"></a>1.5.2 表单验证</h5><pre><code class="lang-javascript">data() &#123;
   //验证用户名
-  var checkAccount = async (rule, value, callback) =&gt; {
-    if (value === &quot;&quot;) {
+  var checkAccount = async (rule, value, callback) =&gt; &#123;
+    if (value === &quot;&quot;) &#123;
       this.accountValid = false;
       callback(new Error(&quot;账户不能为空&quot;));
-    } else {
-      const res = await this.$http.get(`/${this.form.account}`);
-      if (res.data) {
+    &#125; else &#123;
+      const res = await this.$http.get(`/$&#123;this.form.account&#125;`);
+      if (res.data) &#123;
         this.accountValid = false;
         callback(new Error(&quot;用户已存在&quot;));
-      } else {
+      &#125; else &#123;
         this.accountValid = true;
         callback();
-      }
-    }
-  };
+      &#125;
+    &#125;
+  &#125;;
   //验证密码1
-  var checkpsw1 = (rule, value, callback) =&gt; {
-    if (value === &quot;&quot;) {
+  var checkpsw1 = (rule, value, callback) =&gt; &#123;
+    if (value === &quot;&quot;) &#123;
       this.psw1Valid = false;
       callback(new Error(&quot;密码不能为空&quot;));
-    } else {
-      if (this.form.psw1 !== &quot;&quot;) {
+    &#125; else &#123;
+      if (this.form.psw1 !== &quot;&quot;) &#123;
         this.$refs.form.validateField(&quot;psw2&quot;);
-      }
+      &#125;
       this.psw1Valid = true;
       callback();
-    }
-  };
+    &#125;
+  &#125;;
 
-  var checkpsw2 = (rule, value, callback) =&gt; {
-    if (value === &quot;&quot;) {
+  var checkpsw2 = (rule, value, callback) =&gt; &#123;
+    if (value === &quot;&quot;) &#123;
       this.psw2Valid = false;
       callback(new Error(&quot;请再次输入密码&quot;));
-    } else if (value !== this.form.psw1) {
+    &#125; else if (value !== this.form.psw1) &#123;
       this.psw2Valid = false;
       callback(new Error(&quot;两次输入密码不一致!&quot;));
-    } else {
+    &#125; else &#123;
       this.psw2Valid = true;
       callback();
-    }
-  };
-  return {
-    form: {
+    &#125;
+  &#125;;
+  return &#123;
+    form: &#123;
       account: &quot;&quot;,
       psw1: &quot;&quot;,
       psw2: &quot;&quot;,
       check: &quot;&quot;
-    },
+    &#125;,
     loading: false,
     hasRead: false,
     accountValid: false,
     psw1Valid: false,
     psw2Valid: false,
-    rules: {
-      account: [{ required: true, validator: checkAccount, trigger: &quot;blur&quot; }],
-      psw1: [{ required: true, validator: checkpsw1, trigger: &quot;blur&quot; }],
-      psw2: [{ required: true, validator: checkpsw2, trigger: &quot;blur&quot; }]
-    }
-  };
-},
-};
+    rules: &#123;
+      account: [&#123; required: true, validator: checkAccount, trigger: &quot;blur&quot; &#125;],
+      psw1: [&#123; required: true, validator: checkpsw1, trigger: &quot;blur&quot; &#125;],
+      psw2: [&#123; required: true, validator: checkpsw2, trigger: &quot;blur&quot; &#125;]
+    &#125;
+  &#125;;
+&#125;,
+&#125;;
 </code></pre>
-<p>表单验证使用了Element 的表单组件，通过callback函数和rule规则实现。其中触发规则为&quot;blur&quot;。</p>
+<p>表单验证使用了Element 的表单组件，通过callback函数和rule规则实现。其中触发规则为”blur”。</p>
 <ul>
-<li>
-<p>使用V-model绑定表单的值，通过hasRead等布尔值限制提交。</p>
+<li>使用V-model绑定表单的值，通过hasRead等布尔值限制提交。</li>
+<li><p>使用了loading组件对注册时的页面进行遮罩。</p>
 </li>
-<li>
-<p>使用了loading组件对注册时的页面进行遮罩。</p>
+<li><p>当且仅当5个条件判断的布尔值全部符合条件时，才允许提交注册请求。</p>
 </li>
-<li>
-<p>当且仅当5个条件判断的布尔值全部符合条件时，才允许提交注册请求。</p>
-</li>
-<li>
-<p>一次注册成功之后，清除表单数据。</p>
-</li>
+<li>一次注册成功之后，清除表单数据。</li>
 </ul>
-<h3 id="2-后端部分">2 后端部分</h3>
-<p>后盾的数据库采用MongoDB，通过Node.js的mongoose插件进行数据库的操作。</p>
-<h4 id="2-1登录接口">2.1登录接口</h4>
-<pre><code class="language-javascript">    //登录接口
-    app.post('/login', async (req, res) =&gt; {
-        const { account, psw } = req.body
+<h3 id="2-后端部分"><a href="#2-后端部分" class="headerlink" title="2 后端部分"></a>2 后端部分</h3><p>后盾的数据库采用MongoDB，通过Node.js的mongoose插件进行数据库的操作。</p>
+<h4 id="2-1登录接口"><a href="#2-1登录接口" class="headerlink" title="2.1登录接口"></a>2.1登录接口</h4><pre><code class="lang-javascript">    //登录接口
+    app.post(&#39;/login&#39;, async (req, res) =&gt; &#123;
+        const &#123; account, psw &#125; = req.body
         //根据用户名找用户
-        const user = await User.findOne({ account }).select('+psw')
-        assert(user, 422, '用户不存在')
+        const user = await User.findOne(&#123; account &#125;).select(&#39;+psw&#39;)
+        assert(user, 422, &#39;用户不存在&#39;)
         //校验密码
-        const isValid = require('bcrypt').compareSync(psw, user.psw)
-        assert(isValid, 422, '用户名或密码错误')
+        const isValid = require(&#39;bcrypt&#39;).compareSync(psw, user.psw)
+        assert(isValid, 422, &#39;用户名或密码错误&#39;)
         //签名返回token
-        const token = jwt.sign({
+        const token = jwt.sign(&#123;
             _id: user._id,
             id: user._id,
             username: user.account
-        }, app.get('secret'))
-        res.send({ token })
-    })
+        &#125;, app.get(&#39;secret&#39;))
+        res.send(&#123; token &#125;)
+    &#125;)
 </code></pre>
 <p>登录时，通过解构赋值提取Post请求体中的账户和密码。登录验证的步骤如下：</p>
 <ul>
@@ -518,17 +486,16 @@ export default {
 <li>成功查找到用户后，使用bcrypt模块生成密码的摘要，与数据库中的摘要进行对比，如果对比失败，则服务端返回422错误，附带账户或密码错误的信息。</li>
 <li>密码验证通过后，使用JSONWebToken进行签名，密钥为定义在服务端的密钥，返回200状态码，并返回token</li>
 </ul>
-<h4 id="2-2-注册接口">2.2 注册接口</h4>
-<pre><code class="language-javascript">router.post('/', async (req, res) =&gt; {
-        assert(req.body.psw1 === req.body.psw2, 422, '两次密码不一致')
-        const accountLocal = await User.findOne({ account: req.body.account })
+<h4 id="2-2-注册接口"><a href="#2-2-注册接口" class="headerlink" title="2.2 注册接口"></a>2.2 注册接口</h4><pre><code class="lang-javascript">router.post(&#39;/&#39;, async (req, res) =&gt; &#123;
+        assert(req.body.psw1 === req.body.psw2, 422, &#39;两次密码不一致&#39;)
+        const accountLocal = await User.findOne(&#123; account: req.body.account &#125;)
         assert(!accountLocal, 502, &quot;用户已存在&quot;)
-        const model = {}
+        const model = &#123;&#125;
         model.account = req.body.account;
         model.psw = req.body.psw1
         await req.Model.create(model)
         res.send(model)
-    })
+    &#125;)
 </code></pre>
 <p>注册时，除了前端限制，也要在后端进行相应的处理，以避免绕过前端的恶意注册，注册步骤如下：</p>
 <ul>
@@ -536,86 +503,81 @@ export default {
 <li>若两次密码一致，则根据请求体的用户名在数据库进行查找，如果用户已经存在，则返回502错误，附带用户已存在的信息。</li>
 <li>若无误，根据请求体的用户名和密码创建用户，存放到数据库中，其中密码经过bcrypt进行hash，而不是直接存放铭文。</li>
 </ul>
-<h4 id="2-3-用户数据模型">2.3 用户数据模型</h4>
-<pre><code class="language-javascript">const mongoose = require('mongoose')
-const schema = new mongoose.Schema({
-    account: { type: String },
-    psw: {
+<h4 id="2-3-用户数据模型"><a href="#2-3-用户数据模型" class="headerlink" title="2.3 用户数据模型"></a>2.3 用户数据模型</h4><pre><code class="lang-javascript">const mongoose = require(&#39;mongoose&#39;)
+const schema = new mongoose.Schema(&#123;
+    account: &#123; type: String &#125;,
+    psw: &#123;
         type: String,
         select: false,
-        set(val) {
-            return require('bcrypt').hashSync(val, 10)
-        },
-    }
-})
-module.exports = mongoose.model('User', schema)
+        set(val) &#123;
+            return require(&#39;bcrypt&#39;).hashSync(val, 10)
+        &#125;,
+    &#125;
+&#125;)
+module.exports = mongoose.model(&#39;User&#39;, schema)
 </code></pre>
 <p>其中定义psw字段时使用set方法通过bcrypt对密码进行hash签名，生成摘要。用户在数据库中存储的方式为：</p>
-<img src="http://images.nickname4th.vip/用户在数据库中的存储信息.png" srcset="/img/loading.gif" alt="用户在数据库中的存储信息" style="zoom:50%;" />
-<h4 id="2-4-全局错误处理">2.4 全局错误处理</h4>
-<pre><code class="language-javascript">app.use(async (err, req, res, next) =&gt; {
-  res.status(err.statusCode || 500).send({
+<p><img src="http://images.nickname4th.vip/用户在数据库中的存储信息.png" srcset="/img/loading.gif" alt="用户在数据库中的存储信息" style="zoom:50%;" /></p>
+<h4 id="2-4-全局错误处理"><a href="#2-4-全局错误处理" class="headerlink" title="2.4 全局错误处理"></a>2.4 全局错误处理</h4><pre><code class="lang-javascript">app.use(async (err, req, res, next) =&gt; &#123;
+  res.status(err.statusCode || 500).send(&#123;
     message: err.message
-  })
-})
+  &#125;)
+&#125;)
 </code></pre>
 <p>配合前端的http拦截器，返回错误信息。</p>
-<h3 id="3-中间件">3 中间件</h3>
-<h4 id="3-1-auth-js">3.1 auth.js</h4>
-<p>登录成功之后，对应用户访问自己资源的行为需要通过token来鉴定是否具有相应的权限。</p>
-<pre><code class="language-javascript">//auth.js
-module.exports = options =&gt; {
-    const jwt = require('jsonwebtoken')
-    const oUser = require('../models/User')
-    const assert = require('http-assert')
-    return async (req, res, next) =&gt; {
-        const token = String(req.headers.authorization || '').split(' ').pop()
-        assert(token, 401, '登录已过期')
-        try {
-            const { id } = jwt.verify(token, req.app.get('secret'))
+<h3 id="3-中间件"><a href="#3-中间件" class="headerlink" title="3 中间件"></a>3 中间件</h3><h4 id="3-1-auth-js"><a href="#3-1-auth-js" class="headerlink" title="3.1 auth.js"></a>3.1 auth.js</h4><p>登录成功之后，对应用户访问自己资源的行为需要通过token来鉴定是否具有相应的权限。</p>
+<pre><code class="lang-javascript">//auth.js
+module.exports = options =&gt; &#123;
+    const jwt = require(&#39;jsonwebtoken&#39;)
+    const oUser = require(&#39;../models/User&#39;)
+    const assert = require(&#39;http-assert&#39;)
+    return async (req, res, next) =&gt; &#123;
+        const token = String(req.headers.authorization || &#39;&#39;).split(&#39; &#39;).pop()
+        assert(token, 401, &#39;登录已过期&#39;)
+        try &#123;
+            const &#123; id &#125; = jwt.verify(token, req.app.get(&#39;secret&#39;))
             // console.log(id)
-            assert(id, 401, '账户存在问题！')
+            assert(id, 401, &#39;账户存在问题！&#39;)
             req.user = await oUser.findById(id)
             assert(req.user._id, 401, &quot;登录已过期&quot;)
-        } catch (error) {
-            return res.status(401).send({ message: '登录已过期' })
-        }
+        &#125; catch (error) &#123;
+            return res.status(401).send(&#123; message: &#39;登录已过期&#39; &#125;)
+        &#125;
         // console.log(req.user)
         await next()
-    }
-}
+    &#125;
+&#125;
 </code></pre>
 <p>在具体使用时，如下面的获取用户页面的请求：</p>
-<pre><code class="language-javascript">const auth = require('../middle/auth')
+<pre><code class="lang-javascript">const auth = require(&#39;../middle/auth&#39;)
 //查看个人信息
-router.get('/', auth(), async (req, res) =&gt; {
+router.get(&#39;/&#39;, auth(), async (req, res) =&gt; &#123;
   console.log(&quot;user&quot;, req.user.account)
-  // const model = await req.Model.findOne({ account: req.user.account })
+  // const model = await req.Model.findOne(&#123; account: req.user.account &#125;)
   res.send(req.user.account)
-})
+&#125;)
 </code></pre>
 <p>通过express的Router，在收到前端GET请求后，先通过CommJS的require语法执行上面auth.js中的代码，进行权限验证。</p>
-<h4 id="3-2-resources-js">3.2 resources.js</h4>
-<p>在将来如果有更多的资源，我们可以将接口统一起来，根据前端的需求动态的请求后端的资源，这样更加灵活方便。</p>
-<pre><code class="language-javascript">//resource.js
-module.exports = options =&gt; {
-    return async (req, res, next) =&gt; {
-        const ModelName = require('inflection').classify(req.params.resource)
+<h4 id="3-2-resources-js"><a href="#3-2-resources-js" class="headerlink" title="3.2 resources.js"></a>3.2 resources.js</h4><p>在将来如果有更多的资源，我们可以将接口统一起来，根据前端的需求动态的请求后端的资源，这样更加灵活方便。</p>
+<pre><code class="lang-javascript">//resource.js
+module.exports = options =&gt; &#123;
+    return async (req, res, next) =&gt; &#123;
+        const ModelName = require(&#39;inflection&#39;).classify(req.params.resource)
         console.log(req)
-        req.Model = require(`../models/${ModelName}`)
+        req.Model = require(`../models/$&#123;ModelName&#125;`)
         next()
-    }
-}
+    &#125;
+&#125;
 </code></pre>
 <p>通过express的Router，将接口定义为</p>
-<pre><code class="language-javascript">const resource = require('../middle/resource')
-app.use('/api/:resource', resource(), router)
+<pre><code class="lang-javascript">const resource = require(&#39;../middle/resource&#39;)
+app.use(&#39;/api/:resource&#39;, resource(), router)
 </code></pre>
 <p>这样在请求不同资源时，后端就会动态的访问对应的资源，如下面的请求</p>
-<pre><code class="language-javascript">async getInfo() {
+<pre><code class="lang-javascript">async getInfo() &#123;
   const res = await this.$http.get(&quot;/api/users&quot;);
   this.account = res.data;
-},
+&#125;,
 </code></pre>
 <p>表示获取User的数据。</p>
 
@@ -644,7 +606,7 @@ app.use('/api/:resource', resource(), router)
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">

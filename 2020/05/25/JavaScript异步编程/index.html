@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.1k 字
+                    1.2k 字
                   </span>
                 
 
@@ -171,17 +171,14 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>总结了JavaScript异步编程的一些方式。</p>
-<a id="more"></a>
-<h2 id="JavaScript异步操作">JavaScript异步操作</h2>
-<p>在实际项目开发中，经常遇到网络请求、数据库操作等异步操作，由于这些操作需要耗费一定的时间，而JavaScript是一个单线程的语言，因此在执行异步操作时，其不进入主线程，而是加入一个任务队列，主线程继续执行同步任务，当异步任务执行完毕时，只需通知主线程即可。当异步操作指定了回调函数时，主线程将在其执行完毕时调用执行回调函数。</p>
-<h3 id="1-模拟一个异步操作">1 模拟一个异步操作</h3>
-<pre><code class="language-javascript">let a = 0
-function set_a(val,time){
-  setTimeout(()=&gt;{
+              <p>总结了JavaScript异步编程的一些方式。<br><span id="more"></span></p>
+<h2 id="JavaScript异步操作"><a href="#JavaScript异步操作" class="headerlink" title="JavaScript异步操作"></a>JavaScript异步操作</h2><p>在实际项目开发中，经常遇到网络请求、数据库操作等异步操作，由于这些操作需要耗费一定的时间，而JavaScript是一个单线程的语言，因此在执行异步操作时，其不进入主线程，而是加入一个任务队列，主线程继续执行同步任务，当异步任务执行完毕时，只需通知主线程即可。当异步操作指定了回调函数时，主线程将在其执行完毕时调用执行回调函数。</p>
+<h3 id="1-模拟一个异步操作"><a href="#1-模拟一个异步操作" class="headerlink" title="1 模拟一个异步操作"></a>1 模拟一个异步操作</h3><pre><code class="lang-javascript">let a = 0
+function set_a(val,time)&#123;
+  setTimeout(()=&gt;&#123;
     a = val
-  },time)
-}
+  &#125;,time)
+&#125;
 set_a(1,1000)
 console.log(a)
 //0
@@ -195,50 +192,47 @@ console.log(a)
 <li>执行<code>console.log(a)</code>，打印<code>a</code>的值为<code>0</code></li>
 <li>约1s后，<code>set_a(1,1000)</code>执行完毕，此时<code>a</code>的值为<code>1</code></li>
 </ul>
-<h4 id="1-1-使用回调函数进行异步编程">1.1 使用回调函数进行异步编程</h4>
-<p>使用回调函数是最简单直接的方法，如这里我们想在a的值改变后再将其打印输出：</p>
-<pre><code class="language-javascript">let a = 0
-function set_a(val, time, callback) {
-    setTimeout(() =&gt; {
+<h4 id="1-1-使用回调函数进行异步编程"><a href="#1-1-使用回调函数进行异步编程" class="headerlink" title="1.1 使用回调函数进行异步编程"></a>1.1 使用回调函数进行异步编程</h4><p>使用回调函数是最简单直接的方法，如这里我们想在a的值改变后再将其打印输出：</p>
+<pre><code class="lang-javascript">let a = 0
+function set_a(val, time, callback) &#123;
+    setTimeout(() =&gt; &#123;
         a = val
         callback(a)
-    }, time)
-}
-set_a(100, 1000, (a) =&gt; {
+    &#125;, time)
+&#125;
+set_a(100, 1000, (a) =&gt; &#123;
     console.log(a)
-})
+&#125;)
 //100
 </code></pre>
 <p>回调函数的一大缺点是当有多个异步操作需要进行，并且其相互之间有依赖关系时，容易遇到<code>回调地狱</code>的问题。</p>
-<h4 id="1-2-使用Promise">1.2 使用Promise</h4>
-<p>Promise让异步编程非常容易理解，也可以避免回调地狱的产生，同时也是ES6支持的一种方式。</p>
-<pre><code class="language-javascript">function set_a(val, time) {
-    return new Promise(function (reslove, reject) {
-        setTimeout(() =&gt; {
+<h4 id="1-2-使用Promise"><a href="#1-2-使用Promise" class="headerlink" title="1.2 使用Promise"></a>1.2 使用Promise</h4><p>Promise让异步编程非常容易理解，也可以避免回调地狱的产生，同时也是ES6支持的一种方式。</p>
+<pre><code class="lang-javascript">function set_a(val, time) &#123;
+    return new Promise(function (reslove, reject) &#123;
+        setTimeout(() =&gt; &#123;
             a = val
             reslove(a)
-        }, time)
-    })
-}
+        &#125;, time)
+    &#125;)
+&#125;
 set_a(100, 1000).then(() =&gt; console.log(a))
 //100
 </code></pre>
 <p>当有多个异步操作需要进行时，可以通过在<code>.then</code>中return一个Promise对象来进行：</p>
-<pre><code class="language-javascript">set_a(100, 1000).then(() =&gt; {
+<pre><code class="lang-javascript">set_a(100, 1000).then(() =&gt; &#123;
     console.log(a)
     return set_a(200, 500)
-}).then(() =&gt; console.log(a))
+&#125;).then(() =&gt; console.log(a))
 //100
 //200
 </code></pre>
 <p>虽然Promise避免了回调地狱，但是带来了<code>执行地狱</code>，即有多个异步操作需要进行时，仍然需要不断通过<code>.then</code>来调用。</p>
-<h4 id="1-3-使用Generator">1.3 使用Generator</h4>
-<p>ES6中的Generator和Python的十分相似，其本质是一个函数，最大的特点是可以被<code>中断</code>，然后恢复执行。</p>
+<h4 id="1-3-使用Generator"><a href="#1-3-使用Generator" class="headerlink" title="1.3 使用Generator"></a>1.3 使用Generator</h4><p>ES6中的Generator和Python的十分相似，其本质是一个函数，最大的特点是可以被<code>中断</code>，然后恢复执行。</p>
 <p>定义一个简单的Generator函数：</p>
-<pre><code class="language-javascript">function * gen(){
+<pre><code class="lang-javascript">function * gen()&#123;
   yield &quot;hello&quot;
   return &quot;world&quot;
-}
+&#125;
 </code></pre>
 <ul>
 <li>在函数中定义了<code>x</code>个<code>yield</code>关键字，则函数具有<code>x+1</code>种状态（包含<code>return</code>）</li>
@@ -247,20 +241,20 @@ set_a(100, 1000).then(() =&gt; console.log(a))
 <li><code>next()</code>方法可以接受一个参数，传递到Generator内部，利用这个特性来组织异步代码</li>
 <li>更常见的情况是<code>yield</code>关键字后面接一个<code>Promise</code>对象</li>
 </ul>
-<pre><code class="language-javascript">list = [1, 2, 3, 4, 6, 3, 1]
-function* gen() {
-    for (let i of list) {
+<pre><code class="lang-javascript">list = [1, 2, 3, 4, 6, 3, 1]
+function* gen() &#123;
+    for (let i of list) &#123;
         //延时设置为随机数，模拟实际的异步情况
         yield set_a(val, Math.round(Math.random()) * 1000)
-    }
-}
+    &#125;
+&#125;
 var g = gen()
 var r1 = g.next()
-r1.value.then(() =&gt; {
+r1.value.then(() =&gt; &#123;
     console.log(a1)
     var r2 = g.next()
     r2.value.then(() =&gt; console.log(a1))
-})
+&#125;)
 //1
 //2
 </code></pre>
@@ -268,14 +262,14 @@ r1.value.then(() =&gt; {
 <li>调用<code>next()</code>方法时，返回对象的<code>value</code>值就是<code>yield</code>语句的值，<code>done</code>属性用来标志Generator方法是否执行结束</li>
 </ul>
 <p>在执行for循环中的异步操作时，由于<code>next()</code>方法需要手动执行，因此可以通过递归调用来自动执行：</p>
-<pre><code class="language-javascript">function promise_list(p) {
-    if (!p.done) {
-        p.value.then(() =&gt; {
+<pre><code class="lang-javascript">function promise_list(p) &#123;
+    if (!p.done) &#123;
+        p.value.then(() =&gt; &#123;
             console.log(a1)
             promise_list(g.next())
-        })
-    }
-}
+        &#125;)
+    &#125;
+&#125;
 promise_list(g.next())
 //1
 //2
@@ -285,21 +279,20 @@ promise_list(g.next())
 //3
 //1
 </code></pre>
-<h4 id="1-4-async-await">1.4 async/await</h4>
-<p>async函数可以简单的看做带有自执行器的Generator函数。</p>
-<pre><code class="language-javascript">async function async_set_a() {
+<h4 id="1-4-async-await"><a href="#1-4-async-await" class="headerlink" title="1.4 async/await"></a>1.4 async/await</h4><p>async函数可以简单的看做带有自执行器的Generator函数。</p>
+<pre><code class="lang-javascript">async function async_set_a() &#123;
     await set_a(1, 1000).then(() =&gt; console.log(a))
     await set_a(2, 200).then(() =&gt; console.log(a))
-}
+&#125;
 async_set_a()
 //在for循环中使用async/await
 list = [1, 2, 3]
-async function set_list(list) {
-    for (let i of list) {
+async function set_list(list) &#123;
+    for (let i of list) &#123;
         await set_a(i, 100)
         console.log(a)
-    }
-}
+    &#125;
+&#125;
 
 set_list(list)
 </code></pre>
@@ -327,7 +320,7 @@ set_list(list)
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">

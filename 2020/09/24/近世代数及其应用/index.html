@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -171,21 +171,16 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>又开始上学了，近世代数总结一波，随堂更新~</p>
-<a id="more"></a>
-<h2 id="近世代数及其应用">近世代数及其应用</h2>
-<h2 id="9-16-9-23-预备知识">9.16 - 9.23 预备知识</h2>
-<ul>
-<li>
-<p>摩根律</p>
+              <p>又开始上学了，近世代数总结一波，随堂更新~<br><span id="more"></span></p>
+<h2 id="近世代数及其应用"><a href="#近世代数及其应用" class="headerlink" title="近世代数及其应用"></a>近世代数及其应用</h2><h2 id="9-16-9-23-预备知识"><a href="#9-16-9-23-预备知识" class="headerlink" title="9.16 - 9.23 预备知识"></a>9.16 - 9.23 预备知识</h2><ul>
+<li><p>摩根律</p>
 <ul>
 <li>$\overline{A\cup  B} = \overline{A}\cap \overline{B}$</li>
 <li>$\overline{A\cap  B} = \overline{A}\cup \overline{B}$</li>
 <li>推广到$n$个集合：$\begin{matrix}\overline{A_1\cup{A_2}…\cup{A_n}} = \overline{A_1}\cap\overline{A_2}…\overline{\cap{A_n}} \ \overline{A_1\cap{A_2}…\cap{A_n}} = \overline{A_1}\cup\overline{A_2}…\overline{\cup{A_n}} \end{matrix}$</li>
 </ul>
 </li>
-<li>
-<p>容斥定理（用于计数）</p>
+<li><p>容斥定理（用于计数）</p>
 <ul>
 <li>$|A\cup B\cup C| = |A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C|$</li>
 <li>推广到$n$个集合：$|A_1\cup A_2\cup … \cup A_n|=\sum_{1}^{n}|A_i|-\sum_{1\leqslant i\leqslant j}^{n}|A_i\cap A_j|+\sum_{1\leqslant i\leqslant j\leqslant k}^{n}|A_i\cap A_j\cap A_k| -…+(-1)^{n-1}|A_1\cap A_2\cap …\cap A_n|$</li>
@@ -202,12 +197,11 @@
 <p>设集合C为不包含字母$c$的n位字符串的集合，则题目要求解的是：$|\overline{A}\cap\overline{B}\cap\overline{C}|$</p>
 <p>$；∴|\overline{A}\cap\overline{B}\cap\overline{C}|=|\overline{A\cup B \cup C}|=N-|A\cup B\cup C| =N-(|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B \cap C|) =4^n-3^{n+1}+3·2^n-1$</p>
 <p>例题3：</p>
-<img src="https://images.nickname4th.vip/IMG_0819.jpg" srcset="/img/loading.gif" alt="IMG_0819" style="zoom: 25%;" />
+<p><img src="https://images.nickname4th.vip/IMG_0819.jpg" srcset="/img/loading.gif" alt="IMG_0819" style="zoom: 25%;" /></p>
 <p>解3.1：</p>
 </blockquote>
 </li>
-<li>
-<p>二元关系</p>
+<li><p>二元关系</p>
 <blockquote>
 <p>设$A,B$是两个集合，$A\times B$的子集$R$称为$A,B$间的一个<strong>二元关系</strong>.当$(a,b)\in R$时，称$a$与$b$据有关系$R$，记作$aRb$；当$(a,b)\notin R$时，称$a$与$b$据不有关系$R$，记作$aR’b$.</p>
 </blockquote>
@@ -216,27 +210,23 @@
 <li>反自反性</li>
 <li><strong>对称性：$aRb\Rightarrow bRa $</strong></li>
 <li>反对称性</li>
-<li><strong>传递性：$aRb,\ bRc \Rightarrow aRc$</strong></li>
+<li><strong>传递性：$aRb, bRc \Rightarrow aRc$</strong></li>
 <li>满足自反性、对称性和传递性的关系成为==<strong>等价关系</strong>==，可记作$a\sim b$</li>
 </ul>
 </li>
-<li>
-<p>等价关系和集合的分类</p>
+<li><p>等价关系和集合的分类</p>
 <ul>
-<li>
-<p>若对于$a,b∈A\ a\sim b，则[a]=[b]$；</p>
+<li><p>若对于$a,b∈A a\sim b，则[a]=[b]$；</p>
 <blockquote>
 <p>证明集合相等只需证明$[a]\subseteq [b]且[b]\subseteq [a]$</p>
 </blockquote>
 </li>
-<li>
-<p>若对于$a,b∈A\ a\nsim b{不等价}，则[a]\cap[b]=\phi $；</p>
+<li><p>若对于$a,b∈A a\nsim b\{不等价\}，则[a]\cap[b]=\phi $；</p>
 <blockquote>
 <p>反证法</p>
 </blockquote>
 </li>
-<li>
-<p>$A$能写成所有不同等价类的并，即$A=[a_1]\cup[a_2]\cup … \cup[a_n]…$。</p>
+<li><p>$A$能写成所有不同等价类的并，即$A=[a_1]\cup[a_2]\cup … \cup[a_n]…$。</p>
 <blockquote>
 <p>由上两个知两个等价类是相同的，或是不相交的</p>
 <p>$\forall a\in A,a\in[a]$，∴$A$是所有不同等价类的并</p>
@@ -244,8 +234,7 @@
 </li>
 </ul>
 </li>
-<li>
-<p>映射：函数概念推广，两个集合的元素之间的关系</p>
+<li><p>映射：函数概念推广，两个集合的元素之间的关系</p>
 <blockquote>
 <p>$\forall a \in A$，如果通过法则$f$，存在唯一的$y \in D$，则$f$叫做$A到D$的一个映射；$y$叫做$x$在$f$之下的像，$x$叫做$y$在$f$下的一个原像;记作$f:A\rightarrow D,x \rightarrow y=f(x)$，当$A,D$是数集时，$f$就是函数。</p>
 </blockquote>
@@ -256,9 +245,7 @@
 </ul>
 <blockquote>
 <p>一个$A$到$A$之间的映射称作$A$的一个变换</p>
-</blockquote>
-<blockquote>
-<p>设$A={a_1,a_2,…,a_n},B={b_1,b_2,…,b_m},#A=n,#B=m$.</p>
+<p>设$A=\{a_1,a_2,…,a_n\},B=\{b_1,b_2,…,b_m\},#A=n,#B=m$.</p>
 <ul>
 <li>映射$f:A\rightarrow B$有$m^n$个</li>
 <li>单射$f:A\rightarrow B$,当$n\leq m$时，有$m(m-1)(m-2)…(m-n+1)$个，当$n=m$时，双射有$m!$个</li>
@@ -266,15 +253,13 @@
 </ul>
 </blockquote>
 </li>
-<li>
-<p>代数运算</p>
+<li><p>代数运算</p>
 <ul>
 <li>一个$A\times B$到$D$的映射叫做一个$A\times B$到$D$的代数运算，记作$A \circ B$</li>
 <li>若$\circ$一个$A \times A$到$A$的代数运算，则说集合$A$对于$\circ$是封闭的，$\circ$是$A$上的二元运算</li>
 </ul>
 </li>
-<li>
-<p>同态与同构</p>
+<li><p>同态与同构</p>
 <blockquote>
 <p>$\phi:A\rightarrow \bar{A},\circ$和$\bar{\circ}$分别是$A$和$\bar{A}$的代数运算，如果$\forall a,b\in A$，只要$a\rightarrow \bar{a},b\rightarrow \bar{b}$，就有$a\circ b\rightarrow\bar{a}\bar{\circ}\bar{b}$，则说$\phi$是$A$到$\bar{A}$的同态映射</p>
 <p>另一种解释：</p>
@@ -313,7 +298,7 @@
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">

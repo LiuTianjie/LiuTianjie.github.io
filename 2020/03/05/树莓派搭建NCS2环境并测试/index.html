@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.5k 字
+                    1.6k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      7 分钟
+                      8 分钟
                   </span>
                 
 
@@ -171,32 +171,24 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>做毕设和一些实验的基础，在树莓派环境搭建NCS2的依赖环境并进行相关测试</p>
-<a id="more"></a>
-<h3 id="OpenVINO-toolkit-for-RaspberryPi-树莓派NCS2环境搭建">OpenVINO toolkit for RaspberryPi(树莓派NCS2环境搭建)</h3>
-<p>@Nickname4th 2019/10/01</p>
-<p>Call me at: 1733****598</p>
-<h3 id="烧写官方镜像">烧写官方镜像</h3>
-<ul>
+              <p>做毕设和一些实验的基础，在树莓派环境搭建NCS2的依赖环境并进行相关测试<br><span id="more"></span></p>
+<h3 id="OpenVINO-toolkit-for-RaspberryPi-树莓派NCS2环境搭建"><a href="#OpenVINO-toolkit-for-RaspberryPi-树莓派NCS2环境搭建" class="headerlink" title="OpenVINO toolkit for RaspberryPi(树莓派NCS2环境搭建)"></a>OpenVINO toolkit for RaspberryPi(树莓派NCS2环境搭建)</h3><p>@Nickname4th 2019/10/01</p>
+<p>Call me at: 1733<em>**</em>598</p>
+<h3 id="烧写官方镜像"><a href="#烧写官方镜像" class="headerlink" title="烧写官方镜像"></a>烧写官方镜像</h3><ul>
 <li>使用BleanEtchar，略</li>
 </ul>
-<h3 id="TensorFlow配置">TensorFlow配置</h3>
-<h4 id="更换apt和pip源">更换apt和pip源</h4>
-<pre><code class="language-shell">sudo vim /etc/apt/sources.list
+<h3 id="TensorFlow配置"><a href="#TensorFlow配置" class="headerlink" title="TensorFlow配置"></a>TensorFlow配置</h3><h4 id="更换apt和pip源"><a href="#更换apt和pip源" class="headerlink" title="更换apt和pip源"></a>更换apt和pip源</h4><pre><code class="lang-shell">sudo vim /etc/apt/sources.list
 </code></pre>
 <blockquote>
-<p>注释原来的源，添加</p>
-<p>deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi<br>
-deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi</p>
+<p>注释原来的源，添加 </p>
+<p>deb <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</a> stretch main contrib non-free rpi<br>deb-src <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</a> stretch main contrib non-free rpi</p>
 </blockquote>
-<pre><code class="language-shell">pip install pip
+<pre><code class="lang-shell">pip install pip
 pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 </code></pre>
-<h4 id="安装matplot-使用VNC调试更直观，后续可注释相关代码并以CLI启动">安装matplot(使用VNC调试更直观，后续可注释相关代码并以CLI启动)</h4>
-<pre><code class="language-shell">sudo pip3 install matplotlib
+<h4 id="安装matplot-使用VNC调试更直观，后续可注释相关代码并以CLI启动"><a href="#安装matplot-使用VNC调试更直观，后续可注释相关代码并以CLI启动" class="headerlink" title="安装matplot(使用VNC调试更直观，后续可注释相关代码并以CLI启动)"></a>安装matplot(使用VNC调试更直观，后续可注释相关代码并以CLI启动)</h4><pre><code class="lang-shell">sudo pip3 install matplotlib
 </code></pre>
-<h4 id="安装TensorFlow">安装TensorFlow</h4>
-<pre><code class="language-shell">sudo pip3 install tensorflow
+<h4 id="安装TensorFlow"><a href="#安装TensorFlow" class="headerlink" title="安装TensorFlow"></a>安装TensorFlow</h4><pre><code class="lang-shell">sudo pip3 install tensorflow
 </code></pre>
 <blockquote>
 <p>安装依赖包时出现报错时将报错的依赖包单独使用sudo pip3 install [包名]即可</p>
@@ -206,20 +198,18 @@ pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 </ul>
 <blockquote>
 <p>集成了TensorFlow的api，可以快速测试一个模型</p>
-<pre><code class="language-shell">sudo pip3 install obapi-1.0.0-py3-none-any.whl
+<pre><code class="lang-shell">sudo pip3 install obapi-1.0.0-py3-none-any.whl
 </code></pre>
 <p>感谢作者@obapi</p>
 </blockquote>
 <ul>
-<li>
-<p>根据代码移入模型相关文件夹和TensorFlow相关文件夹并修改路径</p>
+<li><p>根据代码移入模型相关文件夹和TensorFlow相关文件夹并修改路径</p>
 <blockquote>
 <p>这里主要是object_detection和silm文件夹等</p>
 </blockquote>
 </li>
 </ul>
-<h4 id="安装opencv及其依赖">安装opencv及其依赖</h4>
-<pre><code class="language-shell">sudo pip3 install opencv-python
+<h4 id="安装opencv及其依赖"><a href="#安装opencv及其依赖" class="headerlink" title="安装opencv及其依赖"></a>安装opencv及其依赖</h4><pre><code class="lang-shell">sudo pip3 install opencv-python
 sudo apt-get install libcblas-dev
 sudo apt-get install libhdf5-dev
 sudo apt-get install libhdf5-serial-dev
@@ -231,32 +221,24 @@ sudo apt-get install libqt4-test
 <blockquote>
 <p>由于树莓派官方系统更新，可能会因为依赖冲突发生多次错误，耐心按照apt的报错决定是否覆盖安装相关依赖包</p>
 </blockquote>
-<h3 id="TensorFlow模型转换及前后性能测试">TensorFlow模型转换及前后性能测试</h3>
-<ul>
-<li>
-<p><a href="https://software.intel.com/en-us/openvino-toolkit/choose-download/free-download-macos" target="_blank" rel="noopener">下载最新版本的macOS*的工具箱OpenVINO toolkit</a>，记住激活码</p>
+<h3 id="TensorFlow模型转换及前后性能测试"><a href="#TensorFlow模型转换及前后性能测试" class="headerlink" title="TensorFlow模型转换及前后性能测试"></a>TensorFlow模型转换及前后性能测试</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://software.intel.com/en-us/openvino-toolkit/choose-download/free-download-macos">下载最新版本的macOS*的工具箱OpenVINO toolkit</a>，记住激活码</li>
+<li><p>按照<a target="_blank" rel="noopener" href="https://docs.openvinotoolkit.org/latest/_docs_install_guides_installing_openvino_macos.html">官网说明</a>进行配置</p>
 </li>
-<li>
-<p>按照<a href="https://docs.openvinotoolkit.org/latest/_docs_install_guides_installing_openvino_macos.html" target="_blank" rel="noopener">官网说明</a>进行配置</p>
+<li><p>本次使用冻结模型ssdlite_mobilenet_v2_coco_2018_05_09(官网发现他正好是受支持的拓扑结构)</p>
 </li>
-<li>
-<p>本次使用冻结模型ssdlite_mobilenet_v2_coco_2018_05_09(官网发现他正好是受支持的拓扑结构)</p>
-</li>
-<li>
-<p>下载模型，将其转换成IR中间件表示</p>
-<ul>
-<li><a href="http://download.tensorflow.org/models/object_detection/ssdlite_mobilenet_v2_coco_2018_05_09.tar.gz" target="_blank" rel="noopener">下载传送门</a></li>
-<li>开始模型转换，<a href="https://docs.openvinotoolkit.org/latest/_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_TensorFlow.html" target="_blank" rel="noopener">转换指南</a></li>
+<li>下载模型，将其转换成IR中间件表示<ul>
+<li><a target="_blank" rel="noopener" href="http://download.tensorflow.org/models/object_detection/ssdlite_mobilenet_v2_coco_2018_05_09.tar.gz">下载传送门</a></li>
+<li>开始模型转换，<a target="_blank" rel="noopener" href="https://docs.openvinotoolkit.org/latest/_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_TensorFlow.html">转换指南</a></li>
 <li>得到.xml和.bin文件</li>
 <li>修改程序进行对比</li>
 </ul>
 </li>
 </ul>
-<h4 id="TestWithOutNCS2-py">TestWithOutNCS2.py</h4>
-<blockquote>
+<h4 id="TestWithOutNCS2-py"><a href="#TestWithOutNCS2-py" class="headerlink" title="TestWithOutNCS2.py"></a>TestWithOutNCS2.py</h4><blockquote>
 <p>这里就是之前在导盲杖和MacBook Pro上跑的目标检测算法</p>
 </blockquote>
-<pre><code class="language-python">import numpy as np
+<pre><code class="lang-python">import numpy as np
 import sys
 import tensorflow as tf
 from obapi import label_map_util
@@ -264,20 +246,20 @@ from obapi import visualization_utils as vis_util
 from PIL import Image
 # import matplotlib.pyplot as plt
 import time
-sys.path.append('/home/pi/NCS2/object_detection') # point to your tensorflow dir
-sys.path.append('/home/pi/NCS2/slim') # point ot your slim dir
+sys.path.append(&#39;/home/pi/NCS2/object_detection&#39;) # point to your tensorflow dir
+sys.path.append(&#39;/home/pi/NCS2/slim&#39;) # point ot your slim dir
 # What model to download.
-MODEL_NAME = '/home/pi/NCS2/object_detection/'
-PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
-PATH_TO_LABELS = '/home/pi/NCS2/obj/data/mscoco_label_map.pbtxt'
+MODEL_NAME = &#39;/home/pi/NCS2/object_detection/&#39;
+PATH_TO_CKPT = MODEL_NAME + &#39;/frozen_inference_graph.pb&#39;
+PATH_TO_LABELS = &#39;/home/pi/NCS2/obj/data/mscoco_label_map.pbtxt&#39;
 NUM_CLASSES = 90
 detection_graph = tf.Graph()
 with detection_graph.as_default():
   od_graph_def = tf.GraphDef()
-  with tf.gfile.GFile(PATH_TO_CKPT, 'rb') as fid:
+  with tf.gfile.GFile(PATH_TO_CKPT, &#39;rb&#39;) as fid:
     serialized_graph = fid.read()
     od_graph_def.ParseFromString(serialized_graph)
-    tf.import_graph_def(od_graph_def, name='')
+    tf.import_graph_def(od_graph_def, name=&#39;&#39;)
 #Loading label map
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
@@ -287,16 +269,16 @@ def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
   return np.array(image.getdata()).reshape(
       (im_height, im_width, 3)).astype(np.uint8)
-TEST_IMAGE_PATHS = ['/home/pi/NCS2/obj/test_images/1.jpg']
+TEST_IMAGE_PATHS = [&#39;/home/pi/NCS2/obj/test_images/1.jpg&#39;]
 # Size, in inches, of the output images.
 IMAGE_SIZE = (16, 9)
 with detection_graph.as_default():
   with tf.Session(graph=detection_graph) as sess:
-    image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
-    detection_boxes = detection_graph.get_tensor_by_name('detection_boxes:0')
-    detection_scores = detection_graph.get_tensor_by_name('detection_scores:0')
-    detection_classes = detection_graph.get_tensor_by_name('detection_classes:0')
-    num_detections = detection_graph.get_tensor_by_name('num_detections:0')
+    image_tensor = detection_graph.get_tensor_by_name(&#39;image_tensor:0&#39;)
+    detection_boxes = detection_graph.get_tensor_by_name(&#39;detection_boxes:0&#39;)
+    detection_scores = detection_graph.get_tensor_by_name(&#39;detection_scores:0&#39;)
+    detection_classes = detection_graph.get_tensor_by_name(&#39;detection_classes:0&#39;)
+    num_detections = detection_graph.get_tensor_by_name(&#39;num_detections:0&#39;)
     import cv2
     while 1:
         for image_path in TEST_IMAGE_PATHS:
@@ -308,15 +290,15 @@ with detection_graph.as_default():
             image = Image.open(image_path)
             image_np = load_image_into_numpy_array(image)
             image_np_expanded = np.expand_dims(image_np, axis=0)
-            image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
-            boxes = detection_graph.get_tensor_by_name('detection_boxes:0')
-            scores = detection_graph.get_tensor_by_name('detection_scores:0')
-            classes = detection_graph.get_tensor_by_name('detection_classes:0')
-            num_detections = detection_graph.get_tensor_by_name('num_detections:0')
+            image_tensor = detection_graph.get_tensor_by_name(&#39;image_tensor:0&#39;)
+            boxes = detection_graph.get_tensor_by_name(&#39;detection_boxes:0&#39;)
+            scores = detection_graph.get_tensor_by_name(&#39;detection_scores:0&#39;)
+            classes = detection_graph.get_tensor_by_name(&#39;detection_classes:0&#39;)
+            num_detections = detection_graph.get_tensor_by_name(&#39;num_detections:0&#39;)
             # Actual detection.
             (boxes, scores, classes, num_detections) = sess.run(
                 [boxes, scores, classes, num_detections],
-                feed_dict={image_tensor: image_np_expanded})
+                feed_dict=&#123;image_tensor: image_np_expanded&#125;)
             # Visualization of the results of a detection.
             vis_util.visualize_boxes_and_labels_on_image_array(
                 image_np,
@@ -328,7 +310,7 @@ with detection_graph.as_default():
                 line_thickness=8)
             a = np.squeeze(classes).astype(np.int32)[0]
             elapsed = (time.clock() - start)
-            name = category_index[a]['name']
+            name = category_index[a][&#39;name&#39;]
             print(&quot;This is a &quot;,name)
             print(&quot;Time used:&quot;,elapsed)
             # plt.figure(figsize=IMAGE_SIZE)
@@ -339,19 +321,18 @@ with detection_graph.as_default():
 <li>冷启动时间：20.6s</li>
 <li>单独进行一次图像识别时间：6.03s</li>
 </ul>
-<h4 id="TestWithNCS2-py">TestWithNCS2.py</h4>
-<blockquote>
+<h4 id="TestWithNCS2-py"><a href="#TestWithNCS2-py" class="headerlink" title="TestWithNCS2.py"></a>TestWithNCS2.py</h4><blockquote>
 <p>这里是将原来的目标检测算法转换后，通过计算棒执行的目标检测</p>
 </blockquote>
-<pre><code class="language-shell">cd object_detection-master
+<pre><code class="lang-shell">cd object_detection-master
 python3 main.py -d MYRIAD -i &quot;cam&quot; -m &quot;ssd_v2.xml&quot; # 使用摄像头进行实时目标检测 
 python3 main.py  -d MYRIAD -i &quot;Cars - 1900.mp4&quot; -m &quot;./mobilenet-ssd/FP32/mobilenet-ssd.xml&quot; # 在测试视频中运行目标检测
 </code></pre>
 <blockquote>
 <p>注意：通过ssh进行目标检测时，会由于无法调用display而报错，这里将cv2.imshow()注释即可，如果要观测，可以通过VNC连接至树莓派，通过内置终端执行语句</p>
-<p>object_detection-master文件夹资源链接：https://yaleedupl-my.sharepoint.com/:f:/g/personal/acs_shier_love/Eu6GMrDyxi9DkFD4rAKy6-ABjpyvwmHuBWWkQRijtCo4rQ?e=zr7eIA</p>
+<p>object_detection-master文件夹资源链接：<a target="_blank" rel="noopener" href="https://yaleedupl-my.sharepoint.com/:f:/g/personal/acs_shier_love/Eu6GMrDyxi9DkFD4rAKy6-ABjpyvwmHuBWWkQRijtCo4rQ?e=zr7eIA">https://yaleedupl-my.sharepoint.com/:f:/g/personal/acs_shier_love/Eu6GMrDyxi9DkFD4rAKy6-ABjpyvwmHuBWWkQRijtCo4rQ?e=zr7eIA</a></p>
 </blockquote>
-<pre><code class="language-python">#main.py代码
+<pre><code class="lang-python">#main.py代码
 from __future__ import print_function
 import sys
 import os
@@ -369,7 +350,7 @@ def build_argparser():
     parser = ArgumentParser()
     parser.add_argument(&quot;-m&quot;, &quot;--model&quot;, help=&quot;Path to an .xml file with a trained model.&quot;, required=True, type=str)
     parser.add_argument(&quot;-i&quot;, &quot;--input&quot;,
-                        help=&quot;Path to video file or image. 'cam' for capturing video stream from camera&quot;,
+                        help=&quot;Path to video file or image. &#39;cam&#39; for capturing video stream from camera&quot;,
                         type=str)
     parser.add_argument(&quot;-l&quot;, &quot;--cpu_extension&quot;,
                         help=&quot;MKLDNN (CPU)-targeted custom layers.Absolute path to a shared library with the kernels &quot;
@@ -391,7 +372,7 @@ def make_sure_path_exists(path):
         os.makedirs(path)
     except OSError as exception:
         pass
- 
+
 def main():
     is_async_mode = True
     args = build_argparser().parse_args()
@@ -425,15 +406,14 @@ def main():
         cap.release()
     finally:
         del resultant_initialisation_object.exec_net
-if __name__ == '__main__':
+if __name__ == &#39;__main__&#39;:
     sys.exit(main() or 0)
 </code></pre>
 <ul>
 <li>冷启动时间：2.0s</li>
 <li>单独进行一次图像识别时间：0.06s</li>
 </ul>
-<h3 id="RealTime的性能对比">RealTime的性能对比</h3>
-<blockquote>
+<h3 id="RealTime的性能对比"><a href="#RealTime的性能对比" class="headerlink" title="RealTime的性能对比"></a>RealTime的性能对比</h3><blockquote>
 <p>相同场景下实时识别，对比帧数</p>
 </blockquote>
 <p>待续。。。</p>
@@ -463,7 +443,7 @@ if __name__ == '__main__':
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">

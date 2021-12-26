@@ -41,7 +41,7 @@
 <!-- 自定义样式保持在最底部 -->
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.7k 字
+                    1.9k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      7 分钟
+                      8 分钟
                   </span>
                 
 
@@ -171,8 +171,7 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>​    本文讲述我学习Rust中的一些随笔。。。</p>
-<a id="more"></a>
+              <p>​    本文讲述我学习Rust中的一些随笔。。。<br><span id="more"></span></p>
 <ul>
 <li>所有权规则：</li>
 </ul>
@@ -182,35 +181,35 @@
 <li>值在任一时刻有且只有一个所有者。</li>
 <li>当所有者（变量）离开作用域，这个值将被丢弃。</li>
 </ol>
-<p>​	变量与数据交互的方式有移动和克隆，如：</p>
-<pre><code class="language-rust">let a:u32 = 1;
+<p>​    变量与数据交互的方式有移动和克隆，如：</p>
+<pre><code class="lang-rust">let a:u32 = 1;
 let b:u32 = a; //a是由字面量赋值（在栈上分配），将a赋值给b时，是克隆，不会移交a的所有权
-println!(&quot;{},{}&quot;,a,b)//正常输出
+println!(&quot;&#123;&#125;,&#123;&#125;&quot;,a,b)//正常输出
 let c:String = String::from(&quot;hello&quot;);
 let d:String = c;//c是由String类的关联函数构造，会请求内存，赋值时移交控制权
-println!(&quot;{},{}&quot;,c,d)//报错
+println!(&quot;&#123;&#125;,&#123;&#125;&quot;,c,d)//报错
 </code></pre>
 </blockquote>
 <ul>
 <li>闭包</li>
 </ul>
 <blockquote>
-<p>Rust 闭包可以对参数和返回类型进行判断，捕获变量的方式有三种：引用(&amp;T)，可变引用(&amp;mut T)和值(T)。</p>
-<pre><code class="language-rust">let a = 1;
-let print = ||println(&quot;{}&quot;,a);
-print();//print仅需a的引用即可打印，所以这里闭包仅捕获了a的引用即&amp;a
-let b = a;//仍然可以转移a的所有权
-//////////////////////////////////////////////////////
-let mut a =1;
-let inc = ||{a+=1;};
-let c = &amp;a;//报错，因为后面的inc捕获了a的可变引用，会造成c的值不确定，rust编译器不允许这种不确定性，如果注释掉inc();则不会报错
-inc();//inc要改变a的值，因此捕获了a的可变引用即&amp;mut a
-//////////////////////////////////////////////////////
-use std::mem;
-let a = Box::new(3);
-let f = ||{mem::drop(a);};
-f();
-let b = a; //报错，因为f捕获了a的值，所以a的所有权已经被转移到f中，f结束时a已被释放
+<p> Rust 闭包可以对参数和返回类型进行判断，捕获变量的方式有三种：引用(&amp;T)，可变引用(&amp;mut T)和值(T)。</p>
+<pre><code class="lang-rust"> let a = 1;
+ let print = ||println(&quot;&#123;&#125;&quot;,a);
+ print();//print仅需a的引用即可打印，所以这里闭包仅捕获了a的引用即&amp;a
+ let b = a;//仍然可以转移a的所有权
+ //////////////////////////////////////////////////////
+ let mut a =1;
+ let inc = ||&#123;a+=1;&#125;;
+ let c = &amp;a;//报错，因为后面的inc捕获了a的可变引用，会造成c的值不确定，rust编译器不允许这种不确定性，如果注释掉inc();则不会报错
+ inc();//inc要改变a的值，因此捕获了a的可变引用即&amp;mut a
+ //////////////////////////////////////////////////////
+ use std::mem;
+ let a = Box::new(3);
+ let f = ||&#123;mem::drop(a);&#125;;
+ f();
+ let b = a; //报错，因为f捕获了a的值，所以a的所有权已经被转移到f中，f结束时a已被释放
 </code></pre>
 </blockquote>
 <ul>
@@ -218,51 +217,48 @@ let b = a; //报错，因为f捕获了a的值，所以a的所有权已经被转�
 </ul>
 <blockquote>
 <p>&lt;&gt;符号中放的是类型参数</p>
-<pre><code class="language-rust">fn largest&lt;T&gt;(list:&amp;[T])-&gt;T{
+<pre><code class="lang-rust">fn largest&lt;T&gt;(list:&amp;[T])-&gt;T&#123;
 ...
-}
+&#125;
 </code></pre>
 <p>枚举定义中的泛型</p>
 <ul>
-<li>
-<pre><code class="language-rust">enum Option&lt;T&gt;{
+<li><pre><code class="lang-rust">enum Option&lt;T&gt;&#123;
   Some(T),
   None,
-}
+&#125;
 </code></pre>
 </li>
-<li>
-<pre><code class="language-rust">enum Result&lt;T,E&gt;{
+<li><pre><code class="lang-rust">enum Result&lt;T,E&gt;&#123;
   Ok(T),
   Err(E),
-}
+&#125;
 </code></pre>
 </li>
 </ul>
 <p>方法定义中的泛型</p>
 <ul>
-<li>
-<pre><code class="language-rust">struct Point&lt;T&gt;{
-	x:T,
-	y:T,
-}
+<li><pre><code class="lang-rust">struct Point&lt;T&gt;&#123;
+    x:T,
+    y:T,
+&#125;
 //impl必须声明T，才可以在Point&lt;T&gt;上实现的方法中使用
-impl&lt;T&gt; Point&lt;T&gt;{
-  fn x(&amp;self)-&gt;&amp;T{
+impl&lt;T&gt; Point&lt;T&gt;&#123;
+  fn x(&amp;self)-&gt;&amp;T&#123;
     &amp;self.x
-  }
-}
+  &#125;
+&#125;
 //只有f32类型的Point可以使用distance_from_orign方法
-impl Point&lt;f32&gt;{
-  fn distance_from_orign(&amp;self) -&gt; f32{
+impl Point&lt;f32&gt;&#123;
+  fn distance_from_orign(&amp;self) -&gt; f32&#123;
     (self.x.powi(2)+self.y.powi(2)).sqrt()
-  }
-}
+  &#125;
+&#125;
 
-fn main(){
+fn main()&#123;
   let p = Point(x:5,y:10);
-  println!(&quot;p.x={}&quot;,p.x());
-}
+  println!(&quot;p.x=&#123;&#125;&quot;,p.x());
+&#125;
 </code></pre>
 </li>
 </ul>
@@ -272,38 +268,38 @@ fn main(){
 </ul>
 <blockquote>
 <p>不同类型调用相同方法。trait定义是一种将方法签名组合起来的方法，目的是定义一个实现某些目的所必需的行为的集合。</p>
-<pre><code class="language-rust">//使用pub，这样在其他作用域实现Summary，只需通过use引入即可
-pub trait Summary(){
+<pre><code class="lang-rust">//使用pub，这样在其他作用域实现Summary，只需通过use引入即可
+pub trait Summary()&#123;
 fn summarize(&amp;self)-&gt;String;
 /*声明但是不在这里实现，每一个实现Summary的类型都要提供其自定义行为的方法体
 可以有多个方法*/
 //也可以提供一种默认实现
-}
+&#125;
 
-pub struct Book{
+pub struct Book&#123;
 pub title:String;
 pub author:String;
 pub content:String;
-}
+&#125;
 
-pub struct NewsArticle{
-	pub title:String;
+pub struct NewsArticle&#123;
+    pub title:String;
 pub date:String;
-}
+&#125;
 
 //为Book类型实现Summary trait
-impl Summary for Book{
+impl Summary for Book&#123;
 //实现summarize方法
-fn sumarize(&amp;self)-&gt;String{
- format!(&quot;{}, wirtten by {}.&quot;,self.title,self.author)
-}
-}
+fn sumarize(&amp;self)-&gt;String&#123;
+ format!(&quot;&#123;&#125;, wirtten by &#123;&#125;.&quot;,self.title,self.author)
+&#125;
+&#125;
 //为NewsArticle类型实现Summary trait
-impl Summary for NewsArticle{
-	fn summarize(&amp;self) -&gt; String{
-	format!(&quot;{}, {}&quot;,self.title,self.date)
-	}
-}
+impl Summary for NewsArticle&#123;
+    fn summarize(&amp;self) -&gt; String&#123;
+    format!(&quot;&#123;&#125;, &#123;&#125;&quot;,self.title,self.date)
+    &#125;
+&#125;
 </code></pre>
 </blockquote>
 <ul>
@@ -315,7 +311,7 @@ impl Summary for NewsArticle{
 <li>在进行赋值<code>(let x =y)</code>或通过值来传递参数<code>(foo(x))</code>的时候，资源的所有权会发生转移，这被称为资源的移动<code>(move)</code></li>
 <li>所有权发生转移时，数据的可变性可能会发生改变：</li>
 </ul>
-<pre><code class="language-rust">let x:i32=1;//x是不可变的变量
+<pre><code class="lang-rust">let x:i32=1;//x是不可变的变量
 let mut y:i32 = x;//y是可变的变量
 </code></pre>
 <ul>
@@ -337,95 +333,94 @@ let mut y:i32 = x;//y是可变的变量
 <li>如果没有输入的函数返回了一个引用，有时会导致返回的引用指向无效数据，此时禁止其返回引用</li>
 </ul>
 <p>一些合法函数的例子：</p>
-<pre><code class="language-rust">fn print_one&lt;'a&gt;(x:&amp;'a i32){
-  println!(&quot;{}&quot;,x);
-}
+<pre><code class="lang-rust">fn print_one&lt;&#39;a&gt;(x:&amp;&#39;a i32)&#123;
+  println!(&quot;&#123;&#125;&quot;,x);
+&#125;
 
-fn add_one&lt;'a&gt;(x:&amp;'a mut i32){
+fn add_one&lt;&#39;a&gt;(x:&amp;&#39;a mut i32)&#123;
   *x+=1;
-}
+&#125;
 
-fn print_multi&lt;'a,'b&gt;(x:&amp;'a i32,y:&amp;'b i32){
-  println!(&quot;x is {}, y is {}&quot;,x,y)
-}
+fn print_multi&lt;&#39;a,&#39;b&gt;(x:&amp;&#39;a i32,y:&amp;&#39;b i32)&#123;
+  println!(&quot;x is &#123;&#125;, y is &#123;&#125;&quot;,x,y)
+&#125;
 
-fn pass_x&lt;'a,'b&gt;(x:&amp;'a i32,_:&amp;'b i32)-&gt;&amp;'a i32{
+fn pass_x&lt;&#39;a,&#39;b&gt;(x:&amp;&#39;a i32,_:&amp;&#39;b i32)-&gt;&amp;&#39;a i32&#123;
   x
-}
+&#125;
 </code></pre>
 <p>方法的例子：</p>
-<pre><code class="language-rust">struct Owner(i32);
-impl Owner{
-	fn add_one&lt;&amp;'a&gt;(&amp;'a mut self){
+<pre><code class="lang-rust">struct Owner(i32);
+impl Owner&#123;
+    fn add_one&lt;&amp;&#39;a&gt;(&amp;&#39;a mut self)&#123;
     self.0+=1;
-  }
-  fn print&lt;&amp;'a&gt;(&amp;'a self){
-    println!(&quot;{}&quot;,self.0)
-  }
-}
+  &#125;
+  fn print&lt;&amp;&#39;a&gt;(&amp;&#39;a self)&#123;
+    println!(&quot;&#123;&#125;&quot;,self.0)
+  &#125;
+&#125;
 </code></pre>
 <p>结构体的例子：</p>
-<pre><code class="language-rust">struct NamedBorrowed&lt;'a&gt;{
-  x:&amp;'a i32,
-  y:&amp;'a i32,
-}
+<pre><code class="lang-rust">struct NamedBorrowed&lt;&#39;a&gt;&#123;
+  x:&amp;&#39;a i32,
+  y:&amp;&#39;a i32,
+&#125;
 
-enum Either&lt;'a&gt;{
+enum Either&lt;&#39;a&gt;&#123;
   Num(i32),
-  Ref(&amp;'a i32),
-}
+  Ref(&amp;&#39;a i32),
+&#125;
 </code></pre>
 <p>trait的例子：</p>
-<pre><code class="language-rust">struct Brrowed&lt;'a&gt;{
-  x:&amp;'a i32,
-}
-impl&lt;'a&gt; Default for Brrowed&lt;'a&gt;{
-  fn default() -&gt;Self{
+<pre><code class="lang-rust">struct Brrowed&lt;&#39;a&gt;&#123;
+  x:&amp;&#39;a i32,
+&#125;
+impl&lt;&#39;a&gt; Default for Brrowed&lt;&#39;a&gt;&#123;
+  fn default() -&gt;Self&#123;
     x:&amp;10,
-  }
-}
+  &#125;
+&#125;
 </code></pre>
 <p>使用trait约束：</p>
-<pre><code class="language-rust">use std::fmt::Debug;//用于约束的trait
-struct Ref&lt;'a,T:'a&gt;(&amp;'a T);
-/*Ref包含一个指向泛型T的引用，其中T拥有一个未知的生命周期'a，T被'a的生命周期限制。T中任何引用都必须比'a活得更长，Ref本身的生命周期也不能超过'a*/
+<pre><code class="lang-rust">use std::fmt::Debug;//用于约束的trait
+struct Ref&lt;&#39;a,T:&#39;a&gt;(&amp;&#39;a T);
+/*Ref包含一个指向泛型T的引用，其中T拥有一个未知的生命周期&#39;a，T被&#39;a的生命周期限制。T中任何引用都必须比&#39;a活得更长，Ref本身的生命周期也不能超过&#39;a*/
 fn print&lt;T&gt;(t:T) where
-T:Debug{
-  println!(&quot;{:?}&quot;,t)
-}
-fn print_ref&lt;'a,T&gt;(t:&amp;'a T)where
-T:Debug+'a{
-  println!(&quot;{:?}&quot;,t)
-}
+T:Debug&#123;
+  println!(&quot;&#123;:?&#125;&quot;,t)
+&#125;
+fn print_ref&lt;&#39;a,T&gt;(t:&amp;&#39;a T)where
+T:Debug+&#39;a&#123;
+  println!(&quot;&#123;:?&#125;&quot;,t)
+&#125;
 </code></pre>
 <ul>
 <li>强制转换</li>
 </ul>
 <p>一个较长的生命周期可以强制转换成一个较短的生命周期。</p>
-<pre><code class="language-rust">fn multily&lt;'a&gt;(x:&amp;'a i32,y:&amp;'a i32){
+<pre><code class="lang-rust">fn multily&lt;&#39;a&gt;(x:&amp;&#39;a i32,y:&amp;&#39;a i32)&#123;
   x * y
-}
-//'a:'b的含义是a的声明周期至少和b一样长
-fn force&lt;'a:'b,'b&gt;(x:&amp;'a i32, y:&amp;'a i32)-&gt;'a i32{
+&#125;
+//&#39;a:&#39;b的含义是a的声明周期至少和b一样长
+fn force&lt;&#39;a:&#39;b,&#39;b&gt;(x:&amp;&#39;a i32, y:&amp;&#39;a i32)-&gt;&#39;a i32&#123;
   //长转短
   x+y
-}
-fn main(){
+&#125;
+fn main()&#123;
   let x:i32 = 1;//较长的生命周期
-  {
+  &#123;
       let y:i32 = 2;//较短的生命周期
-  		println!(&quot;{}&quot;,multily(x,y));
-    	println!(&quot;{}&quot;,force(x,y));
-      println!(&quot;{}&quot;,force(y,x));
+          println!(&quot;&#123;&#125;&quot;,multily(x,y));
+        println!(&quot;&#123;&#125;&quot;,force(x,y));
+      println!(&quot;&#123;&#125;&quot;,force(y,x));
    //报错，因为y的生命周期比x短，不能从短的转变成长的
-  }
-}
+  &#125;
+&#125;
 </code></pre>
 <ul>
-<li>
-<p>static</p>
-<p><code>'static</code>生命周期可能是最长的，会在程序运行整个时期中存在，它也可以被转换成短的生命周期。</p>
-<p>使变量拥有<code>'static</code>生命周期的两种方式：</p>
+<li><p>static</p>
+<p><code>&#39;static</code>生命周期可能是最长的，会在程序运行整个时期中存在，它也可以被转换成短的生命周期。</p>
+<p>使变量拥有<code>&#39;static</code>生命周期的两种方式：</p>
 <ul>
 <li>使用static声明常量</li>
 <li>产生字面量</li>
@@ -450,7 +445,7 @@ fn main(){
                 
               </p>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
