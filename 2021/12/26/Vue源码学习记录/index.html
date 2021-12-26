@@ -19,7 +19,7 @@
   <meta name="description" content="Bupt/Computer Since">
   <meta name="author" content="Nickname4th">
   <meta name="keywords" content="">
-  <title>Rust语言随笔 - Nickname4th</title>
+  <title>Vue源码学习记录 - Nickname4th</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -113,7 +113,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('https://www.rust-lang.org/static/images/rust-logo-blk.svg') no-repeat center center;
+         style="background: url('https://cn.vuejs.org/images/logo.svg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -126,7 +126,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期二, 九月 29日 2020, 10:41 晚上
+                  星期日, 十二月 26日 2021, 10:41 晚上
                 </p>
               
 
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.7k 字
+                    1.3k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      7 分钟
+                      4 分钟
                   </span>
                 
 
@@ -171,269 +171,162 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>​    本文讲述我学习Rust中的一些随笔。。。</p>
+              <p>记录Vue源码学习过程。</p>
 <a id="more"></a>
-<ul>
-<li>所有权规则：</li>
-</ul>
+<h3 id="Vue源码学习">Vue源码学习</h3>
+<h4 id="1-变化侦测（如何实现响应式）">1 变化侦测（如何实现响应式）</h4>
+<h5 id="1-1-数据驱动视图的含义">1.1 数据驱动视图的含义</h5>
 <blockquote>
-<ol>
-<li>Rust 中的每一个值都有一个被称为其 <strong>所有者</strong>（<em>owner</em>）的变量。</li>
-<li>值在任一时刻有且只有一个所有者。</li>
-<li>当所有者（变量）离开作用域，这个值将被丢弃。</li>
-</ol>
-<p>​	变量与数据交互的方式有移动和克隆，如：</p>
-<pre><code class="language-rust">let a:u32 = 1;
-let b:u32 = a; //a是由字面量赋值（在栈上分配），将a赋值给b时，是克隆，不会移交a的所有权
-println!(&quot;{},{}&quot;,a,b)//正常输出
-let c:String = String::from(&quot;hello&quot;);
-let d:String = c;//c是由String类的关联函数构造，会请求内存，赋值时移交控制权
-println!(&quot;{},{}&quot;,c,d)//报错
-</code></pre>
+<p><code>UI=render(state)</code></p>
+<p>UI指视图，state是用户的输入或后端的数据，state的变化经过render渲染，显示为视图的变化过程</p>
 </blockquote>
-<ul>
-<li>闭包</li>
-</ul>
-<blockquote>
-<p>Rust 闭包可以对参数和返回类型进行判断，捕获变量的方式有三种：引用(&amp;T)，可变引用(&amp;mut T)和值(T)。</p>
-<pre><code class="language-rust">let a = 1;
-let print = ||println(&quot;{}&quot;,a);
-print();//print仅需a的引用即可打印，所以这里闭包仅捕获了a的引用即&amp;a
-let b = a;//仍然可以转移a的所有权
-//////////////////////////////////////////////////////
-let mut a =1;
-let inc = ||{a+=1;};
-let c = &amp;a;//报错，因为后面的inc捕获了a的可变引用，会造成c的值不确定，rust编译器不允许这种不确定性，如果注释掉inc();则不会报错
-inc();//inc要改变a的值，因此捕获了a的可变引用即&amp;mut a
-//////////////////////////////////////////////////////
-use std::mem;
-let a = Box::new(3);
-let f = ||{mem::drop(a);};
-f();
-let b = a; //报错，因为f捕获了a的值，所以a的所有权已经被转移到f中，f结束时a已被释放
-</code></pre>
-</blockquote>
-<ul>
-<li>泛型</li>
-</ul>
-<blockquote>
-<p>&lt;&gt;符号中放的是类型参数</p>
-<pre><code class="language-rust">fn largest&lt;T&gt;(list:&amp;[T])-&gt;T{
-...
-}
-</code></pre>
-<p>枚举定义中的泛型</p>
+<h5 id="1-2-实现数据驱动视图的关键点">1.2 实现数据驱动视图的关键点</h5>
+<p><strong>对象</strong></p>
 <ul>
 <li>
-<pre><code class="language-rust">enum Option&lt;T&gt;{
-  Some(T),
-  None,
-}
-</code></pre>
+<p>变化检测</p>
+<ul>
+<li>
+<p>Object：<code>Object.defineProperty</code>,编写一个Observer类，递归给Object的每个子属性都变为可观测。</p>
 </li>
 <li>
-<pre><code class="language-rust">enum Result&lt;T,E&gt;{
-  Ok(T),
-  Err(E),
-}
-</code></pre>
-</li>
-</ul>
-<p>方法定义中的泛型</p>
-<ul>
-<li>
-<pre><code class="language-rust">struct Point&lt;T&gt;{
-	x:T,
-	y:T,
-}
-//impl必须声明T，才可以在Point&lt;T&gt;上实现的方法中使用
-impl&lt;T&gt; Point&lt;T&gt;{
-  fn x(&amp;self)-&gt;&amp;T{
-    &amp;self.x
+<pre><code class="language-javascript">// 把对象的一个属性变为可观测
+let car = {}
+let price = 3000
+Object.defineProperty(car, 'price',{
+  enumerable:true;
+  configurale:true;
+  get(){
+  	console.log(&quot;price属性被读取&quot;)
+  	return val
+	},
+  set(newVal){
+    console.log(&quot;price属性被修改&quot;)
+    val = newVal
   }
-}
-//只有f32类型的Point可以使用distance_from_orign方法
-impl Point&lt;f32&gt;{
-  fn distance_from_orign(&amp;self) -&gt; f32{
-    (self.x.powi(2)+self.y.powi(2)).sqrt()
-  }
-}
-
-fn main(){
-  let p = Point(x:5,y:10);
-  println!(&quot;p.x={}&quot;,p.x());
-}
+})
 </code></pre>
 </li>
 </ul>
-</blockquote>
-<ul>
-<li>trait定义共享的行为</li>
+</li>
+<li>
+<p>依赖收集</p>
+<p>通过<code>Object.defineProperty</code>将对象的所有属性（包括子属性）变为可观测，然后为对象创建依赖管理器，在<code>get</code>中收集依赖，在<code>set</code>中通知依赖更新。</p>
+<p>具体而言：依赖管理器中实际存储的是watcher实例，数据使用者使用对象时，创建该wather实例，先将其挂载到全局<code>window.target</code>，在去使用对象的属性，此时会触发对象属性的get方法，get方法将wather添加到其依赖管理器，即完成了依赖收集。</p>
+</li>
+<li>
+<p>通知更新</p>
+<p>当数据使用者修改数据时，触发该数据的set方法，进而通知其属性对应的wather，进行具体的视图更新操作。</p>
+<img src="https://vue-js.com/learn-vue/assets/img/3.0b99330d.jpg" srcset="/img/loading.gif" alt="img" style="zoom: 50%;" />
+</li>
 </ul>
-<blockquote>
-<p>不同类型调用相同方法。trait定义是一种将方法签名组合起来的方法，目的是定义一个实现某些目的所必需的行为的集合。</p>
-<pre><code class="language-rust">//使用pub，这样在其他作用域实现Summary，只需通过use引入即可
-pub trait Summary(){
-fn summarize(&amp;self)-&gt;String;
-/*声明但是不在这里实现，每一个实现Summary的类型都要提供其自定义行为的方法体
-可以有多个方法*/
-//也可以提供一种默认实现
+<p><strong>数组</strong></p>
+<ul>
+<li>
+<p>变化检测</p>
+<p>JavaScript的数组类型没有Object.defineProperty方法，因此不能使用set方法来使数组变化可观测。所以Vue采用数据劫持来事数组变化可观测。</p>
+<p>因为修改数组的方法就几种，我们可以将这写方法都重写封装就可以了（Vue改写了7个修改数组的方法）。</p>
+<pre><code class="language-javascript">let arr = [1,2,3]
+arr.push(4)
+// 在数组类型的原型上挂载新的push方法
+Array.prototype.newPush = function(val){
+  console.log('arr被修改了')
+  this.push(val)
 }
-
-pub struct Book{
-pub title:String;
-pub author:String;
-pub content:String;
+arr.newPush(4)
+</code></pre>
+</li>
+<li>
+<p>依赖收集</p>
+<pre><code class="language-javascript">data(){
+  return {
+    arr:[1,2,3]
+  }
+</code></pre>
+<p>在写Vue代码时，数组其实始终包裹在一个对象里面，所以获取这个对象的数组时，总是会触发该对象的get方法，因此在这里可以完成依赖收集。</p>
+</li>
+<li>
+<p>通知更新</p>
+</li>
+</ul>
+<img src="https://vue-js.com/learn-vue/assets/img/2.b446ab83.png" srcset="/img/loading.gif" alt="img" style="zoom:33%;" />
+<ul>
+<li>
+<p>数组的缺点：通过下标修改数据时无法被检测到。</p>
+<pre><code class="language-javascript">let arr = [1,2,3]
+arr[0] = 5;       // 通过数组下标修改数组中的数据
+arr.length = 0    // 通过修改数组长度清空数组
+// 这样修改没有触发数组对象的任何属性
+</code></pre>
+</li>
+</ul>
+<h4 id="2-虚拟DOM">2 虚拟DOM</h4>
+<h5 id="2-1-虚拟DOM概念">2.1 虚拟DOM概念</h5>
+<p>本质上就是使用js的对象来表达真实DOM节点。</p>
+<pre><code class="language-javascript">&lt;div class=&quot;a&quot; id=&quot;b&quot;&gt;我是内容&lt;/div&gt;
+{
+  tag:'div',        // 元素标签
+  attrs:{           // 属性
+    class:'a',
+    id:'b'
+  },
+  text:'我是内容',  // 文本内容
+  children:[]       // 子元素
 }
-
-pub struct NewsArticle{
-	pub title:String;
-pub date:String;
-}
-
-//为Book类型实现Summary trait
-impl Summary for Book{
-//实现summarize方法
-fn sumarize(&amp;self)-&gt;String{
- format!(&quot;{}, wirtten by {}.&quot;,self.title,self.author)
-}
-}
-//为NewsArticle类型实现Summary trait
-impl Summary for NewsArticle{
-	fn summarize(&amp;self) -&gt; String{
-	format!(&quot;{}, {}&quot;,self.title,self.date)
+</code></pre>
+<p>之所以要使用虚拟DOM，是因为vue被设计为数据驱动的，当时数据发生变化时，DOM需要被修改，而修改DOM是开销非常大的，因此可以通过虚拟DOM，借助一些算法，先计算出最少需要改动哪些DOM，然后再去操作真实DOM，达到最佳的效果。</p>
+<h5 id="2-2-VNode类">2.2 VNode类</h5>
+<p><code>VNode</code>类中包含了描述一个真实<code>DOM</code>节点所需要的一系列属性，如<code>tag</code>表示节点的标签名，<code>text</code>表示节点中包含的文本，<code>children</code>表示该节点包含的子节点等。通过属性之间不同的搭配，就可以描述出各种类型的真实<code>DOM</code>节点。</p>
+<h5 id="2-3-视图更新">2.3 视图更新</h5>
+<p>在视图渲染之前，把写好的<code>template</code>模板先编译成<code>VNode</code>并缓存下来，等到数据发生变化页面需要重新渲染的时候，我们把数据发生变化后生成的<code>VNode</code>与前一次缓存下来的<code>VNode</code>进行对比，找出差异，然后有差异的<code>VNode</code>对应的真实<code>DOM</code>节点就是需要重新渲染的节点，最后根据有差异的<code>VNode</code>创建出真实的<code>DOM</code>节点再插入到视图中，最终完成一次视图更新</p>
+<h5 id="2-4-DOM-Diff算法">2.4 DOM-Diff算法</h5>
+<ul>
+<li>创建VNode：</li>
+</ul>
+<img src="https://vue-js.com/learn-vue/assets/img/2.02d5c7b1.png" srcset="/img/loading.gif" alt="img" style="zoom: 50%;" />
+<ul>
+<li>
+<p>删除节点：</p>
+<pre><code class="language-javascript">function removeNode (el) {
+    const parent = nodeOps.parentNode(el)// 获取父节点
+    if (isDef(parent)) {
+      nodeOps.removeChild(parent, el)// 调用父节点的removeChild方法
+    }
+  }
+</code></pre>
+</li>
+<li>
+<p>更新节点（复杂）</p>
+<img src="https://vue-js.com/learn-vue/assets/img/3.7b0442aa.png" srcset="/img/loading.gif" alt="img" style="zoom:50%;" />
+<ul>
+<li>
+<p>更新算法</p>
+<p>就是递归比较新节点和就节点，执行新增、删除和更新操作</p>
+<pre><code class="language-js">function compare(newNode,oldNode){
+  let newNodes = newNode.children
+  let oldNodes = oldNode.children
+  // 判断条件
+  //判断代码
+	for newNode in newNodes{
+    for oldNode in OldNodes{
+      // 递归比较
+      compare(newNode,oldNode)
+    }
 	}
 }
 </code></pre>
-</blockquote>
-<ul>
-<li>作用域规则</li>
-</ul>
-<blockquote>
-<ul>
-<li>一个资源只能有个所有者，因为变量要负责释放它们拥有的资源，这也防止了资源的重复释放</li>
-<li>在进行赋值<code>(let x =y)</code>或通过值来传递参数<code>(foo(x))</code>的时候，资源的所有权会发生转移，这被称为资源的移动<code>(move)</code></li>
-<li>所有权发生转移时，数据的可变性可能会发生改变：</li>
-</ul>
-<pre><code class="language-rust">let x:i32=1;//x是不可变的变量
-let mut y:i32 = x;//y是可变的变量
-</code></pre>
-<ul>
-<li>当存在引用指向一个对象时，该对象不能被销毁</li>
-<li>可变引用可以使借用者读写数据，不可变引用借用者只能读数据</li>
-<li>当数据在作用域里被不可变借用时，他会被冻结</li>
-<li>同一作用域，可以有多个不可变引用，但是只允许有一个可变借用，并且可变引用与不可变引用不能同时使用（同时使用会冻结不可变引用，即可变引用不能再使用）</li>
-</ul>
-</blockquote>
-<ul>
-<li>生命周期</li>
-</ul>
-<blockquote>
-<p>编译器中的借用检查器用生命周期来保证所有的借用都是有效的。一个变量的声明周期从被创建时开始，到被销毁时结束。</p>
-<p>对于函数来说：</p>
-<ul>
-<li>任何引用都必须拥有标注好的声明周期（尽管有时是隐式标注）</li>
-<li>任何被返回的引用都必须有和某个输入量相同的声明周期或是static</li>
-<li>如果没有输入的函数返回了一个引用，有时会导致返回的引用指向无效数据，此时禁止其返回引用</li>
-</ul>
-<p>一些合法函数的例子：</p>
-<pre><code class="language-rust">fn print_one&lt;'a&gt;(x:&amp;'a i32){
-  println!(&quot;{}&quot;,x);
-}
-
-fn add_one&lt;'a&gt;(x:&amp;'a mut i32){
-  *x+=1;
-}
-
-fn print_multi&lt;'a,'b&gt;(x:&amp;'a i32,y:&amp;'b i32){
-  println!(&quot;x is {}, y is {}&quot;,x,y)
-}
-
-fn pass_x&lt;'a,'b&gt;(x:&amp;'a i32,_:&amp;'b i32)-&gt;&amp;'a i32{
-  x
-}
-</code></pre>
-<p>方法的例子：</p>
-<pre><code class="language-rust">struct Owner(i32);
-impl Owner{
-	fn add_one&lt;&amp;'a&gt;(&amp;'a mut self){
-    self.0+=1;
-  }
-  fn print&lt;&amp;'a&gt;(&amp;'a self){
-    println!(&quot;{}&quot;,self.0)
-  }
-}
-</code></pre>
-<p>结构体的例子：</p>
-<pre><code class="language-rust">struct NamedBorrowed&lt;'a&gt;{
-  x:&amp;'a i32,
-  y:&amp;'a i32,
-}
-
-enum Either&lt;'a&gt;{
-  Num(i32),
-  Ref(&amp;'a i32),
-}
-</code></pre>
-<p>trait的例子：</p>
-<pre><code class="language-rust">struct Brrowed&lt;'a&gt;{
-  x:&amp;'a i32,
-}
-impl&lt;'a&gt; Default for Brrowed&lt;'a&gt;{
-  fn default() -&gt;Self{
-    x:&amp;10,
-  }
-}
-</code></pre>
-<p>使用trait约束：</p>
-<pre><code class="language-rust">use std::fmt::Debug;//用于约束的trait
-struct Ref&lt;'a,T:'a&gt;(&amp;'a T);
-/*Ref包含一个指向泛型T的引用，其中T拥有一个未知的生命周期'a，T被'a的生命周期限制。T中任何引用都必须比'a活得更长，Ref本身的生命周期也不能超过'a*/
-fn print&lt;T&gt;(t:T) where
-T:Debug{
-  println!(&quot;{:?}&quot;,t)
-}
-fn print_ref&lt;'a,T&gt;(t:&amp;'a T)where
-T:Debug+'a{
-  println!(&quot;{:?}&quot;,t)
-}
-</code></pre>
-<ul>
-<li>强制转换</li>
-</ul>
-<p>一个较长的生命周期可以强制转换成一个较短的生命周期。</p>
-<pre><code class="language-rust">fn multily&lt;'a&gt;(x:&amp;'a i32,y:&amp;'a i32){
-  x * y
-}
-//'a:'b的含义是a的声明周期至少和b一样长
-fn force&lt;'a:'b,'b&gt;(x:&amp;'a i32, y:&amp;'a i32)-&gt;'a i32{
-  //长转短
-  x+y
-}
-fn main(){
-  let x:i32 = 1;//较长的生命周期
-  {
-      let y:i32 = 2;//较短的生命周期
-  		println!(&quot;{}&quot;,multily(x,y));
-    	println!(&quot;{}&quot;,force(x,y));
-      println!(&quot;{}&quot;,force(y,x));
-   //报错，因为y的生命周期比x短，不能从短的转变成长的
-  }
-}
-</code></pre>
-<ul>
+</li>
 <li>
-<p>static</p>
-<p><code>'static</code>生命周期可能是最长的，会在程序运行整个时期中存在，它也可以被转换成短的生命周期。</p>
-<p>使变量拥有<code>'static</code>生命周期的两种方式：</p>
-<ul>
-<li>使用static声明常量</li>
-<li>产生字面量</li>
-</ul>
-<p>二者都将数据保存在可执行文件的只读区</p>
+<p>优化的更新算法</p>
+<p>之前的两层循环复杂度很高，当节点数量大的时候运算会比较慢，所以优化更新策略，选择了从子节点数组中的4个特殊位置互相比对，分别是：新前与旧前，新后与旧后，新后与旧前，新前与旧后。</p>
 </li>
 </ul>
-</blockquote>
+</li>
+</ul>
+<h4 id="3-模板编译">3 模板编译</h4>
+<p>模板编译就是把用户写的代码编译成<code>render</code>函数，通过<code>render</code>函数生成<code>VNode</code>，经过path的过程渲染到视图上。<br>
+<img src="https://vue-js.com/learn-vue/assets/img/1.f0570125.png" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></p>
+<p><img src="https://vue-js.com/learn-vue/assets/img/8.ad277be0.jpg" srcset="/img/loading.gif" alt=""></p>
 
             </div>
             <hr>
@@ -444,7 +337,7 @@ fn main(){
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Rust/">Rust</a>
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
                     
                   </span>
                 
@@ -457,18 +350,12 @@ fn main(){
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/26/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
-                        <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">Vue源码学习记录</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/09/24/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">
-                        <span class="hidden-mobile">近世代数及其应用</span>
+                      <a href="/2020/09/29/Rust%E8%AF%AD%E8%A8%80%E9%9A%8F%E7%AC%94/">
+                        <span class="hidden-mobile">Rust语言随笔</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
@@ -682,7 +569,7 @@ fn main(){
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Rust语言随笔&nbsp;",
+        "Vue源码学习记录&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
