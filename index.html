@@ -1,849 +1,135 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
+<!doctype html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="https://images.nickname4th.vip/logo.jpg">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="Bupt/Computer Since">
-  <meta name="author" content="Nickname4th">
-  <meta name="keywords" content="">
-  <title>Nickname4th</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
-
-
-
-  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-<!-- 自定义样式保持在最底部 -->
-
-
-<meta name="generator" content="Hexo 4.2.1"></head>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description"
+    content="Liu Tao, former senior frontend engineer at ByteDance and Alibaba Cloud, now an AI entrepreneur focused on AI education." />
+  <meta name="author" content="Liu Tao" />
+  <meta property="og:title" content="Liu Tao" />
+  <meta property="og:description"
+    content="AI education practitioner, AI Coding enthusiast, and perhaps a writer if not writing code." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://liutianjie.github.io/" />
+  <title>Liu Tao</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
 
 <body>
-  <header style="height: 100vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Nickname4th</strong>&nbsp;</a>
+  <main class="page">
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">Liu Tao</h1>
+      <p class="subtitle">AI entrepreneur / AI education practitioner</p>
+      <p>
+        Hi, I am Liu Tao. I was previously a senior frontend engineer at ByteDance and Alibaba Cloud, and I am now
+        building in the AI education space.
+      </p>
+      <p>
+        I have spent years working across frontend engineering, product experience, and developer productivity. Products
+        I worked on have reached millions of users and received strong feedback, which shaped how I think about useful
+        software.
+      </p>
+      <p>
+        These days, I enjoy putting new AI tools into real development and learning workflows, then seeing what actually
+        holds up.
+      </p>
+      <p>
+        What fascinates me about AI Coding is not that it lets us write less code. It shortens the distance between an
+        idea and something usable, discussable, and iterable.
+      </p>
+      <p>
+        Based in Wuhan / Chengdu, China. Remember me as an AI education practitioner, an AI Coding enthusiast, and
+        perhaps a writer if I were not writing code.
+      </p>
+      <p class="support-links">
+        <a class="support-link" href="https://ifdian.net/a/itool/plan" target="_blank" rel="noreferrer">♡ Sponsor my work</a>
+      </p>
+    </section>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
-        
-          
-          
-          
-          
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
-        
-          
-          
-          
-          
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
-        
-          
-          
-          
-          
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
-        
-          
-          
-          
-          
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="view intro-2" id="background" parallax=true
-         style="background: url('http://c4-q.mafengwo.net/s8/M00/2C/45/wKgBpVYiHp-AFn2HAAopXu6cjaQ34.jpeg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-          </div>
-
-          
-            <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
-            </div>
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2021/12/28/MySQL-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" target="_self">
-          <img src="https://upload.wikimedia.org/wikipedia/zh/thumb/6/62/MySQL.svg/1200px-MySQL.svg.png" srcset="/img/loading.gif" alt="MySQL--持续更新"
-               class="index-img img-fluid rounded index-thumbnails">
+    <section class="block" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+      <p>
+        Things I am building or have worked on include
+        <a href="https://liutianjie.github.io/LinkShell/" target="_blank" rel="noreferrer">LinkShell</a>,
+        <a href="https://gaojiua.com/" target="_blank" rel="noreferrer">Pencil Box</a>, and
+        <a href="https://itool.tech" target="_blank" rel="noreferrer">iTool</a>.
+      </p>
+      <div class="project-list">
+        <a class="project-item" href="https://liutianjie.github.io/LinkShell/" target="_blank" rel="noreferrer">
+          <img src="/img/linkshell-icon.png" alt="" aria-hidden="true" />
+          <span>
+            <strong>LinkShell</strong>
+            <em>Connect to your Claude, Codex, and Shell from your phone.</em>
+          </span>
+        </a>
+        <a class="project-item" href="https://gaojiua.com/" target="_blank" rel="noreferrer">
+          <img src="/img/bidai-icon.png" alt="" aria-hidden="true" />
+          <span>
+            <strong>Pencil Box</strong>
+            <em>A learning growth and career planning platform.</em>
+          </span>
+        </a>
+        <a class="project-item" href="https://itool.tech" target="_blank" rel="noreferrer">
+          <img src="/img/itool-icon.svg" alt="" aria-hidden="true" />
+          <span>
+            <strong>iTool</strong>
+            <em>An online toolbox for developers, designers, and knowledge workers.</em>
+          </span>
         </a>
       </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2021/12/28/MySQL-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
-        <p class="h4 index-header">MySQL--持续更新</p>
-      </a>
+    </section>
 
-      <a href="/2021/12/28/MySQL-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
-        
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1"></div>
-        </div>
-      </a>
+    <section class="block" id="stack" aria-labelledby="stack-title">
+      <h2 id="stack-title">Stack</h2>
+      <p>
+        I usually build with
+        <span class="tags">React</span>
+        <span class="tags">Vue</span>
+        <span class="tags">Expo</span>
+        <span class="tags">Python</span>
+        <span class="tags">ADK</span>
+        <span class="tags">LangGraph</span>
+        <span class="tags">Mastra</span>.
+      </p>
+    </section>
 
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2021-12-28&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/SQL/">SQL</a>&nbsp;
-          
-        
+    <section class="block" aria-labelledby="now-title">
+      <h2 id="now-title">Now</h2>
+      <p>
+        I am exploring how AI can become a useful companion in learning: giving feedback, shaping plans, helping
+        learners make things, and making education feel less like a pipeline and more like an ongoing conversation.
+      </p>
+    </section>
+
+    <hr />
+
+    <section class="block" id="find-me" aria-labelledby="find-me-title">
+      <h2 id="find-me-title">Find me</h2>
+      <p class="links">
+        <a href="https://github.com/LiuTianjie" target="_blank" rel="noreferrer">GitHub</a>
+      </p>
+      <div class="qr-list" aria-label="QR codes">
+        <figure>
+          <img src="/img/wechat-qr.png" alt="WeChat QR code for Liu Tao" />
+          <figcaption>WeChat</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/github-qr.png" alt="GitHub QR code for Liu Tao" />
+          <figcaption>GitHub</figcaption>
+        </figure>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2021/12/26/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" target="_self">
-          <img src="https://cn.vuejs.org/images/logo.svg" srcset="/img/loading.gif" alt="Vue源码学习记录"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2021/12/26/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
-        <p class="h4 index-header">Vue源码学习记录</p>
-      </a>
-
-      <a href="/2021/12/26/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">记录Vue源码学习过程。...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2021-12-26&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Vue/">Vue</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/09/29/Rust%E8%AF%AD%E8%A8%80%E9%9A%8F%E7%AC%94/" target="_self">
-          <img src="https://www.rust-lang.org/static/images/rust-logo-blk.svg" srcset="/img/loading.gif" alt="Rust语言随笔"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/09/29/Rust%E8%AF%AD%E8%A8%80%E9%9A%8F%E7%AC%94/">
-        <p class="h4 index-header">Rust语言随笔</p>
-      </a>
-
-      <a href="/2020/09/29/Rust%E8%AF%AD%E8%A8%80%E9%9A%8F%E7%AC%94/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">​    本文讲述我学习Rust中的一些随笔。。。...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-29&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Rust/">Rust</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/09/24/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/" target="_self">
-          <img src="https://images.nickname4th.vip/近世代数.jpg" srcset="/img/loading.gif" alt="近世代数及其应用"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/09/24/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">
-        <p class="h4 index-header">近世代数及其应用</p>
-      </a>
-
-      <a href="/2020/09/24/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">又开始上学了，近世代数总结一波，随堂更新~...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-09-24&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">近世代数及其应用</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/13/Leetcode%E4%B8%AD%E7%AD%89%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/" target="_self">
-          <img src="http://images.nickname4th.vip/leetcode_index.jpeg" srcset="/img/loading.gif" alt="Leetcode中等题目分析（持续更新）"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/08/13/Leetcode%E4%B8%AD%E7%AD%89%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">
-        <p class="h4 index-header">Leetcode中等题目分析（持续更新）</p>
-      </a>
-
-      <a href="/2020/08/13/Leetcode%E4%B8%AD%E7%AD%89%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">作为刷算法题目路上的一点心得。...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-13&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/07/02/Unitimmer%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" target="_self">
-          <img src="https://indigo.amsterdam/wp-content/uploads/2017/05/python-django-logo-300x169.jpg" srcset="/img/loading.gif" alt="Unitimmer数据库设计"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/07/02/Unitimmer%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
-        <p class="h4 index-header">Unitimmer数据库设计</p>
-      </a>
-
-      <a href="/2020/07/02/Unitimmer%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">​    本文讲述我的开源项目unitimmer的数据库设计，我将从需求分析出发，设计各数据表的结构，并使用Django的ORM来定义数据模型，最终该项目的后端将从Node.js重构为Django...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-07-02&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Django/">Django</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/05/25/JavaScript%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" target="_self">
-          <img src="https://webdevwithsam.files.wordpress.com/2016/04/javascript.png?w=785" srcset="/img/loading.gif" alt="JavaScript异步编程"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/25/JavaScript%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
-        <p class="h4 index-header">JavaScript异步编程</p>
-      </a>
-
-      <a href="/2020/05/25/JavaScript%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">总结了JavaScript异步编程的一些方式。...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-25&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/05/23/%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/" target="_self">
-          <img src="http://images.nickname4th.vip/bytedance.jpg" srcset="/img/loading.gif" alt="前端实习面经"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/23/%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/">
-        <p class="h4 index-header">前端实习面经</p>
-      </a>
-
-      <a href="/2020/05/23/%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">刚出炉的面试凉经，哎~~~。...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-23&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/web%E5%89%8D%E7%AB%AF/">web前端</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/05/16/JavaScript%E7%BB%A7%E6%89%BF/" target="_self">
-          <img src="https://webdevwithsam.files.wordpress.com/2016/04/javascript.png?w=785" srcset="/img/loading.gif" alt="JavaScript继承"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/16/JavaScript%E7%BB%A7%E6%89%BF/">
-        <p class="h4 index-header">JavaScript继承</p>
-      </a>
-
-      <a href="/2020/05/16/JavaScript%E7%BB%A7%E6%89%BF/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">关于JavaScript继承的一些实现方法。...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-16&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/05/15/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
-          <img src="https://webdevwithsam.files.wordpress.com/2016/04/javascript.png?w=785" srcset="/img/loading.gif" alt="JavaScript原型链"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/15/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/">
-        <p class="h4 index-header">JavaScript原型链</p>
-      </a>
-
-      <a href="/2020/05/15/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/">
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">简单梳理一下JavaScript原型链。...</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-15&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-
-
-  <nav aria-label="index posts navigation">
-    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-double-right"></i></a>
-    </span>
-  </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
+    <footer>
+      <p>
+        <a href="https://github.com/LiuTianjie" target="_blank" rel="noreferrer">@LiuTianjie</a>
+        · 2026-PRESENT © Liu Tao
+      </p>
+    </footer>
   </main>
-
-  
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
-    </div>
-    
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
-<script  src="/js/main.js" ></script>
-
-
-  <script  src="/js/lazyload.js" ></script>
-
-
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "工者，始于技，而见于器。&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      getSearchFile(path);
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
-      function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-  
-  
-    <script type="text/javascript">
-      //定义获取词语下标
-      var a_idx = 0;
-      jQuery(document).ready(function ($) {
-        //点击body时触发事件
-        $("body").click(function (e) {
-          //需要显示的词语
-          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
-          //设置词语给span标签
-          var $i = $("<span/>").text(a[a_idx]);
-          //下标等于原来下标+1  余 词语总数
-          a_idx = (a_idx + 1) % a.length;
-          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
-          //获取x和y的指针坐标
-          var x = e.pageX, y = e.pageY;
-          //在鼠标的指针的位置给$i定义的span标签添加css样式
-          $i.css({
-            "z-index": 999,
-            "top": y - 20,
-            "left": x,
-            "position": "absolute",
-            "font-weight": "bold",
-            "color": rand_color()
-          });
-          // 随机颜色
-          function rand_color() {
-            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
-          }
-          //在body添加这个标签
-          $("body").append($i);
-          //animate() 方法执行 CSS 属性集的自定义动画。
-          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
-          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
-          $i.animate({
-            //将原来的位置向上移动180
-            "top": y - 180,
-            "opacity": 0
-            //1500动画的速度
-          }, 1500, function () {
-            //时间到了自动删除
-            $i.remove();
-          });
-        });
-      })
-      ;
-    </script>
-  
-
-
-
-
-
-
-
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-{% comment %} <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> {% endcomment %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
+
 </html>
