@@ -370,3 +370,39 @@ footer p {
   color: var(--fg);
   text-decoration: none;
 }
+
+.magic-line {
+  color: var(--muted);
+}
+
+.magic-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  margin: 0 0.1rem;
+  border-radius: 5px;
+  background: var(--code-bg);
+  padding: 0.08rem 0.35rem 0.08rem 0.18rem;
+  color: var(--fg);
+  line-height: 1.35;
+  vertical-align: -0.12em;
+}
+
+.magic-link:hover {
+  color: var(--fg);
+  text-decoration: none;
+  background: color-mix(in srgb, var(--code-bg) 82%, var(--muted));
+}
+
+.magic-link img {
+  width: auto;
+  height: 1.08em;
+  max-width: 1.65em;
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+
+.magic-link img.wide {
+  max-width: 2.1em;
+}
