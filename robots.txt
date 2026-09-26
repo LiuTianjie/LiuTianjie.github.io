@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://liutianjie.github.io/sitemap.xml
