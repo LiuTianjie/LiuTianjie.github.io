@@ -18,7 +18,7 @@ COPY = {
   'approach':'I enjoy working across the whole product: the interface people use, the systems behind it, and the details that make it reliable in everyday use.',
   'work':'Selected projects','work_intro':'Tools I build and maintain. Each repository includes its own setup instructions, platform support, and license.',
   'projects':[
-   ('LinkShell','Remote access to local terminals and coding agents from a phone or browser.','https://liutianjie.github.io/LinkShell/','/img/linkshell-icon.png'),
+   ('LinkShell','Remote access to local terminals and coding agents from a phone or browser.','https://linkshell.itool.tech/','/img/linkshell-icon.png'),
    ('StupidMirror','Native iOS and Android mirroring on macOS, with a local MCP interface for device automation.','https://stupidmirror.itool.tech/','/img/projects/stupidmirror-icon.webp'),
    ('Luma','A self-hosted deployment control plane for containers, built on Nomad.','https://liutianjie.github.io/luma/','/img/projects/luma-icon.png'),
    ('Saylane','A macOS input method for on-device dictation, Pinyin, and translation.','https://liutianjie.github.io/Saylane/','/img/projects/saylane-icon.png'),
@@ -44,7 +44,7 @@ COPY = {
   'approach':'我喜欢完整地参与一个产品：从用户接触的界面，到背后的系统实现，再到日常使用中的稳定性与细节。',
   'work':'代表项目','work_intro':'以下项目由我持续开发和维护。各仓库分别提供安装说明、支持平台和许可证。',
   'projects':[
-   ('LinkShell','在手机或浏览器中，远程使用本机终端与编程 Agent。','https://liutianjie.github.io/LinkShell/','/img/linkshell-icon.png'),
+   ('LinkShell','在手机或浏览器中，远程使用本机终端与编程 Agent。','https://linkshell.itool.tech/','/img/linkshell-icon.png'),
    ('StupidMirror','在 macOS 上镜像 iOS / Android 真机，通过本地 MCP 接入设备自动化。','https://stupidmirror.itool.tech/','/img/projects/stupidmirror-icon.webp'),
    ('Luma','基于 Nomad 的自托管容器部署控制面。','https://liutianjie.github.io/luma/','/img/projects/luma-icon.png'),
    ('Saylane','macOS 原生输入法，支持端侧听写、拼音和翻译。','https://liutianjie.github.io/Saylane/','/img/projects/saylane-icon.png'),
@@ -62,7 +62,7 @@ COPY = {
  }
 }
 
-PROJECT_SITES = ['LinkShell', 'luma']
+PROJECT_SITES = ['luma']
 
 def json_ld(c, canonical):
  person = {
