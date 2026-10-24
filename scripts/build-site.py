@@ -1,6 +1,7 @@
 """Generate the English and Chinese static resume pages."""
 from pathlib import Path
 from html import escape
+import json
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://liutianjie.github.io'
@@ -18,7 +19,7 @@ COPY = {
   'work':'Selected projects','work_intro':'Tools I build and maintain. Each repository includes its own setup instructions, platform support, and license.',
   'projects':[
    ('LinkShell','Remote access to local terminals and coding agents from a phone or browser.','https://liutianjie.github.io/LinkShell/','/img/linkshell-icon.png'),
-   ('StupidMirror','Native iOS and Android mirroring on macOS, with a local MCP interface for device automation.','https://liutianjie.github.io/StupidMirror/','/img/projects/stupidmirror-icon.webp'),
+   ('StupidMirror','Native iOS and Android mirroring on macOS, with a local MCP interface for device automation.','https://stupidmirror.itool.tech/','/img/projects/stupidmirror-icon.webp'),
    ('Luma','A self-hosted deployment control plane for containers, built on Nomad.','https://liutianjie.github.io/luma/','/img/projects/luma-icon.png'),
    ('Saylane','A macOS input method for on-device dictation, Pinyin, and translation.','https://liutianjie.github.io/Saylane/','/img/projects/saylane-icon.png'),
    ('pura','A shared Android device workspace for team reviews, control, and annotated feedback.','https://liutianjie.github.io/pura/','/img/projects/pura-icon.png'),
@@ -44,7 +45,7 @@ COPY = {
   'work':'代表项目','work_intro':'以下项目由我持续开发和维护。各仓库分别提供安装说明、支持平台和许可证。',
   'projects':[
    ('LinkShell','在手机或浏览器中，远程使用本机终端与编程 Agent。','https://liutianjie.github.io/LinkShell/','/img/linkshell-icon.png'),
-   ('StupidMirror','在 macOS 上镜像 iOS / Android 真机，通过本地 MCP 接入设备自动化。','https://liutianjie.github.io/StupidMirror/','/img/projects/stupidmirror-icon.webp'),
+   ('StupidMirror','在 macOS 上镜像 iOS / Android 真机，通过本地 MCP 接入设备自动化。','https://stupidmirror.itool.tech/','/img/projects/stupidmirror-icon.webp'),
    ('Luma','基于 Nomad 的自托管容器部署控制面。','https://liutianjie.github.io/luma/','/img/projects/luma-icon.png'),
    ('Saylane','macOS 原生输入法，支持端侧听写、拼音和翻译。','https://liutianjie.github.io/Saylane/','/img/projects/saylane-icon.png'),
    ('pura','团队共享 Android 真机，进行评审、操作并记录带标注的反馈。','https://liutianjie.github.io/pura/','/img/projects/pura-icon.png'),
@@ -60,6 +61,27 @@ COPY = {
   'support':'支持我的工作','wechat':'微信','wechat_alt':'刘涛的微信联系二维码','github_alt':'刘涛的 GitHub 主页二维码','skip':'跳到正文',
  }
 }
+
+PROJECT_SITES = ['LinkShell', 'luma']
+
+def json_ld(c, canonical):
+ person = {
+  '@type': 'Person', '@id': BASE + '/#person', 'name': 'Liu Tao',
+  'alternateName': ['刘涛', 'Nickname4th', 'LiuTianjie'], 'url': BASE + '/',
+  'jobTitle': c['subtitle'], 'sameAs': [GITHUB],
+  'alumniOf': [{'@type': 'Organization', 'name': n} for n in ('ByteDance', 'Alibaba Cloud', 'Intel')],
+ }
+ site = {'@type': 'WebSite', '@id': BASE + '/#website', 'name': 'Liu Tao', 'url': BASE + '/',
+         'inLanguage': ['en', 'zh-CN'], 'author': {'@id': BASE + '/#person'}}
+ page = {'@type': 'ProfilePage', '@id': canonical + '#page', 'url': canonical, 'name': c['title'],
+         'description': c['description'], 'inLanguage': c['lang'],
+         'isPartOf': {'@id': BASE + '/#website'}, 'mainEntity': {'@id': BASE + '/#person'}}
+ items = [{'@type': 'ListItem', 'position': i + 1, 'name': name, 'url': url}
+          for i, (name, _, url, _) in enumerate(c['projects'])]
+ projects = {'@type': 'ItemList', 'name': c['work'], 'itemListElement': items}
+ data = {'@context': 'https://schema.org', '@graph': [person, site, page, projects]}
+ # '</' inside a JSON string would end the script element early.
+ return json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
 def render(c):
  chinese=c['lang']=='zh-CN'
@@ -81,7 +103,17 @@ def render(c):
   <meta property="og:description" content="{c['description']}" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{canonical}" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="Liu Tao" />
+  <meta property="og:locale" content="{'zh_CN' if chinese else 'en_US'}" />
+  <meta property="og:locale:alternate" content="{'en_US' if chinese else 'zh_CN'}" />
+  <meta property="og:image" content="{BASE}/img/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{c['title']}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{c['title']}" />
+  <meta name="twitter:description" content="{c['description']}" />
+  <meta name="twitter:image" content="{BASE}/img/og-image.png" />
   <link rel="canonical" href="{canonical}" />
   <link rel="alternate" hreflang="en" href="{BASE}/" />
   <link rel="alternate" hreflang="zh-CN" href="{BASE}/zh.html" />
@@ -89,6 +121,7 @@ def render(c):
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/css/main.css?v=20260926-resume" />
   <title>{c['title']}</title>
+  <script type="application/ld+json">{json_ld(c, canonical)}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">{c['skip']}</a>
@@ -131,3 +164,8 @@ if __name__=='__main__':
  for c in COPY.values():
   (ROOT/c['file']).write_text(render(c),encoding='utf-8')
   print('Built '+c['file'])
+ # Project sites live under sub-paths of this host, and crawlers only read robots.txt at
+ # the host root, so their sitemaps can only be announced from here.
+ sitemaps='\n'.join(f'Sitemap: {BASE}/{p}/sitemap.xml' for p in PROJECT_SITES)
+ (ROOT/'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n{sitemaps}\n',encoding='utf-8')
+ print('Built robots.txt')
